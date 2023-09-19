@@ -9,13 +9,42 @@
 /* Begin PBXBuildFile section */
 		BFAE271D2AB7D9D70004A47C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAE271C2AB7D9D70004A47C /* AppDelegate.swift */; };
 		BFAE271F2AB7D9D70004A47C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAE271E2AB7D9D70004A47C /* SceneDelegate.swift */; };
-		BFAE27212AB7D9D70004A47C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAE27202AB7D9D70004A47C /* ViewController.swift */; };
-		BFAE27242AB7D9D70004A47C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFAE27222AB7D9D70004A47C /* Main.storyboard */; };
 		BFAE27262AB7D9D80004A47C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFAE27252AB7D9D80004A47C /* Assets.xcassets */; };
 		BFAE27292AB7D9D80004A47C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFAE27272AB7D9D80004A47C /* LaunchScreen.storyboard */; };
 		BFAE27342AB7D9D80004A47C /* SimpleChatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAE27332AB7D9D80004A47C /* SimpleChatTests.swift */; };
 		BFAE273E2AB7D9D80004A47C /* SimpleChatUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAE273D2AB7D9D80004A47C /* SimpleChatUITests.swift */; };
 		BFAE27402AB7D9D80004A47C /* SimpleChatUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAE273F2AB7D9D80004A47C /* SimpleChatUITestsLaunchTests.swift */; };
+		BFAE27512AB7E8CE0004A47C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAE27502AB7E8CE0004A47C /* LoginViewController.swift */; };
+		BFAE27532AB7E9510004A47C /* TitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAE27522AB7E9510004A47C /* TitleLabel.swift */; };
+		BFAE27552AB7E9680004A47C /* CustomLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAE27542AB7E9680004A47C /* CustomLabel.swift */; };
+		BFAE27572AB7E9730004A47C /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAE27562AB7E9730004A47C /* CustomTextField.swift */; };
+		BFAE27592AB7E9880004A47C /* SelectButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAE27582AB7E9880004A47C /* SelectButton.swift */; };
+		BFAE275B2AB7E9960004A47C /* ExplanationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAE275A2AB7E9960004A47C /* ExplanationButton.swift */; };
+		BFAE275E2AB82C080004A47C /* LoginViewConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAE275D2AB82C080004A47C /* LoginViewConstraints.swift */; };
+		BFAE27602AB82C540004A47C /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAE275F2AB82C540004A47C /* SignUpViewController.swift */; };
+		BFAE27622AB82DBA0004A47C /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAE27612AB82DBA0004A47C /* CustomButton.swift */; };
+		BFAE27642AB82DF00004A47C /* SignUpViewConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAE27632AB82DF00004A47C /* SignUpViewConstraints.swift */; };
+		BFAE27662AB82E9C0004A47C /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAE27652AB82E9C0004A47C /* MainViewController.swift */; };
+		BFAE27682AB9240C0004A47C /* UserItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAE27672AB9240C0004A47C /* UserItems.swift */; };
+		BFAE276A2AB9286C0004A47C /* UserMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAE27692AB9286C0004A47C /* UserMessages.swift */; };
+		BFAE276C2AB929B00004A47C /* BadgeImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAE276B2AB929B00004A47C /* BadgeImageView.swift */; };
+		BFAE276E2AB929C20004A47C /* BaseTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAE276D2AB929C20004A47C /* BaseTableView.swift */; };
+		BFAE27702AB92A170004A47C /* ChatBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAE276F2AB92A170004A47C /* ChatBaseView.swift */; };
+		BFAE27722AB92AAA0004A47C /* IconImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAE27712AB92AAA0004A47C /* IconImageView.swift */; };
+		BFAE27742AB92B030004A47C /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAE27732AB92B030004A47C /* SearchViewController.swift */; };
+		BFAE27762AB92B310004A47C /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAE27752AB92B310004A47C /* SettingViewController.swift */; };
+		BFAE27782AB92B630004A47C /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAE27772AB92B630004A47C /* ChatViewController.swift */; };
+		BFAE277B2AB92C280004A47C /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAE277A2AB92C280004A47C /* MainTableViewCell.swift */; };
+		BFAE277D2AB92C370004A47C /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAE277C2AB92C370004A47C /* SearchTableViewCell.swift */; };
+		BFAE277F2AB92C490004A47C /* MyChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAE277E2AB92C490004A47C /* MyChatTableViewCell.swift */; };
+		BFAE27812AB92D4D0004A47C /* SettingViewConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAE27802AB92D4D0004A47C /* SettingViewConstraints.swift */; };
+		BFAE27842AB92DBA0004A47C /* SearchTableViewConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAE27832AB92DBA0004A47C /* SearchTableViewConstraints.swift */; };
+		BFAE27862AB92DCB0004A47C /* MyChatTableViewConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAE27852AB92DCB0004A47C /* MyChatTableViewConstraints.swift */; };
+		BFAE27882AB92DDF0004A47C /* OthersChatTableViewConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAE27872AB92DDF0004A47C /* OthersChatTableViewConstraints.swift */; };
+		BFAE278A2AB92E000004A47C /* MainTableViewConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAE27892AB92E000004A47C /* MainTableViewConstraints.swift */; };
+		BFAE278C2AB92E960004A47C /* OthersChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAE278B2AB92E960004A47C /* OthersChatTableViewCell.swift */; };
+		BFAE278E2AB92EDF0004A47C /* ChatViewConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAE278D2AB92EDF0004A47C /* ChatViewConstraints.swift */; };
+		BFAE27912AB94BA70004A47C /* CombineCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = BFAE27902AB94BA70004A47C /* CombineCocoa */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,8 +68,6 @@
 		BFAE27192AB7D9D70004A47C /* SimpleChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFAE271C2AB7D9D70004A47C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BFAE271E2AB7D9D70004A47C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		BFAE27202AB7D9D70004A47C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		BFAE27232AB7D9D70004A47C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BFAE27252AB7D9D80004A47C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BFAE27282AB7D9D80004A47C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BFAE272A2AB7D9D80004A47C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -49,6 +76,36 @@
 		BFAE27392AB7D9D80004A47C /* SimpleChatUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SimpleChatUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFAE273D2AB7D9D80004A47C /* SimpleChatUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleChatUITests.swift; sourceTree = "<group>"; };
 		BFAE273F2AB7D9D80004A47C /* SimpleChatUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleChatUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		BFAE27502AB7E8CE0004A47C /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		BFAE27522AB7E9510004A47C /* TitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleLabel.swift; sourceTree = "<group>"; };
+		BFAE27542AB7E9680004A47C /* CustomLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLabel.swift; sourceTree = "<group>"; };
+		BFAE27562AB7E9730004A47C /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		BFAE27582AB7E9880004A47C /* SelectButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectButton.swift; sourceTree = "<group>"; };
+		BFAE275A2AB7E9960004A47C /* ExplanationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplanationButton.swift; sourceTree = "<group>"; };
+		BFAE275D2AB82C080004A47C /* LoginViewConstraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewConstraints.swift; sourceTree = "<group>"; };
+		BFAE275F2AB82C540004A47C /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		BFAE27612AB82DBA0004A47C /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		BFAE27632AB82DF00004A47C /* SignUpViewConstraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewConstraints.swift; sourceTree = "<group>"; };
+		BFAE27652AB82E9C0004A47C /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		BFAE27672AB9240C0004A47C /* UserItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserItems.swift; sourceTree = "<group>"; };
+		BFAE27692AB9286C0004A47C /* UserMessages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMessages.swift; sourceTree = "<group>"; };
+		BFAE276B2AB929B00004A47C /* BadgeImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeImageView.swift; sourceTree = "<group>"; };
+		BFAE276D2AB929C20004A47C /* BaseTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableView.swift; sourceTree = "<group>"; };
+		BFAE276F2AB92A170004A47C /* ChatBaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBaseView.swift; sourceTree = "<group>"; };
+		BFAE27712AB92AAA0004A47C /* IconImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconImageView.swift; sourceTree = "<group>"; };
+		BFAE27732AB92B030004A47C /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		BFAE27752AB92B310004A47C /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		BFAE27772AB92B630004A47C /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		BFAE277A2AB92C280004A47C /* MainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewCell.swift; sourceTree = "<group>"; };
+		BFAE277C2AB92C370004A47C /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
+		BFAE277E2AB92C490004A47C /* MyChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyChatTableViewCell.swift; sourceTree = "<group>"; };
+		BFAE27802AB92D4D0004A47C /* SettingViewConstraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewConstraints.swift; sourceTree = "<group>"; };
+		BFAE27832AB92DBA0004A47C /* SearchTableViewConstraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewConstraints.swift; sourceTree = "<group>"; };
+		BFAE27852AB92DCB0004A47C /* MyChatTableViewConstraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyChatTableViewConstraints.swift; sourceTree = "<group>"; };
+		BFAE27872AB92DDF0004A47C /* OthersChatTableViewConstraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OthersChatTableViewConstraints.swift; sourceTree = "<group>"; };
+		BFAE27892AB92E000004A47C /* MainTableViewConstraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewConstraints.swift; sourceTree = "<group>"; };
+		BFAE278B2AB92E960004A47C /* OthersChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OthersChatTableViewCell.swift; sourceTree = "<group>"; };
+		BFAE278D2AB92EDF0004A47C /* ChatViewConstraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewConstraints.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +113,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFAE27912AB94BA70004A47C /* CombineCocoa in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -101,8 +159,9 @@
 			children = (
 				BFAE271C2AB7D9D70004A47C /* AppDelegate.swift */,
 				BFAE271E2AB7D9D70004A47C /* SceneDelegate.swift */,
-				BFAE27202AB7D9D70004A47C /* ViewController.swift */,
-				BFAE27222AB7D9D70004A47C /* Main.storyboard */,
+				BFAE274C2AB7E4BB0004A47C /* Model */,
+				BFAE274F2AB7E4F00004A47C /* components */,
+				BFAE274E2AB7E4D90004A47C /* Controller */,
 				BFAE27252AB7D9D80004A47C /* Assets.xcassets */,
 				BFAE27272AB7D9D80004A47C /* LaunchScreen.storyboard */,
 				BFAE272A2AB7D9D80004A47C /* Info.plist */,
@@ -127,6 +186,81 @@
 			path = SimpleChatUITests;
 			sourceTree = "<group>";
 		};
+		BFAE274C2AB7E4BB0004A47C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				BFAE27672AB9240C0004A47C /* UserItems.swift */,
+				BFAE27692AB9286C0004A47C /* UserMessages.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		BFAE274E2AB7E4D90004A47C /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				BFAE275C2AB82BEA0004A47C /* Constraints */,
+				BFAE27772AB92B630004A47C /* ChatViewController.swift */,
+				BFAE27502AB7E8CE0004A47C /* LoginViewController.swift */,
+				BFAE27652AB82E9C0004A47C /* MainViewController.swift */,
+				BFAE27732AB92B030004A47C /* SearchViewController.swift */,
+				BFAE27752AB92B310004A47C /* SettingViewController.swift */,
+				BFAE275F2AB82C540004A47C /* SignUpViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		BFAE274F2AB7E4F00004A47C /* components */ = {
+			isa = PBXGroup;
+			children = (
+				BFAE27792AB92C070004A47C /* TableViewCell */,
+				BFAE276B2AB929B00004A47C /* BadgeImageView.swift */,
+				BFAE276D2AB929C20004A47C /* BaseTableView.swift */,
+				BFAE276F2AB92A170004A47C /* ChatBaseView.swift */,
+				BFAE27612AB82DBA0004A47C /* CustomButton.swift */,
+				BFAE27542AB7E9680004A47C /* CustomLabel.swift */,
+				BFAE27562AB7E9730004A47C /* CustomTextField.swift */,
+				BFAE275A2AB7E9960004A47C /* ExplanationButton.swift */,
+				BFAE27712AB92AAA0004A47C /* IconImageView.swift */,
+				BFAE27582AB7E9880004A47C /* SelectButton.swift */,
+				BFAE27522AB7E9510004A47C /* TitleLabel.swift */,
+			);
+			path = components;
+			sourceTree = "<group>";
+		};
+		BFAE275C2AB82BEA0004A47C /* Constraints */ = {
+			isa = PBXGroup;
+			children = (
+				BFAE278D2AB92EDF0004A47C /* ChatViewConstraints.swift */,
+				BFAE275D2AB82C080004A47C /* LoginViewConstraints.swift */,
+				BFAE27802AB92D4D0004A47C /* SettingViewConstraints.swift */,
+				BFAE27632AB82DF00004A47C /* SignUpViewConstraints.swift */,
+			);
+			path = Constraints;
+			sourceTree = "<group>";
+		};
+		BFAE27792AB92C070004A47C /* TableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				BFAE27822AB92DA70004A47C /* Constraints */,
+				BFAE277A2AB92C280004A47C /* MainTableViewCell.swift */,
+				BFAE277E2AB92C490004A47C /* MyChatTableViewCell.swift */,
+				BFAE278B2AB92E960004A47C /* OthersChatTableViewCell.swift */,
+				BFAE277C2AB92C370004A47C /* SearchTableViewCell.swift */,
+			);
+			path = TableViewCell;
+			sourceTree = "<group>";
+		};
+		BFAE27822AB92DA70004A47C /* Constraints */ = {
+			isa = PBXGroup;
+			children = (
+				BFAE27892AB92E000004A47C /* MainTableViewConstraints.swift */,
+				BFAE27852AB92DCB0004A47C /* MyChatTableViewConstraints.swift */,
+				BFAE27872AB92DDF0004A47C /* OthersChatTableViewConstraints.swift */,
+				BFAE27832AB92DBA0004A47C /* SearchTableViewConstraints.swift */,
+			);
+			path = Constraints;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -143,6 +277,9 @@
 			dependencies = (
 			);
 			name = SimpleChat;
+			packageProductDependencies = (
+				BFAE27902AB94BA70004A47C /* CombineCocoa */,
+			);
 			productName = SimpleChat;
 			productReference = BFAE27192AB7D9D70004A47C /* SimpleChat.app */;
 			productType = "com.apple.product-type.application";
@@ -215,6 +352,9 @@
 				Base,
 			);
 			mainGroup = BFAE27102AB7D9D70004A47C;
+			packageReferences = (
+				BFAE278F2AB94BA70004A47C /* XCRemoteSwiftPackageReference "CombineCocoa" */,
+			);
 			productRefGroup = BFAE271A2AB7D9D70004A47C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -233,7 +373,6 @@
 			files = (
 				BFAE27292AB7D9D80004A47C /* LaunchScreen.storyboard in Resources */,
 				BFAE27262AB7D9D80004A47C /* Assets.xcassets in Resources */,
-				BFAE27242AB7D9D70004A47C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,9 +397,38 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BFAE27212AB7D9D70004A47C /* ViewController.swift in Sources */,
+				BFAE27722AB92AAA0004A47C /* IconImageView.swift in Sources */,
+				BFAE276C2AB929B00004A47C /* BadgeImageView.swift in Sources */,
+				BFAE27782AB92B630004A47C /* ChatViewController.swift in Sources */,
+				BFAE27512AB7E8CE0004A47C /* LoginViewController.swift in Sources */,
+				BFAE27862AB92DCB0004A47C /* MyChatTableViewConstraints.swift in Sources */,
+				BFAE27662AB82E9C0004A47C /* MainViewController.swift in Sources */,
+				BFAE278C2AB92E960004A47C /* OthersChatTableViewCell.swift in Sources */,
+				BFAE278E2AB92EDF0004A47C /* ChatViewConstraints.swift in Sources */,
+				BFAE27882AB92DDF0004A47C /* OthersChatTableViewConstraints.swift in Sources */,
+				BFAE275B2AB7E9960004A47C /* ExplanationButton.swift in Sources */,
+				BFAE27762AB92B310004A47C /* SettingViewController.swift in Sources */,
+				BFAE277B2AB92C280004A47C /* MainTableViewCell.swift in Sources */,
+				BFAE27812AB92D4D0004A47C /* SettingViewConstraints.swift in Sources */,
+				BFAE27552AB7E9680004A47C /* CustomLabel.swift in Sources */,
+				BFAE27642AB82DF00004A47C /* SignUpViewConstraints.swift in Sources */,
+				BFAE276E2AB929C20004A47C /* BaseTableView.swift in Sources */,
+				BFAE27572AB7E9730004A47C /* CustomTextField.swift in Sources */,
+				BFAE27602AB82C540004A47C /* SignUpViewController.swift in Sources */,
+				BFAE27742AB92B030004A47C /* SearchViewController.swift in Sources */,
+				BFAE277F2AB92C490004A47C /* MyChatTableViewCell.swift in Sources */,
+				BFAE27532AB7E9510004A47C /* TitleLabel.swift in Sources */,
 				BFAE271D2AB7D9D70004A47C /* AppDelegate.swift in Sources */,
+				BFAE27682AB9240C0004A47C /* UserItems.swift in Sources */,
+				BFAE27622AB82DBA0004A47C /* CustomButton.swift in Sources */,
+				BFAE276A2AB9286C0004A47C /* UserMessages.swift in Sources */,
+				BFAE275E2AB82C080004A47C /* LoginViewConstraints.swift in Sources */,
+				BFAE27842AB92DBA0004A47C /* SearchTableViewConstraints.swift in Sources */,
+				BFAE27592AB7E9880004A47C /* SelectButton.swift in Sources */,
+				BFAE277D2AB92C370004A47C /* SearchTableViewCell.swift in Sources */,
 				BFAE271F2AB7D9D70004A47C /* SceneDelegate.swift in Sources */,
+				BFAE27702AB92A170004A47C /* ChatBaseView.swift in Sources */,
+				BFAE278A2AB92E000004A47C /* MainTableViewConstraints.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,14 +465,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		BFAE27222AB7D9D70004A47C /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				BFAE27232AB7D9D70004A47C /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		BFAE27272AB7D9D80004A47C /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -442,9 +602,9 @@
 				INFOPLIST_FILE = SimpleChat/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -470,9 +630,9 @@
 				INFOPLIST_FILE = SimpleChat/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -602,6 +762,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		BFAE278F2AB94BA70004A47C /* XCRemoteSwiftPackageReference "CombineCocoa" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/CombineCommunity/CombineCocoa";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.4.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		BFAE27902AB94BA70004A47C /* CombineCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BFAE278F2AB94BA70004A47C /* XCRemoteSwiftPackageReference "CombineCocoa" */;
+			productName = CombineCocoa;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = BFAE27112AB7D9D70004A47C /* Project object */;
 }
