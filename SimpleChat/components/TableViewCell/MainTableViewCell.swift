@@ -1,0 +1,35 @@
+//
+//  MainTableViewCell.swift
+//  SimpleChat
+//
+//  Created by Sho Tamaki on 2023/09/19.
+//
+
+import UIKit
+
+final class MainTableViewCell: UITableViewCell {
+    
+    var userIcon = IconImageView(frame: .zero)
+    var userName = CustomLabel(frame: .zero, fontSize: 15.0, text: "")
+    var userLastMessage = CustomLabel(frame: .zero, fontSize: 15.0, text: "")
+    var userLastMessageTime = CustomLabel(frame: .zero, fontSize: 15.0, text: "")
+    var badgeIcon = BadgeImageView(frame: .zero)
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        // コンテントビュー設定
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        // サブビュー設定
+        contentView.addSubview(userIcon)
+        contentView.addSubview(userName)
+        contentView.addSubview(userLastMessage)
+        contentView.addSubview(userLastMessageTime)
+        contentView.addSubview(badgeIcon)
+        // 制約設定
+        MainTableViewConstraints.makeConstraints(contentView: contentView, userIcon: userIcon, userName: userName, userLastMessage: userLastMessage, userLastMessageTime: userLastMessageTime, badgeIcon: badgeIcon)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
