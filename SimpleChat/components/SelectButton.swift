@@ -12,7 +12,6 @@ final class SelectButton: UIButton {
     init(frame: CGRect, title: String) {
         super.init(frame: frame)
         self.backgroundColor = .lightGray
-        self.layer.borderWidth = 1.0
         self.layer.cornerRadius = 10.0
         self.setTitle(title, for: .normal)
         self.setTitleColor(.white, for: .normal)
