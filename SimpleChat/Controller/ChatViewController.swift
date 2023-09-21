@@ -33,7 +33,7 @@ final class ChatViewController: UIViewController, UITextFieldDelegate {
         // ビュー設定
         view.backgroundColor = .white
         // テーブルビュー設定
-        tableView.frame = self.view.frame
+        tableView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height - 120)
         tableView.separatorStyle = .none
         tableView.delegate = self
         tableView.dataSource = self
@@ -67,6 +67,8 @@ final class ChatViewController: UIViewController, UITextFieldDelegate {
                             self?.chatViewCellItems.append(newMessage)
                             Task.detached { @MainActor in
                                 self?.tableView.reloadData()
+                                let indexPath = IndexPath(row: (self?.chatViewCellItems.count ?? 1) - 1, section: 0)
+                                self?.tableView.scrollToRow(at: indexPath, at: .top, animated: false)
                             }
                         }
                     }
