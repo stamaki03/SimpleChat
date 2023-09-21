@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import FirebaseCore
+import FirebaseFirestore
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -27,6 +29,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
         
+        FirebaseApp.configure()
+        
+        let db = Firestore.firestore()
+                
         return true
     }
 

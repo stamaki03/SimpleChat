@@ -6,12 +6,10 @@
 //
 
 import UIKit
-import Combine
-import CombineCocoa
+import FirebaseAuth
 
 final class LoginViewController: UIViewController {
     
-    private var cancellables: Set<AnyCancellable> = []
     @Published private var validCheck1 = false
     @Published private var validCheck2 = false
     
@@ -51,59 +49,17 @@ final class LoginViewController: UIViewController {
     
     // ボタンアクション処理
     @objc internal func goToMainViewController(sender: UIButton){
-        
-        let mainViewController = MainViewController()
-        self.navigationController?.pushViewController(mainViewController, animated: true)
-        return
-        
-        //        let list: [User] = CoreDataRepository.array()
-        //
-        //        for userItems in list {
-        //            if userItems.name == idTextField.text && userItems.password == passwordTextField.text {
-        //                let mainViewController = MainViewController()
-        //                self.navigationController?.pushViewController(mainViewController, animated: true)
-        //                return
-        //            }
-        //        }
-        
-        //        let alert = UIAlertController(title: "ログインできませんでした", message: "IDまたはパスワードが正しくありません。", preferredStyle: .alert)
-        //        let okAction = UIAlertAction(title: "OK", style: .default)
-        //        alert.addAction(okAction)
-        //        present(alert, animated: true, completion: nil)
+        Auth.auth().signIn(withEmail: idTextField.text ?? "" , password: passwordTextField.text ?? "") { [weak self] authResult, error in
+            guard let self = self else { return }
+            if let e = error {
+                print(e)
+            } else {
+                let mainViewController = MainViewController()
+                self.navigationController?.pushViewController(mainViewController, animated: true)
+                return
+            }
+        }
     }
-    
-//    private func enableButton() {
-//
-//        idTextField
-//            .textPublisher
-//            .compactMap{ $0 }
-//            .sink(receiveValue:  { text in
-//                self.validCheck1 = text.isEmpty ? false : true
-//            })
-//            .store(in: &cancellables)
-//
-//        passwordTextField
-//            .textPublisher
-//            .compactMap{ $0 }
-//            .sink(receiveValue:  { text in
-//                self.validCheck2 = text.isEmpty ? false : true
-//            })
-//            .store(in: &cancellables)
-//    }
-//
-//    private func aaa() {
-//        [validCheck1, validCheck2]
-//            .publisher
-//            .allSatisfy { $0 == true }
-//            .sink { bool in
-//                if bool == true {
-//                    self.loginSelectButton.isEnabled = true
-//                    self.loginSelectButton.backgroundColor = .yellow
-//                }
-//            }
-//            .store(in: &cancellables)
-//    }
-    
     
     @objc internal func goToSignUpViewController(sender: UIButton){
         let signUpViewController = SignUpViewController()
@@ -137,7 +93,7 @@ extension LoginViewController: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
         let idIsEmpty = idTextField.text?.isEmpty ?? true
         let passwordIsEmpty = passwordTextField.text?.isEmpty ?? true
-
+        
         if idIsEmpty || passwordIsEmpty {
             loginSelectButton.isEnabled = false
             loginSelectButton.backgroundColor = .lightGray

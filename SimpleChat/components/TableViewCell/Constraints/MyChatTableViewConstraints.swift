@@ -8,7 +8,7 @@
 import UIKit
 
 struct MyChatTableViewConstraints {
-    static func makeConstraints(contentView: UIView, userMessage: CustomLabel){
+    static func makeConstraints(contentView: UIView, userMessage: CustomChatLabel){
         contentView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width).isActive = true
         
         userMessage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10).isActive = true

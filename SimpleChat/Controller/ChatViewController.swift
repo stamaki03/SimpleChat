@@ -6,21 +6,27 @@
 //
 
 import UIKit
+import FirebaseAuth
+import FirebaseFirestore
+
 
 final class ChatViewController: UIViewController {
     
-    private let chatViewCellItems: [UserMessages] = [
-        UserMessages(userName: "user1", userMessage: "はじめまして。"),
-        UserMessages(userName: "useruser2", userMessage: "おはよう。"),
-        UserMessages(userName: "user1", userMessage: "こんにちは。"),
-        UserMessages(userName: "useruser4", userMessage: "こんばんは。"),
-        UserMessages(userName: "useruser4", userMessage: "よろしくねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねね。"),
-        UserMessages(userName: "user1", userMessage: "よろしくねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねね。")
-    ]
+    let db = Firestore.firestore()
+    
+    private var chatViewCellItems: [UserMessages] = []
     
     let chatBaseView = ChatBaseView()
     let chatSendButton = CustomButton(frame: .zero, cornerRadius: 10, systemName: "paperplane")
     let chatTextField = CustomTextField(frame: .zero, placeholder: "メッセージを入力")
+    
+    private let tableView: UITableView = {
+        let view = UITableView(frame: .zero, style: UITableView.Style.plain)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.register(MyChatTableViewCell.self, forCellReuseIdentifier: "MyChatCell")
+        view.register(OthersChatTableViewCell.self, forCellReuseIdentifier: "OthersChatCell")
+        return view
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,12 +34,10 @@ final class ChatViewController: UIViewController {
         // ビュー設定
         view.backgroundColor = .white
         // テーブルビュー設定
-        let tableView = UITableView(frame: self.view.frame, style: UITableView.Style.plain)
+        tableView.frame = self.view.frame
         tableView.separatorStyle = .none
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(MyChatTableViewCell.self, forCellReuseIdentifier: "MyChatCell")
-        tableView.register(OthersChatTableViewCell.self, forCellReuseIdentifier: "OthersChatCell")
         view.addSubview(tableView)
         // サブビュー設定
         view.addSubview(chatBaseView)
@@ -41,8 +45,47 @@ final class ChatViewController: UIViewController {
         chatBaseView.addSubview(chatTextField)
         // 制約設定
         ChatViewConstraints.makeConstraints(view: view, chatBaseView: chatBaseView, chatTextField: chatTextField, chatSendButton: chatSendButton)
+        // ボタンアクション設定
+        chatSendButton.addTarget(self, action: #selector(sendMessage(sender:)), for:.touchUpInside)
+        // テキストの読み込み
+        loadMessages()
     }
-
+    
+    private func loadMessages() {
+        db.collection("messages").order(by: "sendTime").addSnapshotListener { [weak self] (querrySnapshot, error) in
+            if let e = error {
+                print(e)
+            } else {
+                self?.chatViewCellItems = []
+                if let snapshotDocments = querrySnapshot?.documents {
+                    for doc in snapshotDocments {
+                        let data = doc.data()
+                        if let userName = data["userName"] as? String, let chatText = data["chatText"] as? String {
+                            let newMessage = UserMessages(userName: userName, userMessage: chatText)
+                            print(newMessage)
+                            self?.chatViewCellItems.append(newMessage)
+                            Task.detached { @MainActor in
+                                self?.tableView.reloadData()
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    @objc internal func sendMessage(sender: UIButton){
+        if let userName = Auth.auth().currentUser?.email, let chatText = chatTextField.text {
+            db.collection("messages").addDocument(data: ["userName" : userName, "chatText" : chatText, "sendTime" : Date().timeIntervalSince1970]) { error in
+                if let e = error {
+                    print(e)
+                } else {
+                    print("success")
+                }
+            }
+        }
+    }
+    
 }
 
 extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
@@ -51,7 +94,7 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if chatViewCellItems[indexPath.row].userName == "user1"{
+        if chatViewCellItems[indexPath.row].userName == Auth.auth().currentUser?.email {
             let cell = tableView.dequeueReusableCell(withIdentifier: "MyChatCell", for: indexPath) as! MyChatTableViewCell
             cell.userMessage.text = chatViewCellItems[indexPath.row].userMessage
             return cell
@@ -62,3 +105,12 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
 }
+
+//    private var chatViewCellItems: [UserMessages] = [
+//        UserMessages(userName: "user1", userMessage: "はじめまして。"),
+//        UserMessages(userName: "useruser2", userMessage: "おはよう。"),
+//        UserMessages(userName: "user1", userMessage: "こんにちは。"),
+//        UserMessages(userName: "useruser4", userMessage: "こんばんは。"),
+//        UserMessages(userName: "useruser4", userMessage: "よろしくねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねね。"),
+//        UserMessages(userName: "user1", userMessage: "よろしくねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねね。")
+//    ]

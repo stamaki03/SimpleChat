@@ -10,7 +10,7 @@ import UIKit
 final class OthersChatTableViewCell: UITableViewCell {
     
     var userIcon = IconImageView(frame: .zero)
-    var userMessage = CustomLabel(frame: .zero, fontSize: 15.0, text: "")
+    var userMessage = CustomChatLabel(frame: .zero, fontSize: 15.0, text: "")
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

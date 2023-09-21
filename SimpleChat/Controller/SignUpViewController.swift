@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 final class SignUpViewController: UIViewController {
     
@@ -50,7 +51,13 @@ final class SignUpViewController: UIViewController {
     }
     
     @objc internal func signUpUser(sender: UIButton){
-        //CoreDataRepository.add(User.new(name: idTextField.text!, password: passwordTextField.text!))
+        Auth.auth().createUser(withEmail: idTextField.text ?? "", password: passwordTextField.text ?? "") { authResult, error in
+            if let e = error {
+                print(e)
+            } else {
+                self.dismiss(animated: true, completion: nil)
+            }
+        }
     }
 }
 
