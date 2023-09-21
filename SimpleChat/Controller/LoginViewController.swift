@@ -8,7 +8,7 @@
 import UIKit
 import FirebaseAuth
 
-final class LoginViewController: UIViewController {
+final class LoginViewController: UIViewController, UITextFieldDelegate {
     
     @Published private var validCheck1 = false
     @Published private var validCheck2 = false
@@ -42,9 +42,9 @@ final class LoginViewController: UIViewController {
         // ボタンアクション設定
         loginSelectButton.addTarget(self, action: #selector(goToMainViewController(sender:)), for:.touchUpInside)
         signUpButton.addTarget(self, action: #selector(goToSignUpViewController(sender:)), for:.touchUpInside)
-        // キーボード設定
-        NotificationCenter.default.addObserver(self, selector: #selector(showKeyboad), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(hideKeyboad), name: UIResponder.keyboardWillHideNotification, object: nil)
+        // キーボード設定用
+        idTextField.delegate = self
+        passwordTextField.delegate = self
     }
     
     // ボタンアクション処理
@@ -66,30 +66,6 @@ final class LoginViewController: UIViewController {
         self.navigationController?.present(signUpViewController, animated: true)
     }
     
-    // キーボード処理
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.view.endEditing(true)
-    }
-    
-    @objc func showKeyboad(notification: Notification) {
-        let keyboadFrame = (notification.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as AnyObject).cgRectValue
-        guard let keyboadMinY = keyboadFrame?.minY else { return }
-        let loginSelectButtonMaxY = loginSelectButton.frame.maxY
-        let distance = loginSelectButtonMaxY - keyboadMinY + 20
-        let transform = CGAffineTransform(translationX: 0, y: -distance)
-        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, animations: {
-            self.view.transform = transform
-        })
-    }
-    
-    @objc func hideKeyboad() {
-        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, animations: {
-            self.view.transform = .identity
-        })
-    }
-}
-
-extension LoginViewController: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
         let idIsEmpty = idTextField.text?.isEmpty ?? true
         let passwordIsEmpty = passwordTextField.text?.isEmpty ?? true
@@ -101,5 +77,10 @@ extension LoginViewController: UITextFieldDelegate {
             loginSelectButton.isEnabled = true
             loginSelectButton.backgroundColor = UIColor(named: "bg")
         }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }

@@ -8,7 +8,7 @@
 import UIKit
 import FirebaseAuth
 
-final class SignUpViewController: UIViewController {
+final class SignUpViewController: UIViewController, UITextFieldDelegate {
     
     let signUpTitleLabel = TitleLabel(frame: .zero, text: "新規登録")
     let iconImageView = CustomButton(frame: .zero, cornerRadius: 75, systemName: "camera")
@@ -48,6 +48,11 @@ final class SignUpViewController: UIViewController {
         SignUpViewConstraints.makeConstraints(view: view, iconImageView: iconImageView, signUpTitleLabel: signUpTitleLabel, idLabel: idLabel, idTextField: idTextField, nameLabel: nameLabel, nameTextField: nameTextField, passwordLabel: passwordLabel, passwordTextField: passwordTextField, repasswordLabel: repasswordLabel, repasswordTextField: repasswordTextField, signUpButton: signUpButton)
         // ボタンアクション設定
         signUpButton.addTarget(self, action: #selector(signUpUser(sender:)), for:.touchUpInside)
+        // キーボード設定用
+        idTextField.delegate = self
+        nameTextField.delegate = self
+        passwordTextField.delegate = self
+        repasswordTextField.delegate = self
     }
     
     @objc internal func signUpUser(sender: UIButton){
@@ -59,9 +64,7 @@ final class SignUpViewController: UIViewController {
             }
         }
     }
-}
-
-extension SignUpViewController: UITextFieldDelegate {
+    
     func textFieldDidChangeSelection(_ textField: UITextField) {
         let idIsEmpty = idTextField.text?.isEmpty ?? true
         let nameIsEmpty = nameTextField.text?.isEmpty ?? true
@@ -76,4 +79,10 @@ extension SignUpViewController: UITextFieldDelegate {
             signUpButton.backgroundColor = UIColor(named: "bg")
         }
     }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
 }

@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class SettingViewController: UIViewController {
+final class SettingViewController: UIViewController, UITextFieldDelegate {
     
     let signUpTitleLabel = TitleLabel(frame: .zero, text: "設定変更")
     let iconImageView = CustomButton(frame: .zero, cornerRadius: 75, systemName: "camera")
@@ -45,10 +45,13 @@ final class SettingViewController: UIViewController {
         view.addSubview(loginSelectButton)
         // 制約設定
         SettingViewConstraints.makeConstraints(view: view, iconImageView: iconImageView, signUpTitleLabel: signUpTitleLabel, idLabel: idLabel, idTextField: idTextField, nameLabel: nameLabel, nameTextField: nameTextField, passwordLabel: passwordLabel, passwordTextField: passwordTextField, repasswordLabel: repasswordLabel, repasswordTextField: repasswordTextField, loginSelectButton: loginSelectButton)
+        // キーボード設定用
+        idTextField.delegate = self
+        nameTextField.delegate = self
+        passwordTextField.delegate = self
+        repasswordTextField.delegate = self
     }
-}
-
-extension SettingViewController: UITextFieldDelegate {
+    
     func textFieldDidChangeSelection(_ textField: UITextField) {
         let idIsEmpty = idTextField.text?.isEmpty ?? true
         let nameIsEmpty = nameTextField.text?.isEmpty ?? true
@@ -62,5 +65,10 @@ extension SettingViewController: UITextFieldDelegate {
             loginSelectButton.isEnabled = true
             loginSelectButton.backgroundColor = UIColor(named: "bg")
         }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }

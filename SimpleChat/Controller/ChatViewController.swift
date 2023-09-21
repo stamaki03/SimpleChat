@@ -9,8 +9,7 @@ import UIKit
 import FirebaseAuth
 import FirebaseFirestore
 
-
-final class ChatViewController: UIViewController {
+final class ChatViewController: UIViewController, UITextFieldDelegate {
     
     let db = Firestore.firestore()
     
@@ -49,6 +48,8 @@ final class ChatViewController: UIViewController {
         chatSendButton.addTarget(self, action: #selector(sendMessage(sender:)), for:.touchUpInside)
         // テキストの読み込み
         loadMessages()
+        // キーボード設定用
+        chatTextField.delegate = self
     }
     
     private func loadMessages() {
@@ -86,6 +87,10 @@ final class ChatViewController: UIViewController {
         }
     }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 }
 
 extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
