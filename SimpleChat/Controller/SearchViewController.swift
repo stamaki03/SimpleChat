@@ -19,7 +19,7 @@ class SearchViewController: UIViewController {
     private let tableView: UITableView = {
         let view = UITableView(frame: .zero, style: UITableView.Style.plain)
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.register(MainTableViewCell.self, forCellReuseIdentifier: "Cell")
+        view.register(SearchTableViewCell.self, forCellReuseIdentifier: "Cell")
         return view
     }()
     
