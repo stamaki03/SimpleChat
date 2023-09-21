@@ -14,10 +14,10 @@ final class LoginViewController: UIViewController, UITextFieldDelegate {
     @Published private var validCheck2 = false
     
     let appTitleLabel = TitleLabel(frame: .zero, text: "SIMPLE CHAT")
-    let idLabel = CustomLabel(frame: .zero, fontSize: 20.0, text: "ID")
-    let idTextField = CustomTextField(frame: .zero, placeholder: "example@co.jp")
-    let passwordLabel = CustomLabel(frame: .zero, fontSize: 20.0, text: "パスワード")
-    let passwordTextField = CustomTextField(frame: .zero, placeholder: "パスワード")
+    let idLabel = CustomLabel(frame: .zero, fontSize: 20.0, text: "ID", paddingSize: 0)
+    let idTextField = CustomTextField(frame: .zero, placeholder: "example@co.jp", paddingSize: 0)
+    let passwordLabel = CustomLabel(frame: .zero, fontSize: 20.0, text: "パスワード", paddingSize: 0)
+    let passwordTextField = CustomTextField(frame: .zero, placeholder: "パスワード", paddingSize: 0)
     let loginSelectButton = SelectButton(frame: .zero, title: "ログイン")
     let signUpButton = ExplanationButton(frame: .zero, title: "新規登録はこちら")
     

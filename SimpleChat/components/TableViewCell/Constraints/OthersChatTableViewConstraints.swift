@@ -8,7 +8,7 @@
 import UIKit
 
 struct OthersChatTableViewConstraints {
-    static func makeConstraints(contentView: UIView, userIcon: IconImageView, userMessage: CustomChatLabel){
+    static func makeConstraints(contentView: UIView, userIcon: IconImageView, userMessage: CustomLabel){
         contentView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width).isActive = true
         
         userIcon.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10).isActive = true

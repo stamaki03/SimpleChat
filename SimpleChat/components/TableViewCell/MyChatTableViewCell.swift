@@ -10,7 +10,7 @@ import UIKit
 final class MyChatTableViewCell: UITableViewCell {
     
     let chatBaseView = ChatBaseView()
-    var userMessage = CustomChatLabel(frame: .zero, fontSize: 15.0, text: "")
+    var userMessage = CustomLabel(frame: .zero, fontSize: 15.0, text: "", paddingSize: 5)
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

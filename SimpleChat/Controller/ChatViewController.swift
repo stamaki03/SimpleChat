@@ -17,7 +17,7 @@ final class ChatViewController: UIViewController, UITextFieldDelegate {
     
     let chatBaseView = ChatBaseView()
     let chatSendButton = CustomButton(frame: .zero, cornerRadius: 10, systemName: "paperplane")
-    let chatTextField = CustomTextField(frame: .zero, placeholder: "メッセージを入力")
+    let chatTextField = CustomTextField(frame: .zero, placeholder: "メッセージを入力", paddingSize: 10)
     
     private let tableView: UITableView = {
         let view = UITableView(frame: .zero, style: UITableView.Style.plain)

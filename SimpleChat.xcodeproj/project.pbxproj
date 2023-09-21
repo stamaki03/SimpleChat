@@ -53,7 +53,6 @@
 		BFAE279D2ABA666D0004A47C /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = BFAE279C2ABA666D0004A47C /* FirebaseAuth */; };
 		BFAE27A02ABA90530004A47C /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = BFAE279F2ABA90530004A47C /* FirebaseFirestore */; };
 		BFAE27A22ABA90530004A47C /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = BFAE27A12ABA90530004A47C /* FirebaseFirestoreSwift */; };
-		BFAE27A42ABBC7BE0004A47C /* CustomChatLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAE27A32ABBC7BE0004A47C /* CustomChatLabel.swift */; };
 		BFAE27A92ABC2F220004A47C /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = BFAE27A82ABC2F220004A47C /* IQKeyboardManagerSwift */; };
 /* End PBXBuildFile section */
 
@@ -117,7 +116,6 @@
 		BFAE278B2AB92E960004A47C /* OthersChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OthersChatTableViewCell.swift; sourceTree = "<group>"; };
 		BFAE278D2AB92EDF0004A47C /* ChatViewConstraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewConstraints.swift; sourceTree = "<group>"; };
 		BFAE27922ABA57E10004A47C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		BFAE27A32ABBC7BE0004A47C /* CustomChatLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomChatLabel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -239,7 +237,6 @@
 				BFAE276F2AB92A170004A47C /* ChatBaseView.swift */,
 				BFAE27612AB82DBA0004A47C /* CustomButton.swift */,
 				BFAE27542AB7E9680004A47C /* CustomLabel.swift */,
-				BFAE27A32ABBC7BE0004A47C /* CustomChatLabel.swift */,
 				BFAE27562AB7E9730004A47C /* CustomTextField.swift */,
 				BFAE275A2AB7E9960004A47C /* ExplanationButton.swift */,
 				BFAE27712AB92AAA0004A47C /* IconImageView.swift */,
@@ -474,7 +471,6 @@
 				BFAE27592AB7E9880004A47C /* SelectButton.swift in Sources */,
 				BFAE277D2AB92C370004A47C /* SearchTableViewCell.swift in Sources */,
 				BFAE271F2AB7D9D70004A47C /* SceneDelegate.swift in Sources */,
-				BFAE27A42ABBC7BE0004A47C /* CustomChatLabel.swift in Sources */,
 				BFAE27702AB92A170004A47C /* ChatBaseView.swift in Sources */,
 				BFAE278A2AB92E000004A47C /* MainTableViewConstraints.swift in Sources */,
 			);

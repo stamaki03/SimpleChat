@@ -10,9 +10,9 @@ import UIKit
 final class MainTableViewCell: UITableViewCell {
     
     var userIcon = IconImageView(frame: .zero)
-    var userName = CustomLabel(frame: .zero, fontSize: 15.0, text: "")
-    var userLastMessage = CustomLabel(frame: .zero, fontSize: 15.0, text: "")
-    var userLastMessageTime = CustomLabel(frame: .zero, fontSize: 15.0, text: "")
+    var userName = CustomLabel(frame: .zero, fontSize: 15.0, text: "", paddingSize: 0)
+    var userLastMessage = CustomLabel(frame: .zero, fontSize: 15.0, text: "", paddingSize: 0)
+    var userLastMessageTime = CustomLabel(frame: .zero, fontSize: 15.0, text: "", paddingSize: 0)
     var badgeIcon = BadgeImageView(frame: .zero)
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

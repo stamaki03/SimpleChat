@@ -11,14 +11,14 @@ final class SettingViewController: UIViewController, UITextFieldDelegate {
     
     let signUpTitleLabel = TitleLabel(frame: .zero, text: "設定変更")
     let iconImageView = CustomButton(frame: .zero, cornerRadius: 75, systemName: "camera")
-    let idLabel = CustomLabel(frame: .zero, fontSize: 20.0, text: "ID")
-    let idTextField = CustomTextField(frame: .zero, placeholder: "example@co.jp")
-    let nameLabel = CustomLabel(frame: .zero, fontSize: 20.0, text: "名前")
-    let nameTextField = CustomTextField(frame: .zero, placeholder: "名前")
-    let passwordLabel = CustomLabel(frame: .zero, fontSize: 20.0, text: "パスワード")
-    let passwordTextField = CustomTextField(frame: .zero, placeholder: "パスワード")
-    let repasswordLabel = CustomLabel(frame: .zero, fontSize: 20.0, text: "パスワード(確認)")
-    let repasswordTextField = CustomTextField(frame: .zero, placeholder: "パスワード(確認)")
+    let idLabel = CustomLabel(frame: .zero, fontSize: 20.0, text: "ID", paddingSize: 0)
+    let idTextField = CustomTextField(frame: .zero, placeholder: "example@co.jp", paddingSize: 0)
+    let nameLabel = CustomLabel(frame: .zero, fontSize: 20.0, text: "名前", paddingSize: 0)
+    let nameTextField = CustomTextField(frame: .zero, placeholder: "名前", paddingSize: 0)
+    let passwordLabel = CustomLabel(frame: .zero, fontSize: 20.0, text: "パスワード", paddingSize: 0)
+    let passwordTextField = CustomTextField(frame: .zero, placeholder: "パスワード", paddingSize: 0)
+    let repasswordLabel = CustomLabel(frame: .zero, fontSize: 20.0, text: "パスワード(確認)", paddingSize: 0)
+    let repasswordTextField = CustomTextField(frame: .zero, placeholder: "パスワード(確認)", paddingSize: 0)
     let loginSelectButton = SelectButton(frame: .zero, title: "修正")
     
     override func viewDidLoad() {

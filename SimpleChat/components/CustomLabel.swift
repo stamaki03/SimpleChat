@@ -9,7 +9,10 @@ import UIKit
 
 final class CustomLabel: UILabel {
     
-    init(frame: CGRect, fontSize: CGFloat, text: String) {
+    let padding: UIEdgeInsets
+    
+    init(frame: CGRect, fontSize: CGFloat, text: String, paddingSize: CGFloat) {
+        padding = UIEdgeInsets(top: paddingSize, left: paddingSize, bottom: paddingSize, right: paddingSize)
         super.init(frame: frame)
         self.adjustsFontSizeToFitWidth = true
         self.font = UIFont.systemFont(ofSize: fontSize)
@@ -17,6 +20,18 @@ final class CustomLabel: UILabel {
         self.textColor = .black
         self.numberOfLines = 0
         self.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    override func drawText(in rect: CGRect) {
+        let newRect = rect.inset(by: padding)
+        super.drawText(in: newRect)
+    }
+
+    override var intrinsicContentSize: CGSize {
+        var intrinsicContentSize = super.intrinsicContentSize
+        intrinsicContentSize.height += padding.top + padding.bottom
+        intrinsicContentSize.width += padding.left + padding.right
+        return intrinsicContentSize
     }
     
     required init?(coder: NSCoder) {
