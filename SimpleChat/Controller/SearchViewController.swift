@@ -16,17 +16,23 @@ class SearchViewController: UIViewController {
         UserItems(userIcon: IconImageView(frame: .zero), userName: "user4", userPassword: "12345", userLastMessage: "こんばんは。", userLastMessageTime: "2022/12/09", badgeIcon: BadgeImageView(frame: .zero))
     ]
     
+    private let tableView: UITableView = {
+        let view = UITableView(frame: .zero, style: UITableView.Style.plain)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.register(MainTableViewCell.self, forCellReuseIdentifier: "Cell")
+        return view
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         // ビュー設定
         view.backgroundColor = .white
         // テーブルビュー設定
-        let tableView = UITableView(frame: self.view.frame, style: UITableView.Style.plain)
+        tableView.frame = self.view.frame
         tableView.rowHeight = 70
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(SearchTableViewCell.self, forCellReuseIdentifier: "Cell")
         view.addSubview(tableView)
     }
     
