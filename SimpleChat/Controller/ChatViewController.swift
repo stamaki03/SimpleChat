@@ -21,6 +21,7 @@ final class ChatViewController: UIViewController, UITextFieldDelegate {
     
     private let tableView: UITableView = {
         let view = UITableView(frame: .zero, style: UITableView.Style.plain)
+        view.allowsSelection = false
         view.translatesAutoresizingMaskIntoConstraints = false
         view.register(MyChatTableViewCell.self, forCellReuseIdentifier: "MyChatCell")
         view.register(OthersChatTableViewCell.self, forCellReuseIdentifier: "OthersChatCell")
@@ -83,7 +84,9 @@ final class ChatViewController: UIViewController, UITextFieldDelegate {
                     print(e)
                 } else {
                     print("success")
-                    self.chatTextField.text = ""
+                    Task.detached { @MainActor in
+                        self.chatTextField.text = ""
+                    }
                 }
             }
         }

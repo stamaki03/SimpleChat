@@ -11,7 +11,7 @@ final class ChatBaseView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = .white
+        self.backgroundColor = UIColor(named: "bg")
         self.layer.borderColor = UIColor.black.cgColor
         self.layer.borderWidth = 1
         self.translatesAutoresizingMaskIntoConstraints = false

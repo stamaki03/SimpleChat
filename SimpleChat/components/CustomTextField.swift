@@ -15,6 +15,7 @@ final class CustomTextField: UITextField {
     init(frame: CGRect, placeholder: String, paddingSize: CGFloat) {
         self.padding = paddingSize
         super.init(frame: frame)
+        self.backgroundColor = .white
         self.font = UIFont.systemFont(ofSize: 20.0)
         self.layer.borderColor = CGColor.init(gray: 0.5, alpha: 1.0)
         self.layer.borderWidth = 1
