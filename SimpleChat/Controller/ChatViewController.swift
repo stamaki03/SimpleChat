@@ -39,6 +39,7 @@ final class ChatViewController: UIViewController, UITextFieldDelegate {
         tableView.dataSource = self
         view.addSubview(tableView)
         // サブビュー設定
+        chatTextField.delegate = self
         view.addSubview(chatBaseView)
         chatBaseView.addSubview(chatSendButton)
         chatBaseView.addSubview(chatTextField)
@@ -48,8 +49,6 @@ final class ChatViewController: UIViewController, UITextFieldDelegate {
         chatSendButton.addTarget(self, action: #selector(sendMessage(sender:)), for:.touchUpInside)
         // テキストの読み込み
         loadMessages()
-        // キーボード設定用
-        chatTextField.delegate = self
     }
     
     private func loadMessages() {
@@ -84,6 +83,7 @@ final class ChatViewController: UIViewController, UITextFieldDelegate {
                     print(e)
                 } else {
                     print("success")
+                    self.chatTextField.text = ""
                 }
             }
         }
