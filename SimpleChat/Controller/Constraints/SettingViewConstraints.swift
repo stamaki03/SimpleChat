@@ -8,7 +8,7 @@
 import UIKit
 
 struct SettingViewConstraints {
-    static func makeConstraints(view: UIView, iconImageView: CustomButton, signUpTitleLabel: TitleLabel, idLabel: CustomLabel, idTextField: CustomTextField, nameLabel: CustomLabel, nameTextField: CustomTextField, passwordLabel: CustomLabel, passwordTextField: CustomTextField, repasswordLabel: CustomLabel, repasswordTextField: CustomTextField, loginSelectButton: SelectButton){
+    static func makeConstraints(view: UIView, iconImageView: CustomButton, signUpTitleLabel: TitleLabel, idLabel: CustomLabel, idTextField: CustomTextField, nameLabel: CustomLabel, nameTextField: CustomTextField, passwordLabel: CustomLabel, passwordTextField: CustomTextField, repasswordLabel: CustomLabel, repasswordTextField: CustomTextField, modifyButton: SelectButton){
         signUpTitleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50).isActive = true
         signUpTitleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
         signUpTitleLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true
@@ -59,9 +59,9 @@ struct SettingViewConstraints {
         repasswordTextField.heightAnchor.constraint(equalToConstant: 30).isActive = true
         repasswordTextField.widthAnchor.constraint(equalToConstant: 300).isActive = true
         
-        loginSelectButton.topAnchor.constraint(equalTo: repasswordTextField.bottomAnchor, constant: 50).isActive = true
-        loginSelectButton.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
-        loginSelectButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        loginSelectButton.widthAnchor.constraint(equalToConstant: 300).isActive = true
+        modifyButton.topAnchor.constraint(equalTo: repasswordTextField.bottomAnchor, constant: 50).isActive = true
+        modifyButton.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
+        modifyButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        modifyButton.widthAnchor.constraint(equalToConstant: 300).isActive = true
     }
 }

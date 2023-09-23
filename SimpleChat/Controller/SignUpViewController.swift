@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import FirebaseAuth
 
 final class SignUpViewController: UIViewController, UITextFieldDelegate {
     
@@ -21,7 +20,10 @@ final class SignUpViewController: UIViewController, UITextFieldDelegate {
     let repasswordLabel = CustomLabel(frame: .zero, fontSize: 20.0, text: "パスワード(確認)", paddingSize: 0)
     let repasswordTextField = CustomTextField(frame: .zero, placeholder: "パスワード(確認)", paddingSize: 0)
     let signUpButton = SelectButton(frame: .zero, title: "登録")
-        
+    
+    let ipc = UIImagePickerController()
+    var localImageURL: URL?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -47,20 +49,25 @@ final class SignUpViewController: UIViewController, UITextFieldDelegate {
         // 制約設定
         SignUpViewConstraints.makeConstraints(view: view, iconImageView: iconImageView, signUpTitleLabel: signUpTitleLabel, idLabel: idLabel, idTextField: idTextField, nameLabel: nameLabel, nameTextField: nameTextField, passwordLabel: passwordLabel, passwordTextField: passwordTextField, repasswordLabel: repasswordLabel, repasswordTextField: repasswordTextField, signUpButton: signUpButton)
         // ボタンアクション設定
+        iconImageView.addTarget(self, action: #selector(registerImage(sender:)), for:.touchUpInside)
         signUpButton.addTarget(self, action: #selector(signUpUser(sender:)), for:.touchUpInside)
-        // キーボード設定用
-        idTextField.delegate = self
-        nameTextField.delegate = self
-        passwordTextField.delegate = self
-        repasswordTextField.delegate = self
+        // イメージピッカー設定
+        ipc.delegate = self
+    }
+    
+    @objc internal func registerImage(sender: UIButton){
+        self.present(ipc, animated:true, completion:nil)
     }
     
     @objc internal func signUpUser(sender: UIButton){
-        Auth.auth().createUser(withEmail: idTextField.text ?? "", password: passwordTextField.text ?? "") { authResult, error in
-            if let e = error {
-                print(e)
-            } else {
+        Task {
+            do {
+                guard let email = idTextField.text, let password = passwordTextField.text else { return }
+                let authDataResult = try await AuthenticationManager.shared.createUser(email: email, password: password)
+                try await UserManager.shared.createManager(auth: authDataResult)
                 self.dismiss(animated: true, completion: nil)
+            } catch {
+                print(error)
             }
         }
     }
@@ -85,4 +92,20 @@ final class SignUpViewController: UIViewController, UITextFieldDelegate {
         return true
     }
     
+}
+
+extension SignUpViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let editedImage = info[.editedImage] as? UIImage {
+            iconImageView.setImage(editedImage, for: .normal)
+        } else if let originalImage = info[.originalImage] as? UIImage {
+            iconImageView.setImage(originalImage, for: .normal)
+        }
+        dismiss(animated: true, completion: nil)
+        self.localImageURL = info[UIImagePickerController.InfoKey.imageURL] as? URL
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
+    }
 }

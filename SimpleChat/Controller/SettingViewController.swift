@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 final class SettingViewController: UIViewController, UITextFieldDelegate {
     
@@ -19,7 +20,7 @@ final class SettingViewController: UIViewController, UITextFieldDelegate {
     let passwordTextField = CustomTextField(frame: .zero, placeholder: "パスワード", paddingSize: 0)
     let repasswordLabel = CustomLabel(frame: .zero, fontSize: 20.0, text: "パスワード(確認)", paddingSize: 0)
     let repasswordTextField = CustomTextField(frame: .zero, placeholder: "パスワード(確認)", paddingSize: 0)
-    let loginSelectButton = SelectButton(frame: .zero, title: "修正")
+    let modifyButton = SelectButton(frame: .zero, title: "修正")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +32,7 @@ final class SettingViewController: UIViewController, UITextFieldDelegate {
         nameTextField.delegate = self
         passwordTextField.delegate = self
         repasswordTextField.delegate = self
-        loginSelectButton.isEnabled = false
+        modifyButton.isEnabled = false
         view.addSubview(signUpTitleLabel)
         view.addSubview(iconImageView)
         view.addSubview(idLabel)
@@ -42,14 +43,15 @@ final class SettingViewController: UIViewController, UITextFieldDelegate {
         view.addSubview(passwordTextField)
         view.addSubview(repasswordLabel)
         view.addSubview(repasswordTextField)
-        view.addSubview(loginSelectButton)
+        view.addSubview(modifyButton)
         // 制約設定
-        SettingViewConstraints.makeConstraints(view: view, iconImageView: iconImageView, signUpTitleLabel: signUpTitleLabel, idLabel: idLabel, idTextField: idTextField, nameLabel: nameLabel, nameTextField: nameTextField, passwordLabel: passwordLabel, passwordTextField: passwordTextField, repasswordLabel: repasswordLabel, repasswordTextField: repasswordTextField, loginSelectButton: loginSelectButton)
-        // キーボード設定用
-        idTextField.delegate = self
-        nameTextField.delegate = self
-        passwordTextField.delegate = self
-        repasswordTextField.delegate = self
+        SettingViewConstraints.makeConstraints(view: view, iconImageView: iconImageView, signUpTitleLabel: signUpTitleLabel, idLabel: idLabel, idTextField: idTextField, nameLabel: nameLabel, nameTextField: nameTextField, passwordLabel: passwordLabel, passwordTextField: passwordTextField, repasswordLabel: repasswordLabel, repasswordTextField: repasswordTextField, modifyButton: modifyButton)
+        // ボタンアクション設定
+        modifyButton.addTarget(self, action: #selector(userModify(sender:)), for:.touchUpInside)
+    }
+    
+    @objc internal func userModify(sender: UIButton){
+        
     }
     
     func textFieldDidChangeSelection(_ textField: UITextField) {
@@ -59,11 +61,11 @@ final class SettingViewController: UIViewController, UITextFieldDelegate {
         let repasswordIsEmpty = repasswordTextField.text?.isEmpty ?? true
         
         if idIsEmpty || nameIsEmpty || passwordIsEmpty || repasswordIsEmpty {
-            loginSelectButton.isEnabled = false
-            loginSelectButton.backgroundColor = .lightGray
+            modifyButton.isEnabled = false
+            modifyButton.backgroundColor = .lightGray
         } else {
-            loginSelectButton.isEnabled = true
-            loginSelectButton.backgroundColor = UIColor(named: "bg")
+            modifyButton.isEnabled = true
+            modifyButton.backgroundColor = UIColor(named: "bg")
         }
     }
     

@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import FirebaseAuth
 
 final class LoginViewController: UIViewController, UITextFieldDelegate {
     
@@ -42,21 +41,18 @@ final class LoginViewController: UIViewController, UITextFieldDelegate {
         // ボタンアクション設定
         loginSelectButton.addTarget(self, action: #selector(goToMainViewController(sender:)), for:.touchUpInside)
         signUpButton.addTarget(self, action: #selector(goToSignUpViewController(sender:)), for:.touchUpInside)
-        // キーボード設定用
-        idTextField.delegate = self
-        passwordTextField.delegate = self
     }
     
     // ボタンアクション処理
     @objc internal func goToMainViewController(sender: UIButton){
-        Auth.auth().signIn(withEmail: idTextField.text ?? "" , password: passwordTextField.text ?? "") { [weak self] authResult, error in
-            guard let self = self else { return }
-            if let e = error {
-                print(e)
-            } else {
+        Task {
+            do {
+                guard let email = idTextField.text, let password = passwordTextField.text else { return }
+                try await AuthenticationManager.shared.signInUser(email: email, password: password)
                 let mainViewController = MainViewController()
                 self.navigationController?.pushViewController(mainViewController, animated: true)
-                return
+            } catch {
+                print(error)
             }
         }
     }
