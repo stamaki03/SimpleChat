@@ -9,13 +9,8 @@ import UIKit
 
 class SearchViewController: UIViewController {
     
-    private let serchViewCellItems: [UserItems] = [
-        UserItems(userIcon: IconImageView(frame: .zero), userName: "useruser1", userPassword: "12345", userLastMessage: "はじめまして。", userLastMessageTime: "2022/12/09", badgeIcon: BadgeImageView(frame: .zero)),
-        UserItems(userIcon: IconImageView(frame: .zero), userName: "useruser2", userPassword: "12345", userLastMessage: "おはよう。", userLastMessageTime: "2022/12/09", badgeIcon: BadgeImageView(frame: .zero)),
-        UserItems(userIcon: IconImageView(frame: .zero), userName: "user3", userPassword: "12345", userLastMessage: "こんにちは。", userLastMessageTime: "2022/12/09", badgeIcon: BadgeImageView(frame: .zero)),
-        UserItems(userIcon: IconImageView(frame: .zero), userName: "user4", userPassword: "12345", userLastMessage: "こんばんは。", userLastMessageTime: "2022/12/09", badgeIcon: BadgeImageView(frame: .zero))
-    ]
-    
+    private var serchViewCellItems: [DBuser] = []
+        
     private let tableView: UITableView = {
         let view = UITableView(frame: .zero, style: UITableView.Style.plain)
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -34,6 +29,11 @@ class SearchViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         view.addSubview(tableView)
+        // ユーザ情報取得
+        Task {
+            self.serchViewCellItems = try await UserManager.shared.getAllUser()
+            self.tableView.reloadData()
+        }
     }
     
 }
@@ -45,7 +45,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! SearchTableViewCell
-        cell.userName.text = serchViewCellItems[indexPath.row].userName
+        cell.userName.text = serchViewCellItems[indexPath.row].name
         return cell
     }
 }

@@ -6,8 +6,11 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 final class MainViewController: UIViewController {
+    
+    let user = Auth.auth().currentUser
     
     private let mainViewCellItems: [UserItems] = [
         UserItems(userIcon: IconImageView(frame: .zero), userName: "useruser1", userPassword: "12345", userLastMessage: "はじめまして。", userLastMessageTime: "2022/12/09", badgeIcon: BadgeImageView(frame: .zero)),
@@ -59,7 +62,8 @@ extension MainViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! MainTableViewCell
-        cell.userName.text = mainViewCellItems[indexPath.row].userName
+        // cell.userName.text = mainViewCellItems[indexPath.row].userName
+        cell.userName.text = user?.displayName ?? ""
         cell.userLastMessage.text = mainViewCellItems[indexPath.row].userLastMessage
         cell.userLastMessageTime.text = mainViewCellItems[indexPath.row].userLastMessageTime
         return cell
