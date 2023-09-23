@@ -8,18 +8,23 @@
 import UIKit
 
 struct SignUpViewConstraints {
-    static func makeConstraints(view: UIView, iconImageView: CustomButton, signUpTitleLabel: TitleLabel, idLabel: CustomLabel, idTextField: CustomTextField, nameLabel: CustomLabel, nameTextField: CustomTextField, passwordLabel: CustomLabel, passwordTextField: CustomTextField, repasswordLabel: CustomLabel, repasswordTextField: CustomTextField, signUpButton: SelectButton){
+    static func makeConstraints(view: UIView, iconImageView: CustomButton, deleteImage: CustomButton, signUpTitleLabel: TitleLabel, idLabel: CustomLabel, idTextField: CustomTextField, nameLabel: CustomLabel, nameTextField: CustomTextField, passwordLabel: CustomLabel, passwordTextField: CustomTextField, repasswordLabel: CustomLabel, repasswordTextField: CustomTextField, signUpButton: SelectButton){
         signUpTitleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50).isActive = true
         signUpTitleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
         signUpTitleLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true
         signUpTitleLabel.widthAnchor.constraint(equalToConstant: 300).isActive = true
         
-        iconImageView.topAnchor.constraint(equalTo: signUpTitleLabel.bottomAnchor, constant: 25).isActive = true
+        iconImageView.topAnchor.constraint(equalTo: signUpTitleLabel.bottomAnchor, constant: 20).isActive = true
         iconImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
         iconImageView.heightAnchor.constraint(equalToConstant: 150).isActive = true
         iconImageView.widthAnchor.constraint(equalToConstant: 150).isActive = true
         
-        idLabel.topAnchor.constraint(equalTo: iconImageView.bottomAnchor, constant: 25).isActive = true
+        deleteImage.topAnchor.constraint(equalTo: iconImageView.bottomAnchor, constant: 20).isActive = true
+        deleteImage.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
+        deleteImage.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        deleteImage.widthAnchor.constraint(equalToConstant: 30).isActive = true
+        
+        idLabel.topAnchor.constraint(equalTo: deleteImage.bottomAnchor, constant: 20).isActive = true
         idLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
         idLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
         idLabel.widthAnchor.constraint(equalToConstant: 300).isActive = true

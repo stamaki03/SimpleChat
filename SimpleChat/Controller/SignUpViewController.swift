@@ -11,6 +11,7 @@ final class SignUpViewController: UIViewController, UITextFieldDelegate {
     
     let signUpTitleLabel = TitleLabel(frame: .zero, text: "新規登録")
     let iconImageView = CustomButton(frame: .zero, cornerRadius: 75, systemName: "camera")
+    let deleteImage = CustomButton(frame: .zero, cornerRadius: 0, systemName: "trash")
     let idLabel = CustomLabel(frame: .zero, fontSize: 20.0, text: "ID", paddingSize: 0)
     let idTextField = CustomTextField(frame: .zero, placeholder: "example@co.jp", paddingSize: 0)
     let nameLabel = CustomLabel(frame: .zero, fontSize: 20.0, text: "名前", paddingSize: 0)
@@ -22,6 +23,7 @@ final class SignUpViewController: UIViewController, UITextFieldDelegate {
     let signUpButton = SelectButton(frame: .zero, title: "登録")
     
     let ipc = UIImagePickerController()
+    var image: UIImage?
     var localImageURL: URL?
     
     override func viewDidLoad() {
@@ -37,6 +39,7 @@ final class SignUpViewController: UIViewController, UITextFieldDelegate {
         signUpButton.isEnabled = false
         view.addSubview(signUpTitleLabel)
         view.addSubview(iconImageView)
+        view.addSubview(deleteImage)
         view.addSubview(idLabel)
         view.addSubview(idTextField)
         view.addSubview(nameLabel)
@@ -47,9 +50,10 @@ final class SignUpViewController: UIViewController, UITextFieldDelegate {
         view.addSubview(repasswordTextField)
         view.addSubview(signUpButton)
         // 制約設定
-        SignUpViewConstraints.makeConstraints(view: view, iconImageView: iconImageView, signUpTitleLabel: signUpTitleLabel, idLabel: idLabel, idTextField: idTextField, nameLabel: nameLabel, nameTextField: nameTextField, passwordLabel: passwordLabel, passwordTextField: passwordTextField, repasswordLabel: repasswordLabel, repasswordTextField: repasswordTextField, signUpButton: signUpButton)
+        SignUpViewConstraints.makeConstraints(view: view, iconImageView: iconImageView, deleteImage: deleteImage, signUpTitleLabel: signUpTitleLabel, idLabel: idLabel, idTextField: idTextField, nameLabel: nameLabel, nameTextField: nameTextField, passwordLabel: passwordLabel, passwordTextField: passwordTextField, repasswordLabel: repasswordLabel, repasswordTextField: repasswordTextField, signUpButton: signUpButton)
         // ボタンアクション設定
         iconImageView.addTarget(self, action: #selector(registerImage(sender:)), for:.touchUpInside)
+        deleteImage.addTarget(self, action: #selector(deleteImage(sender:)), for:.touchUpInside)
         signUpButton.addTarget(self, action: #selector(signUpUser(sender:)), for:.touchUpInside)
         // イメージピッカー設定
         ipc.delegate = self
@@ -59,12 +63,21 @@ final class SignUpViewController: UIViewController, UITextFieldDelegate {
         self.present(ipc, animated:true, completion:nil)
     }
     
+    @objc internal func deleteImage(sender: UIButton){
+        self.iconImageView.setImage(UIImage(systemName: "camera"), for: .normal)
+        self.image = nil
+    }
+    
     @objc internal func signUpUser(sender: UIButton){
         Task {
             do {
                 guard let email = idTextField.text, let password = passwordTextField.text else { return }
                 let authDataResult = try await AuthenticationManager.shared.createUser(email: email, password: password)
-                try await UserManager.shared.createManager(auth: authDataResult)
+                guard let name = nameTextField.text else { return }
+                try await UserManager.shared.createManager(auth: authDataResult, name: name, photoUrl: "")
+                if let uploadImage = self.image?.jpegData(compressionQuality: 0.5) {
+                    _ = try await StorageManager.shared.saveImage(data: uploadImage, userId: authDataResult.uid)
+                }
                 self.dismiss(animated: true, completion: nil)
             } catch {
                 print(error)
@@ -98,8 +111,10 @@ extension SignUpViewController: UIImagePickerControllerDelegate, UINavigationCon
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let editedImage = info[.editedImage] as? UIImage {
             iconImageView.setImage(editedImage, for: .normal)
+            self.image = editedImage
         } else if let originalImage = info[.originalImage] as? UIImage {
             iconImageView.setImage(originalImage, for: .normal)
+            self.image = originalImage
         }
         dismiss(animated: true, completion: nil)
         self.localImageURL = info[UIImagePickerController.InfoKey.imageURL] as? URL

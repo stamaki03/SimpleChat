@@ -15,6 +15,7 @@ final class CustomButton: UIButton {
         self.layer.borderColor = CGColor.init(gray: 0.5, alpha: 1.0)
         self.layer.borderWidth = 1
         self.layer.cornerRadius = cornerRadius
+        self.layer.masksToBounds = true
         self.setImage(UIImage(systemName: systemName), for: .normal)
         self.translatesAutoresizingMaskIntoConstraints = false
     }
