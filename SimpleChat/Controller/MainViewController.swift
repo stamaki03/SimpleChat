@@ -6,18 +6,10 @@
 //
 
 import UIKit
-import FirebaseAuth
 
 final class MainViewController: UIViewController {
     
-    let user = Auth.auth().currentUser
-    
-    private let mainViewCellItems: [UserItems] = [
-        UserItems(userIcon: IconImageView(frame: .zero), userName: "useruser1", userPassword: "12345", userLastMessage: "はじめまして。", userLastMessageTime: "2022/12/09", badgeIcon: BadgeImageView(frame: .zero)),
-        UserItems(userIcon: IconImageView(frame: .zero), userName: "useruser2", userPassword: "12345", userLastMessage: "おはよう。", userLastMessageTime: "2022/12/09", badgeIcon: BadgeImageView(frame: .zero)),
-        UserItems(userIcon: IconImageView(frame: .zero), userName: "user3", userPassword: "12345", userLastMessage: "こんにちは。", userLastMessageTime: "2022/12/09", badgeIcon: BadgeImageView(frame: .zero)),
-        UserItems(userIcon: IconImageView(frame: .zero), userName: "user4", userPassword: "12345", userLastMessage: "こんばんは。", userLastMessageTime: "2022/12/09", badgeIcon: BadgeImageView(frame: .zero))
-    ]
+    private var mainViewCellItems: [UserItems?] = []
     
     private let tableView: UITableView = {
         let view = UITableView(frame: .zero, style: UITableView.Style.plain)
@@ -41,6 +33,22 @@ final class MainViewController: UIViewController {
         let searchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(goToSearchViewController))
         let settingButton = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(goToSettingViewController))
         navigationItem.rightBarButtonItems = [searchButton, settingButton]
+        // ユーザ情報取得
+        Task {
+            do {
+                let currentUser = try AuthenticationManager.shared.getAuthenticatedUser()
+                let userInfo = try await UserManager.shared.getUser(userId: currentUser.uid)
+                let chatroomIdArray = userInfo.chatroom.filter{ $0 != nil }.map{ $0! }
+                for chatroomId in chatroomIdArray {
+                    let otherUserId = try await UserManager.shared.getOthereMember(chatroomId: chatroomId)
+                    let dbUser = try await UserManager.shared.getUser(userId: otherUserId)
+                    mainViewCellItems.append(UserItems(chatroomId: chatroomId, uid: dbUser.uid, name: dbUser.name, email: dbUser.email, photoUrl: dbUser.photoUrl, chatroom: dbUser.chatroom, dateCreated: dbUser.dateCreated))
+                }
+                self.tableView.reloadData()
+            } catch {
+                print(error)
+            }
+        }
     }
     
     @objc internal func goToSearchViewController() {
@@ -55,25 +63,20 @@ final class MainViewController: UIViewController {
 }
 
 extension MainViewController: UITableViewDataSource {
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return mainViewCellItems.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! MainTableViewCell
-        // cell.userName.text = mainViewCellItems[indexPath.row].userName
-        cell.userName.text = user?.displayName ?? ""
-        cell.userLastMessage.text = mainViewCellItems[indexPath.row].userLastMessage
-        cell.userLastMessageTime.text = mainViewCellItems[indexPath.row].userLastMessageTime
+        cell.userName.text = mainViewCellItems[indexPath.row]?.uid
         return cell
     }
-    
 }
 
 extension MainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let chatViewController = ChatViewController()
+        let chatViewController = ChatViewController(chatroomId: mainViewCellItems[indexPath.row]?.chatroomId ?? "")
         self.navigationController?.pushViewController(chatViewController, animated: true)
     }
     

@@ -8,10 +8,11 @@
 import UIKit
 
 struct UserItems {
-    var userIcon: IconImageView
-    var userName: String
-    var userPassword: String
-    var userLastMessage: String
-    var userLastMessageTime: String
-    var badgeIcon: BadgeImageView
+    let chatroomId: String
+    let uid: String
+    let name: String?
+    let email: String?
+    let photoUrl: String?
+    let chatroom: [String?]
+    let dateCreated: Date?
 }

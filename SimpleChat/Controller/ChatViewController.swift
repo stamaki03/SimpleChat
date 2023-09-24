@@ -10,8 +10,8 @@ import FirebaseAuth
 import FirebaseFirestore
 
 final class ChatViewController: UIViewController, UITextFieldDelegate {
-    
-    let db = Firestore.firestore()
+        
+    var chatroomId: String
     
     private var chatViewCellItems: [UserMessages] = []
     
@@ -27,6 +27,16 @@ final class ChatViewController: UIViewController, UITextFieldDelegate {
         view.register(OthersChatTableViewCell.self, forCellReuseIdentifier: "OthersChatCell")
         return view
     }()
+    
+    init(chatroomId: String) {
+        self.chatroomId = chatroomId
+        super.init(nibName: nil, bundle: nil)
+        print(self.chatroomId)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,7 +63,7 @@ final class ChatViewController: UIViewController, UITextFieldDelegate {
     }
     
     private func loadMessages() {
-        db.collection("messages").order(by: "sendTime").addSnapshotListener { [weak self] (querrySnapshot, error) in
+        Firestore.firestore().collection("chatroom").document(chatroomId).collection("chats").order(by: "sendTime").addSnapshotListener { [weak self] (querrySnapshot, error) in
             if let e = error {
                 print(e)
             } else {
@@ -79,7 +89,7 @@ final class ChatViewController: UIViewController, UITextFieldDelegate {
     
     @objc internal func sendMessage(sender: UIButton){
         if let userName = Auth.auth().currentUser?.email, let chatText = chatTextField.text {
-            db.collection("messages").addDocument(data: ["userName" : userName, "chatText" : chatText, "sendTime" : Date().timeIntervalSince1970]) { error in
+            Firestore.firestore().collection("chatroom").document(chatroomId).collection("chats").addDocument(data: ["userName" : userName, "chatText" : chatText, "sendTime" : Date().timeIntervalSince1970]) { error in
                 if let e = error {
                     print(e)
                 } else {
