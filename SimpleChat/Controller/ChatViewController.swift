@@ -10,7 +10,7 @@ import FirebaseAuth
 import FirebaseFirestore
 
 final class ChatViewController: UIViewController, UITextFieldDelegate {
-        
+    
     var chatroomId: String
     
     private var chatViewCellItems: [UserMessages] = []
@@ -31,7 +31,6 @@ final class ChatViewController: UIViewController, UITextFieldDelegate {
     init(chatroomId: String) {
         self.chatroomId = chatroomId
         super.init(nibName: nil, bundle: nil)
-        print(self.chatroomId)
     }
     
     required init?(coder: NSCoder) {
@@ -87,17 +86,15 @@ final class ChatViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    @objc internal func sendMessage(sender: UIButton){
-        if let userName = Auth.auth().currentUser?.email, let chatText = chatTextField.text {
-            Firestore.firestore().collection("chatroom").document(chatroomId).collection("chats").addDocument(data: ["userName" : userName, "chatText" : chatText, "sendTime" : Date().timeIntervalSince1970]) { error in
-                if let e = error {
-                    print(e)
-                } else {
-                    print("success")
-                    Task.detached { @MainActor in
-                        self.chatTextField.text = ""
-                    }
-                }
+    @objc internal func sendMessage(sender: UIButton) {
+        Task {
+            do {
+                let userName = try AuthenticationManager.shared.getAuthenticatedUser()
+                guard let userEmail = userName.email, let chatText = chatTextField.text else {return}
+                try await ChatroomManager.shared.addDocument(chatroomId: self.chatroomId, userEmail: userEmail, chatText: chatText)
+                self.chatTextField.text = ""
+            } catch {
+                print(error)
             }
         }
     }
@@ -125,12 +122,3 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
 }
-
-//    private var chatViewCellItems: [UserMessages] = [
-//        UserMessages(userName: "user1", userMessage: "はじめまして。"),
-//        UserMessages(userName: "useruser2", userMessage: "おはよう。"),
-//        UserMessages(userName: "user1", userMessage: "こんにちは。"),
-//        UserMessages(userName: "useruser4", userMessage: "こんばんは。"),
-//        UserMessages(userName: "useruser4", userMessage: "よろしくねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねね。"),
-//        UserMessages(userName: "user1", userMessage: "よろしくねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねねね。")
-//    ]
