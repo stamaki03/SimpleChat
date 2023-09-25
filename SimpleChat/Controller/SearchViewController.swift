@@ -9,6 +9,8 @@ import UIKit
 
 class SearchViewController: UIViewController {
     
+    var userIdArray: [String?]
+    
     private var currentUser: AuthDataResultModel?
     private var serchViewCellItems: [DBuser] = []
     
@@ -18,6 +20,15 @@ class SearchViewController: UIViewController {
         view.register(SearchTableViewCell.self, forCellReuseIdentifier: "Cell")
         return view
     }()
+    
+    init(userId: [String?]) {
+        self.userIdArray = userId
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,16 +45,15 @@ class SearchViewController: UIViewController {
         Task {
             self.currentUser = try AuthenticationManager.shared.getAuthenticatedUser()
             guard let currentUser = currentUser else {return}
-            var dbUserArray = try await UserManager.shared.getAllUser()
+            let dbUserArray = try await UserManager.shared.getAllUser()
             for dbUser in dbUserArray {
-                if dbUser.uid != currentUser.uid {
+                if dbUser.uid != currentUser.uid && !userIdArray.contains(dbUser.uid) {
                     self.serchViewCellItems.append(dbUser)
                 }
             }
             self.tableView.reloadData()
         }
     }
-    
 }
 
 extension SearchViewController: UITableViewDelegate, UITableViewDataSource {

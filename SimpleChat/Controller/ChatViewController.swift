@@ -98,11 +98,6 @@ final class ChatViewController: UIViewController, UITextFieldDelegate {
             }
         }
     }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
-    }
 }
 
 extension ChatViewController: UITableViewDelegate, UITableViewDataSource {

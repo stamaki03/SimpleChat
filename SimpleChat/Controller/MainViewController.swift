@@ -6,6 +6,9 @@
 //
 
 import UIKit
+import FirebaseStorage
+import FirebaseFirestore
+import FirebaseFirestoreSwift
 
 final class MainViewController: UIViewController {
     
@@ -42,7 +45,19 @@ final class MainViewController: UIViewController {
                 for chatroomId in chatroomIdArray {
                     let otherUserId = try await UserManager.shared.getOthereMember(chatroomId: chatroomId)
                     let dbUser = try await UserManager.shared.getUser(userId: otherUserId)
-                    mainViewCellItems.append(UserItems(chatroomId: chatroomId, uid: dbUser.uid, name: dbUser.name, email: dbUser.email, photoUrl: dbUser.photoUrl, chatroom: dbUser.chatroom, dateCreated: dbUser.dateCreated))
+                    var image: UIImage? = nil
+                    if let url = dbUser.photoUrl {
+                        let islandRef = Storage.storage().reference().child(url)
+                        islandRef.getData(maxSize: 1 * 1024 * 1024) { data, error in
+                            if let error = error {
+                                print(error)
+                            } else {
+                                image = UIImage(data: data!)
+                                self.mainViewCellItems.append(UserItems(chatroomId: chatroomId, uid: dbUser.uid, name: dbUser.name, email: dbUser.email, photo: image, chatroom: dbUser.chatroom, dateCreated: dbUser.dateCreated))
+                                self.tableView.reloadData()
+                            }
+                        }
+                    }
                 }
                 self.tableView.reloadData()
             } catch {
@@ -52,7 +67,11 @@ final class MainViewController: UIViewController {
     }
     
     @objc internal func goToSearchViewController() {
-        let searchViewController = SearchViewController()
+        var zzz = [String?]()
+        for aaa in mainViewCellItems {
+            zzz.append(aaa?.uid)
+        }
+        let searchViewController = SearchViewController(userId: zzz)
         self.navigationController?.present(searchViewController, animated: true)
     }
     
@@ -69,7 +88,10 @@ extension MainViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! MainTableViewCell
-        cell.userName.text = mainViewCellItems[indexPath.row]?.uid
+        if let image = mainViewCellItems[indexPath.row]?.photo {
+            cell.userIcon.image = image
+        }
+        cell.userName.text = mainViewCellItems[indexPath.row]?.name
         return cell
     }
 }

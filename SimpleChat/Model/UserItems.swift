@@ -12,7 +12,7 @@ struct UserItems {
     let uid: String
     let name: String?
     let email: String?
-    let photoUrl: String?
+    let photo: UIImage?
     let chatroom: [String?]
     let dateCreated: Date?
 }
