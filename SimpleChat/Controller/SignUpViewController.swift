@@ -6,11 +6,8 @@
 //
 
 import UIKit
-import FirebaseAuth
-import FirebaseStorage
 
-final class SignUpViewController: UIViewController, UITextFieldDelegate {
-    
+final class SignUpViewController: UIViewController {
     let signUpTitleLabel = TitleLabel(frame: .zero, text: "新規登録")
     let iconImageView = CustomButton(frame: .zero, cornerRadius: 75, systemName: "camera")
     let idLabel = CustomLabel(frame: .zero, fontSize: 20.0, text: "ID", paddingSize: 0)
@@ -23,13 +20,23 @@ final class SignUpViewController: UIViewController, UITextFieldDelegate {
     let repasswordTextField = CustomTextField(frame: .zero, placeholder: "パスワード(確認)", paddingSize: 0)
     let signUpButton = SelectButton(frame: .zero, title: "登録")
     
-    let ipc = UIImagePickerController()
+    let imagePicker = UIImagePickerController()
+    
     var image: UIImage?
     var localImageURL: URL?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        setView()
+        // ボタンアクション設定
+        iconImageView.addTarget(self, action: #selector(registerImage(sender:)), for:.touchUpInside)
+        signUpButton.addTarget(self, action: #selector(signUpUser(sender:)), for:.touchUpInside)
+        // イメージピッカー設定
+        imagePicker.delegate = self
+    }
+    
+    private func setView() {
         // ビュー設定
         view.backgroundColor = .white
         // サブビュー設定
@@ -51,38 +58,27 @@ final class SignUpViewController: UIViewController, UITextFieldDelegate {
         view.addSubview(signUpButton)
         // 制約設定
         SignUpViewConstraints.makeConstraints(view: view, iconImageView: iconImageView, signUpTitleLabel: signUpTitleLabel, idLabel: idLabel, idTextField: idTextField, nameLabel: nameLabel, nameTextField: nameTextField, passwordLabel: passwordLabel, passwordTextField: passwordTextField, repasswordLabel: repasswordLabel, repasswordTextField: repasswordTextField, signUpButton: signUpButton)
-        // ボタンアクション設定
-        iconImageView.addTarget(self, action: #selector(registerImage(sender:)), for:.touchUpInside)
-        signUpButton.addTarget(self, action: #selector(signUpUser(sender:)), for:.touchUpInside)
         // 暗号化設定
         passwordTextField.isSecureTextEntry = true
         repasswordTextField.isSecureTextEntry = true
-        // イメージピッカー設定
-        ipc.delegate = self
     }
     
     @objc internal func registerImage(sender: UIButton){
         if self.image == nil {
-            self.present(ipc, animated:true, completion:nil)
+            self.present(imagePicker, animated:true, completion:nil)
         } else {
             self.iconImageView.setImage(UIImage(systemName: "camera"), for: .normal)
             self.image = nil
         }
     }
-    
-    @objc internal func deleteImage(sender: UIButton){
-        self.iconImageView.setImage(UIImage(systemName: "camera"), for: .normal)
-        self.image = nil
-    }
-    
+        
     @objc internal func signUpUser(sender: UIButton){
         Task {
             do {
                 var returnedValue: String?
                 guard let email = idTextField.text, let name = nameTextField.text, let password = passwordTextField.text, let repassword = repasswordTextField.text else { return }
                 if password != repassword {
-                    let alert = UIAlertController(title: "エラー", message:"パスワードが一致してません", preferredStyle: UIAlertController.Style.alert)
-                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                    let alert = AlertMessage.shared.notificationAlert(message: "パスワードが一致してません")
                     present(alert, animated: true, completion: nil)
                     return
                 }
@@ -99,7 +95,9 @@ final class SignUpViewController: UIViewController, UITextFieldDelegate {
             }
         }
     }
-    
+}
+
+extension SignUpViewController: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
         let idIsEmpty = idTextField.text?.isEmpty ?? true
         let nameIsEmpty = nameTextField.text?.isEmpty ?? true
@@ -119,7 +117,6 @@ final class SignUpViewController: UIViewController, UITextFieldDelegate {
         textField.resignFirstResponder()
         return true
     }
-    
 }
 
 extension SignUpViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {

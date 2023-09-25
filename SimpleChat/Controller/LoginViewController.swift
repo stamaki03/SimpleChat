@@ -7,11 +7,7 @@
 
 import UIKit
 
-final class LoginViewController: UIViewController, UITextFieldDelegate {
-    
-    @Published private var validCheck1 = false
-    @Published private var validCheck2 = false
-    
+final class LoginViewController: UIViewController {
     let appTitleLabel = TitleLabel(frame: .zero, text: "SIMPLE CHAT")
     let idLabel = CustomLabel(frame: .zero, fontSize: 20.0, text: "ID", paddingSize: 0)
     let idTextField = CustomTextField(frame: .zero, placeholder: "example@co.jp", paddingSize: 0)
@@ -20,9 +16,19 @@ final class LoginViewController: UIViewController, UITextFieldDelegate {
     let loginSelectButton = SelectButton(frame: .zero, title: "ログイン")
     let signUpButton = ExplanationButton(frame: .zero, title: "新規登録はこちら")
     
+    @Published private var validCheck1 = false
+    @Published private var validCheck2 = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        setView()
+        // ボタンアクション設定
+        loginSelectButton.addTarget(self, action: #selector(goToMainViewController(sender:)), for:.touchUpInside)
+        signUpButton.addTarget(self, action: #selector(goToSignUpViewController(sender:)), for:.touchUpInside)
+    }
+    
+    private func setView() {
         // ビュー設定
         view.backgroundColor = .white
         // サブビュー設定
@@ -38,14 +44,10 @@ final class LoginViewController: UIViewController, UITextFieldDelegate {
         view.addSubview(signUpButton)
         // 制約設定
         LoginViewConstraints.makeConstraints(view: view, appTitleLabel: appTitleLabel, idLabel: idLabel, idTextField: idTextField, passwordLabel: passwordLabel, passwordTextField: passwordTextField, loginSelectButton: loginSelectButton, signUpButton: signUpButton)
-        // ボタンアクション設定
-        loginSelectButton.addTarget(self, action: #selector(goToMainViewController(sender:)), for:.touchUpInside)
-        signUpButton.addTarget(self, action: #selector(goToSignUpViewController(sender:)), for:.touchUpInside)
         // 暗号化設定
         passwordTextField.isSecureTextEntry = true
     }
     
-    // ボタンアクション処理
     @objc internal func goToMainViewController(sender: UIButton){
         Task {
             do {
@@ -65,7 +67,9 @@ final class LoginViewController: UIViewController, UITextFieldDelegate {
         let signUpViewController = SignUpViewController()
         self.navigationController?.present(signUpViewController, animated: true)
     }
-    
+}
+
+extension LoginViewController: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
         let idIsEmpty = idTextField.text?.isEmpty ?? true
         let passwordIsEmpty = passwordTextField.text?.isEmpty ?? true
