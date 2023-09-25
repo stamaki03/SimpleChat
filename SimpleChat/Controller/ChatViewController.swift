@@ -13,7 +13,7 @@ final class ChatViewController: UIViewController, UITextFieldDelegate {
     
     var chatroomId: String
     
-    private var chatViewCellItems: [UserMessages] = []
+    private var chatViewCellItems: [ChatModel] = []
     
     let chatBaseView = ChatBaseView()
     let chatSendButton = CustomButton(frame: .zero, cornerRadius: 10, systemName: "paperplane")
@@ -71,7 +71,7 @@ final class ChatViewController: UIViewController, UITextFieldDelegate {
                     for doc in snapshotDocments {
                         let data = doc.data()
                         if let userName = data["userName"] as? String, let chatText = data["chatText"] as? String {
-                            let newMessage = UserMessages(userName: userName, userMessage: chatText)
+                            let newMessage = ChatModel(userName: userName, userMessage: chatText)
                             print(newMessage)
                             self?.chatViewCellItems.append(newMessage)
                             Task.detached { @MainActor in

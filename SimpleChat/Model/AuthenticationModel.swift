@@ -1,5 +1,5 @@
 //
-//  AuthDataResultModel.swift
+//  AuthenticationModel.swift
 //  SimpleChat
 //
 //  Created by Sho Tamaki on 2023/09/22.
@@ -8,7 +8,7 @@
 import Foundation
 import FirebaseAuth
 
-struct AuthDataResultModel {
+struct AuthenticationModel {
     let uid: String
     let email: String?
     

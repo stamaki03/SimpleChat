@@ -1,5 +1,5 @@
 //
-//  UserItems.swift
+//  UserModel.swift
 //  SimpleChat
 //
 //  Created by Sho Tamaki on 2023/09/19.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct UserItems {
+struct UserModel {
     let chatroomId: String
     let uid: String
     let name: String?

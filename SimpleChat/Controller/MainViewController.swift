@@ -12,7 +12,7 @@ import FirebaseFirestoreSwift
 
 final class MainViewController: UIViewController {
     
-    private var mainViewCellItems: [UserItems?] = []
+    private var mainViewCellItems: [UserModel?] = []
     
     private let tableView: UITableView = {
         let view = UITableView(frame: .zero, style: UITableView.Style.plain)
@@ -53,7 +53,7 @@ final class MainViewController: UIViewController {
                                 print(error)
                             } else {
                                 image = UIImage(data: data!)
-                                self.mainViewCellItems.append(UserItems(chatroomId: chatroomId, uid: dbUser.uid, name: dbUser.name, email: dbUser.email, photo: image, chatroom: dbUser.chatroom, dateCreated: dbUser.dateCreated))
+                                self.mainViewCellItems.append(UserModel(chatroomId: chatroomId, uid: dbUser.uid, name: dbUser.name, email: dbUser.email, photo: image, chatroom: dbUser.chatroom, dateCreated: dbUser.dateCreated))
                                 self.tableView.reloadData()
                             }
                         }

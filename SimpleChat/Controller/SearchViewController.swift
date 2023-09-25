@@ -11,8 +11,8 @@ class SearchViewController: UIViewController {
     
     var userIdArray: [String?]
     
-    private var currentUser: AuthDataResultModel?
-    private var serchViewCellItems: [DBuser] = []
+    private var currentUser: AuthenticationModel?
+    private var serchViewCellItems: [FSUserModel] = []
     
     private let tableView: UITableView = {
         let view = UITableView(frame: .zero, style: UITableView.Style.plain)
