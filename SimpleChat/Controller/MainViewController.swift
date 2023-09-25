@@ -40,11 +40,11 @@ final class MainViewController: UIViewController {
         Task {
             do {
                 let currentUser = try AuthenticationManager.shared.getAuthenticatedUser()
-                let userInfo = try await UserManager.shared.getUser(userId: currentUser.uid)
+                let userInfo = try await UserManager.shared.fetchUser(userId: currentUser.uid)
                 let chatroomIdArray = userInfo.chatroom.filter{ $0 != nil }.map{ $0! }
                 for chatroomId in chatroomIdArray {
-                    let otherUserId = try await UserManager.shared.getOthereMember(chatroomId: chatroomId)
-                    let dbUser = try await UserManager.shared.getUser(userId: otherUserId)
+                    let otherUserId = try await UserManager.shared.fetchOtherMember(chatroomId: chatroomId)
+                    let dbUser = try await UserManager.shared.fetchUser(userId: otherUserId)
                     var image: UIImage? = nil
                     if let url = dbUser.photoUrl {
                         let islandRef = Storage.storage().reference().child(url)

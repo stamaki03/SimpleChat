@@ -45,7 +45,7 @@ class SearchViewController: UIViewController {
         Task {
             self.currentUser = try AuthenticationManager.shared.getAuthenticatedUser()
             guard let currentUser = currentUser else {return}
-            let dbUserArray = try await UserManager.shared.getAllUser()
+            let dbUserArray = try await UserManager.shared.fetchAllUser()
             for dbUser in dbUserArray {
                 if dbUser.uid != currentUser.uid && !userIdArray.contains(dbUser.uid) {
                     self.serchViewCellItems.append(dbUser)
@@ -75,8 +75,8 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
                 let member2 = serchViewCellItems[indexPath.row].uid
                 let members = [member1, member2]
                 try await ChatroomManager.shared.createChatroom(chatroomId: chatroomId, members: members)
-                try await UserManager.shared.addChatroom(chatroomId: chatroomId, user: member1)
-                try await UserManager.shared.addChatroom(chatroomId: chatroomId, user: member2)
+                try await UserManager.shared.adUserTodChatroom(chatroomId: chatroomId, user: member1)
+                try await UserManager.shared.adUserTodChatroom(chatroomId: chatroomId, user: member2)
                 self.dismiss(animated: true, completion: nil)
             } catch {
                 print(error)

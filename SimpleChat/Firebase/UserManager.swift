@@ -14,7 +14,7 @@ final class UserManager {
     static let shared = UserManager()
     private init() {}
     
-    func createManager(auth: AuthDataResultModel, name: String, photoUrl: String?) async throws {
+    func createUser(auth: AuthDataResultModel, name: String, photoUrl: String?) async throws {
         let userData: [String:Any] = [
             "uid": auth.uid,
             "name": name,
@@ -28,7 +28,7 @@ final class UserManager {
         
     }
     
-    func getAllUser() async throws -> [DBuser] {
+    func fetchAllUser() async throws -> [DBuser] {
         var dbUserArray: [DBuser] = []
         
         let snapshot = try await Firestore.firestore().collection("users").getDocuments()
@@ -41,7 +41,7 @@ final class UserManager {
         return dbUserArray
     }
     
-    func getUser(userId: String) async throws -> DBuser {
+    func fetchUser(userId: String) async throws -> DBuser {
         let snapshot = try await Firestore.firestore().collection("users").document(userId).getDocument()
         guard let data = snapshot.data(), let uid = data["uid"] as? String else { throw URLError(.badServerResponse) }
         
@@ -54,13 +54,13 @@ final class UserManager {
         return DBuser(uid: uid, name: name, email: email, photoUrl: photoUrl, chatroom: chatroom, dateCreated: dateCreated)
     }
     
-    func addChatroom(chatroomId: String, user: String) async throws {
+    func adUserTodChatroom(chatroomId: String, user: String) async throws {
         try await Firestore.firestore().collection("users").document(user).updateData([
             "chatroom": FieldValue.arrayUnion([chatroomId])
         ])
     }
         
-    func getOthereMember(chatroomId: String) async throws -> String {
+    func fetchOtherMember(chatroomId: String) async throws -> String {
         var otherUser: String?
         
         let chatroomInfo = try await Firestore.firestore().collection("chatroom").document(chatroomId).getDocument()

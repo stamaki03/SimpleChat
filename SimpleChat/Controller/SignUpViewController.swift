@@ -90,7 +90,7 @@ final class SignUpViewController: UIViewController, UITextFieldDelegate {
                 if let uploadImage = self.image?.jpegData(compressionQuality: 0.5) {
                     returnedValue = try await StorageManager.shared.saveImage(data: uploadImage, userId: authDataResult.uid)
                 }
-                try await UserManager.shared.createManager(auth: authDataResult, name: name, photoUrl: returnedValue ?? "")
+                try await UserManager.shared.createUser(auth: authDataResult, name: name, photoUrl: returnedValue ?? "")
                 self.dismiss(animated: true, completion: nil)
             } catch {
                 var errMessage = ""
