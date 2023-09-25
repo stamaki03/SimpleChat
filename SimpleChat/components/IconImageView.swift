@@ -8,15 +8,13 @@
 import UIKit
 
 final class IconImageView: UIImageView {
-    
-    let userImage: UIImage? = nil
-    
+        
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.image = userImage ?? UIImage(systemName: "camera")
-        self.layer.borderColor = UIColor.black.cgColor
-        self.layer.borderWidth = 1
-        self.layer.cornerRadius = 75
+        self.image = UIImage(systemName: "camera")
+        self.clipsToBounds = true
+        self.layer.cornerRadius = 25
+        self.layer.masksToBounds = true
         self.translatesAutoresizingMaskIntoConstraints = false
     }
     
