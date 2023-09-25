@@ -93,27 +93,8 @@ final class SignUpViewController: UIViewController, UITextFieldDelegate {
                 try await UserManager.shared.createUser(auth: authDataResult, name: name, photoUrl: returnedValue ?? "")
                 self.dismiss(animated: true, completion: nil)
             } catch {
-                var errMessage = ""
-                if let error = error as NSError? {
-                    if let errorCode = AuthErrorCode.Code(rawValue: error.code) {
-                        switch errorCode {
-                        case .invalidEmail:
-                            errMessage = "メールアドレスの形式が違います。"
-                        case .emailAlreadyInUse:
-                            errMessage = "このメールアドレスはすでに使われています。"
-                        case .weakPassword:
-                            errMessage = "パスワードが弱すぎます。"
-                        case .userNotFound, .wrongPassword:
-                            errMessage = "メールアドレス、またはパスワードが間違っています"
-                        case .userDisabled:
-                            errMessage = "このユーザーアカウントは無効化されています"
-                        default:
-                            errMessage = "予期せぬエラーが発生しました。\nしばらく時間を置いてから再度お試しください。"
-                        }
-                    }
-                }
-                let alert = UIAlertController(title: "エラー", message:errMessage, preferredStyle: UIAlertController.Style.alert)
-                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                let errMessage = FAErrorCheck.shared.signUpValidationCheck(error: error)
+                let alert = AlertMessage.shared.notificationAlert(message: errMessage)
                 present(alert, animated: true, completion: nil)
             }
         }

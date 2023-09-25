@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BF6C1C562AC1581600798D08 /* FAErrorCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6C1C552AC1581600798D08 /* FAErrorCheck.swift */; };
+		BF6C1C5A2AC15B4F00798D08 /* AlertMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6C1C592AC15B4F00798D08 /* AlertMessage.swift */; };
 		BFAE271D2AB7D9D70004A47C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAE271C2AB7D9D70004A47C /* AppDelegate.swift */; };
 		BFAE271F2AB7D9D70004A47C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAE271E2AB7D9D70004A47C /* SceneDelegate.swift */; };
 		BFAE27262AB7D9D80004A47C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFAE27252AB7D9D80004A47C /* Assets.xcassets */; };
@@ -92,6 +94,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BF6C1C552AC1581600798D08 /* FAErrorCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAErrorCheck.swift; sourceTree = "<group>"; };
+		BF6C1C592AC15B4F00798D08 /* AlertMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertMessage.swift; sourceTree = "<group>"; };
 		BFAE27192AB7D9D70004A47C /* SimpleChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFAE271C2AB7D9D70004A47C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BFAE271E2AB7D9D70004A47C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -174,6 +178,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BF6C1C582AC15B1F00798D08 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				BF6C1C592AC15B4F00798D08 /* AlertMessage.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		BFAE27102AB7D9D70004A47C = {
 			isa = PBXGroup;
 			children = (
@@ -200,6 +212,7 @@
 			children = (
 				BFAE271C2AB7D9D70004A47C /* AppDelegate.swift */,
 				BFAE271E2AB7D9D70004A47C /* SceneDelegate.swift */,
+				BF6C1C582AC15B1F00798D08 /* Utils */,
 				BFAE279E2ABA67030004A47C /* Firebase */,
 				BFAE274C2AB7E4BB0004A47C /* Model */,
 				BFAE274F2AB7E4F00004A47C /* components */,
@@ -319,6 +332,7 @@
 				BFAE27C02ABF0E8D0004A47C /* ChatroomManager.swift */,
 				BFAE27BC2ABED2160004A47C /* StorageManager.swift */,
 				BFAE27B22ABE6C9C0004A47C /* UserManager.swift */,
+				BF6C1C552AC1581600798D08 /* FAErrorCheck.swift */,
 			);
 			path = Firebase;
 			sourceTree = "<group>";
@@ -485,6 +499,7 @@
 				BFAE27882AB92DDF0004A47C /* OthersChatTableViewConstraints.swift in Sources */,
 				BFAE275B2AB7E9960004A47C /* ExplanationButton.swift in Sources */,
 				BFAE27B72ABE80BC0004A47C /* FSUserModel.swift in Sources */,
+				BF6C1C562AC1581600798D08 /* FAErrorCheck.swift in Sources */,
 				BFAE27762AB92B310004A47C /* SettingViewController.swift in Sources */,
 				BFAE277B2AB92C280004A47C /* MainTableViewCell.swift in Sources */,
 				BFAE27812AB92D4D0004A47C /* SettingViewConstraints.swift in Sources */,
@@ -492,6 +507,7 @@
 				BFAE27642AB82DF00004A47C /* SignUpViewConstraints.swift in Sources */,
 				BFAE27B32ABE6C9C0004A47C /* UserManager.swift in Sources */,
 				BFAE27572AB7E9730004A47C /* CustomTextField.swift in Sources */,
+				BF6C1C5A2AC15B4F00798D08 /* AlertMessage.swift in Sources */,
 				BFAE27602AB82C540004A47C /* SignUpViewController.swift in Sources */,
 				BFAE27AB2ABD690E0004A47C /* AuthenticationManager.swift in Sources */,
 				BFAE27742AB92B030004A47C /* SearchViewController.swift in Sources */,
@@ -686,6 +702,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = SimpleChat/SimpleChat.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = JUXZ2JW888;
@@ -714,6 +731,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = SimpleChat/SimpleChat.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = JUXZ2JW888;

@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import FirebaseAuth
 
 final class LoginViewController: UIViewController, UITextFieldDelegate {
     
@@ -55,23 +54,8 @@ final class LoginViewController: UIViewController, UITextFieldDelegate {
                 let mainViewController = MainViewController()
                 self.navigationController?.pushViewController(mainViewController, animated: true)
             } catch {
-                var errMessage = ""
-                if let error = error as NSError? {
-                    if let errorCode = AuthErrorCode.Code(rawValue: error.code) {
-                        switch errorCode {
-                        case .invalidEmail:
-                            errMessage = "メールアドレスの形式が違います。"
-                        case .weakPassword, .userNotFound, .wrongPassword:
-                            errMessage = "メールアドレス、またはパスワードが間違っています"
-                        case .userDisabled:
-                            errMessage = "このユーザーアカウントは無効化されています"
-                        default:
-                            errMessage = "エラーが発生しました。\nメールアドレス、またはパスワードが間違っている可能性があります。"
-                        }
-                    }
-                }
-                let alert = UIAlertController(title: "エラー", message:errMessage, preferredStyle: UIAlertController.Style.alert)
-                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                let errMessage = FAErrorCheck.shared.loginValidationCheck(error: error)
+                let alert = AlertMessage.shared.notificationAlert(message: errMessage)
                 present(alert, animated: true, completion: nil)
             }
         }
