@@ -9,7 +9,6 @@ import Foundation
 import FirebaseAuth
 
 final class AuthenticationManager {
-    
     static let shared = AuthenticationManager()
     private init() {}
     
@@ -48,7 +47,4 @@ final class AuthenticationManager {
         }
         try await user.updateEmail(to: email)
     }
-    
-    
-    
 }

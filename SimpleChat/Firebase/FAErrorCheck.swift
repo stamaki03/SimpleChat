@@ -9,7 +9,6 @@ import Foundation
 import FirebaseAuth
 
 final class FAErrorCheck {
-    
     static let shared = FAErrorCheck()
     private init() {}
     
@@ -44,5 +43,4 @@ final class FAErrorCheck {
         }
         return "エラーが発生しました"
     }
-    
 }

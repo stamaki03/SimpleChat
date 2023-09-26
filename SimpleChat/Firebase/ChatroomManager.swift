@@ -10,9 +10,7 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 final class ChatroomManager {
-    
     static let shared = ChatroomManager()
-    
     private init() {}
     
     func createChatroom(chatroomId: String, members: [String]) async throws {
@@ -27,5 +25,4 @@ final class ChatroomManager {
     func addDocument(chatroomId: String, userEmail: String, chatText: String) async throws {
         try await Firestore.firestore().collection("chatroom").document(chatroomId).collection("chats").addDocument(data: ["userName" : userEmail, "chatText" : chatText, "sendTime" : Date().timeIntervalSince1970])
     }
-    
 }

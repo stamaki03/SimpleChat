@@ -10,7 +10,6 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 final class UserManager {
-    
     static let shared = UserManager()
     private init() {}
     
@@ -23,34 +22,28 @@ final class UserManager {
             "chatroom": [String](),
             "dateCreated": Timestamp()
         ]
-        
         try await Firestore.firestore().collection("users").document(auth.uid).setData(userData, merge: false)
-        
     }
     
     func fetchAllUser() async throws -> [FSUserModel] {
         var dbUserArray: [FSUserModel] = []
-        
         let snapshot = try await Firestore.firestore().collection("users").getDocuments()
         for document in snapshot.documents {
             let data = document.data()
             let dbUser = FSUserModel(uid: data["uid"] as! String, name: data["name"] as? String, email: data["email"] as? String, photoUrl: data["photoUrl"] as? String, chatroom: data["chatroom"] as? [String] ?? [String](), dateCreated: data["dateCreated"] as? Date)
             dbUserArray.append(dbUser)
         }
-        
         return dbUserArray
     }
     
     func fetchUser(userId: String) async throws -> FSUserModel {
         let snapshot = try await Firestore.firestore().collection("users").document(userId).getDocument()
         guard let data = snapshot.data(), let uid = data["uid"] as? String else { throw URLError(.badServerResponse) }
-        
         let name = data["name"] as? String
         let email = data["email"] as? String
         let photoUrl = data["photoUrl"] as? String
         let chatroom = data["chatroom"] as? [String] ?? [String]()
         let dateCreated = data["dateCreated"] as? Date
-        
         return FSUserModel(uid: uid, name: name, email: email, photoUrl: photoUrl, chatroom: chatroom, dateCreated: dateCreated)
     }
     
