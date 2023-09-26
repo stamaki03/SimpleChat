@@ -16,7 +16,5 @@ final class AlertMessage {
         let alert = UIAlertController(title: "エラー", message: message, preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         return alert
-        //self.present(alert, animated: true, completion: nil)
     }
-    
 }

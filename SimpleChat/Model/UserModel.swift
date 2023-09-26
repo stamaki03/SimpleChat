@@ -12,7 +12,7 @@ struct UserModel {
     let uid: String
     let name: String?
     let email: String?
-    let photo: UIImage?
+    let photoUrl: String?
     let chatroom: [String?]
     let dateCreated: Date?
 }

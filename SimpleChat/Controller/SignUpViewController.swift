@@ -75,7 +75,9 @@ final class SignUpViewController: UIViewController {
     @objc internal func signUpUser(sender: UIButton){
         Task {
             do {
-                var returnedValue: String?
+                signUpButton.isEnabled = false
+                signUpButton.backgroundColor = .lightGray
+                var downloadUrl: String?
                 guard let email = idTextField.text, let name = nameTextField.text, let password = passwordTextField.text, let repassword = repasswordTextField.text else { return }
                 if password != repassword {
                     let alert = AlertMessage.shared.notificationAlert(message: "パスワードが一致してません")
@@ -83,10 +85,10 @@ final class SignUpViewController: UIViewController {
                     return
                 }
                 let authDataResult = try await AuthenticationManager.shared.createUser(email: email, password: password)
-                if let uploadImage = self.image?.jpegData(compressionQuality: 0.5) {
-                    returnedValue = try await StorageManager.shared.saveImage(data: uploadImage, userId: authDataResult.uid)
+                if let uploadImage = self.image?.jpegData(compressionQuality: 0.1) {
+                    downloadUrl = try await StorageManager.shared.saveImage(data: uploadImage, userId: authDataResult.uid)
                 }
-                try await UserManager.shared.createUser(auth: authDataResult, name: name, photoUrl: returnedValue ?? "")
+                try await UserManager.shared.createUser(auth: authDataResult, name: name, photoUrl: downloadUrl ?? "")
                 self.dismiss(animated: true, completion: nil)
             } catch {
                 let errMessage = FAErrorCheck.shared.signUpValidationCheck(error: error)

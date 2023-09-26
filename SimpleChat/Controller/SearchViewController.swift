@@ -7,19 +7,17 @@
 
 import UIKit
 
-class SearchViewController: UIViewController {
-    
-    var userIdArray: [String?]
-    
-    private var currentUser: AuthenticationModel?
-    private var serchViewCellItems: [FSUserModel] = []
-    
+final class SearchViewController: UIViewController {
     private let tableView: UITableView = {
         let view = UITableView(frame: .zero, style: UITableView.Style.plain)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.register(SearchTableViewCell.self, forCellReuseIdentifier: "Cell")
         return view
     }()
+    
+    private var currentUser: AuthenticationModel?
+    private var userIdArray: [String?]
+    private var serchViewCellItems: [FSUserModel] = []
     
     init(userId: [String?]) {
         self.userIdArray = userId
@@ -33,6 +31,16 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        setView()
+        // ユーザ情報取得
+        Task {
+            self.currentUser = try AuthenticationManager.shared.getAuthenticatedUser()
+            try await fetchAllUserData(currentUser: currentUser)
+            self.tableView.reloadData()
+        }
+    }
+    
+    private func setView() {
         // ビュー設定
         view.backgroundColor = .white
         // テーブルビュー設定
@@ -41,17 +49,15 @@ class SearchViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         view.addSubview(tableView)
-        // ユーザ情報取得
-        Task {
-            self.currentUser = try AuthenticationManager.shared.getAuthenticatedUser()
-            guard let currentUser = currentUser else {return}
-            let dbUserArray = try await UserManager.shared.fetchAllUser()
-            for dbUser in dbUserArray {
-                if dbUser.uid != currentUser.uid && !userIdArray.contains(dbUser.uid) {
-                    self.serchViewCellItems.append(dbUser)
-                }
+    }
+    
+    private func fetchAllUserData(currentUser: AuthenticationModel?) async throws {
+        guard let currentUser = currentUser else {return}
+        let allUserArray = try await UserManager.shared.fetchAllUser()
+        for allUser in allUserArray {
+            if allUser.uid != currentUser.uid && !userIdArray.contains(allUser.uid) {
+                self.serchViewCellItems.append(allUser)
             }
-            self.tableView.reloadData()
         }
     }
 }
@@ -70,6 +76,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         Task {
             do {
+                self.tableView.isUserInteractionEnabled = false
                 let chatroomId = UUID().uuidString
                 guard let member1 = currentUser?.uid else {return}
                 let member2 = serchViewCellItems[indexPath.row].uid
