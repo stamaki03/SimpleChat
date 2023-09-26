@@ -8,7 +8,6 @@
 import UIKit
 
 final class CustomButton: UIButton {
-    
     init(frame: CGRect, cornerRadius: CGFloat, systemName: String) {
         super.init(frame: frame)
         self.backgroundColor = .white

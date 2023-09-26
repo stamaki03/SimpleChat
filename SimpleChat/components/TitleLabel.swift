@@ -8,7 +8,6 @@
 import UIKit
 
 final class TitleLabel: UILabel {
-    
     init(frame: CGRect, text: String) {
         super.init(frame: frame)
         self.adjustsFontSizeToFitWidth = true

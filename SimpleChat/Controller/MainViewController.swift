@@ -61,11 +61,11 @@ final class MainViewController: UIViewController {
     }
     
     @objc internal func goToSearchViewController() {
-        var zzz = [String?]()
-        for aaa in mainViewCellItems {
-            zzz.append(aaa?.uid)
+        var chatMemberArray: [String?] = []
+        for chatMember in mainViewCellItems {
+            chatMemberArray.append(chatMember?.uid)
         }
-        let searchViewController = SearchViewController(userId: zzz)
+        let searchViewController = SearchViewController(userId: chatMemberArray)
         self.navigationController?.present(searchViewController, animated: true)
     }
     

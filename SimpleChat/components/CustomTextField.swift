@@ -6,10 +6,8 @@
 //
 
 import UIKit
-import Combine
 
 final class CustomTextField: UITextField {
-    
     let padding: CGFloat
     
     init(frame: CGRect, placeholder: String, paddingSize: CGFloat) {

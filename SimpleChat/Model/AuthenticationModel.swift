@@ -16,5 +16,4 @@ struct AuthenticationModel {
         self.uid = user.uid
         self.email = user.email
     }
-    
 }

@@ -8,7 +8,6 @@
 import UIKit
 
 final class SelectButton: UIButton {
-    
     init(frame: CGRect, title: String) {
         super.init(frame: frame)
         self.backgroundColor = .lightGray

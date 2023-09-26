@@ -8,7 +8,6 @@
 import UIKit
 
 final class ExplanationButton: UIButton {
-    
     init(frame: CGRect, title: String) {
         super.init(frame: frame)
         self.setTitle(title, for: .normal)

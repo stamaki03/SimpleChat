@@ -8,7 +8,6 @@
 import UIKit
 
 final class OthersChatTableViewCell: UITableViewCell {
-    
     var userIcon = IconImageView(frame: .zero)
     var userMessage = CustomLabel(frame: .zero, fontSize: 15.0, text: "", paddingSize: 5)
     

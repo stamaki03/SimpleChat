@@ -8,7 +8,6 @@
 import UIKit
 
 final class CustomLabel: UILabel {
-    
     let padding: UIEdgeInsets
     
     init(frame: CGRect, fontSize: CGFloat, text: String, paddingSize: CGFloat) {

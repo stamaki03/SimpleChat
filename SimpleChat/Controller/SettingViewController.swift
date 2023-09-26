@@ -9,7 +9,6 @@ import UIKit
 import FirebaseAuth
 
 final class SettingViewController: UIViewController, UITextFieldDelegate {
-    
     let signUpTitleLabel = TitleLabel(frame: .zero, text: "設定変更")
     let iconImageView = CustomButton(frame: .zero, cornerRadius: 75, systemName: "camera")
     let idLabel = CustomLabel(frame: .zero, fontSize: 20.0, text: "ID", paddingSize: 0)

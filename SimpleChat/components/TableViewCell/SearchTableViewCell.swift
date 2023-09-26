@@ -8,7 +8,6 @@
 import UIKit
 
 final class SearchTableViewCell: UITableViewCell {
-    
     var userIcon = IconImageView(frame: .zero)
     var userName = CustomLabel(frame: .zero, fontSize: 15.0, text: "", paddingSize: 0)
     
@@ -26,5 +25,4 @@ final class SearchTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 }

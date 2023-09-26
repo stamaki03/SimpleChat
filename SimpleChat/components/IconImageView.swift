@@ -8,7 +8,6 @@
 import UIKit
 
 final class IconImageView: UIImageView {
-        
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.image = UIImage(systemName: "camera")

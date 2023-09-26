@@ -8,7 +8,6 @@
 import UIKit
 
 final class ChatBaseView: UIView {
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = UIColor(named: "bg")

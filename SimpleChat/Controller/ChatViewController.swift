@@ -10,7 +10,6 @@ import FirebaseAuth
 import FirebaseFirestore
 
 final class ChatViewController: UIViewController, UITextFieldDelegate {
-    
     var chatroomId: String
     
     private var chatViewCellItems: [ChatModel] = []
