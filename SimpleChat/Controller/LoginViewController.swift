@@ -48,14 +48,27 @@ final class LoginViewController: UIViewController {
         passwordTextField.isSecureTextEntry = true
     }
     
+    private func buttonValidate() {
+        loginSelectButton.isEnabled = true
+        loginSelectButton.backgroundColor = UIColor(named: "bg")
+    }
+    
+    private func buttonInvalidate() {
+        loginSelectButton.isEnabled = false
+        loginSelectButton.backgroundColor = .lightGray
+    }
+    
     @objc internal func goToMainViewController(sender: UIButton){
         Task {
             do {
+                buttonInvalidate()
                 guard let email = idTextField.text, let password = passwordTextField.text else { return }
                 try await AuthenticationManager.shared.signInUser(email: email, password: password)
                 let mainViewController = MainViewController()
                 self.navigationController?.pushViewController(mainViewController, animated: true)
+                buttonValidate()
             } catch {
+                buttonValidate()
                 let errMessage = FAErrorCheck.shared.loginValidationCheck(error: error)
                 let alert = AlertMessage.shared.notificationAlert(message: errMessage)
                 present(alert, animated: true, completion: nil)
@@ -75,11 +88,9 @@ extension LoginViewController: UITextFieldDelegate {
         let passwordIsEmpty = passwordTextField.text?.isEmpty ?? true
         
         if idIsEmpty || passwordIsEmpty {
-            loginSelectButton.isEnabled = false
-            loginSelectButton.backgroundColor = .lightGray
+            buttonInvalidate()
         } else {
-            loginSelectButton.isEnabled = true
-            loginSelectButton.backgroundColor = UIColor(named: "bg")
+            buttonValidate()
         }
     }
     

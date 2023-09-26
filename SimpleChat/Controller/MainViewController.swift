@@ -22,6 +22,9 @@ final class MainViewController: UIViewController {
         // Do any additional setup after loading the view.
         setView()
         // バーボタンアクション設定
+        self.navigationItem.hidesBackButton = true
+        let logoutButton = UIBarButtonItem(title: "LogOut", style: .plain, target: self, action: #selector(logout))
+        navigationItem.leftBarButtonItems = [logoutButton]
         let searchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(goToSearchViewController))
         let settingButton = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(goToSettingViewController))
         navigationItem.rightBarButtonItems = [searchButton, settingButton]
@@ -55,6 +58,15 @@ final class MainViewController: UIViewController {
                 let otherUser = try await UserManager.shared.fetchUser(userId: otherUserId)
                 self.mainViewCellItems.append(UserModel(chatroomId: chatroomId, uid: otherUser.uid, name: otherUser.name, email: otherUser.email, photoUrl: otherUser.photoUrl, chatroom: otherUser.chatroom, dateCreated: otherUser.dateCreated))
             }
+        } catch {
+            print(error)
+        }
+    }
+    
+    @objc internal func logout() throws {
+        do {
+            try AuthenticationManager.shared.signOutUser()
+            self.navigationController?.popViewController(animated: true)
         } catch {
             print(error)
         }

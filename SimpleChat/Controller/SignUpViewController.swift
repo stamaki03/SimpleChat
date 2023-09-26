@@ -63,6 +63,16 @@ final class SignUpViewController: UIViewController {
         repasswordTextField.isSecureTextEntry = true
     }
     
+    private func buttonValidate() {
+        signUpButton.isEnabled = true
+        signUpButton.backgroundColor = UIColor(named: "bg")
+    }
+    
+    private func buttonInvalidate() {
+        signUpButton.isEnabled = false
+        signUpButton.backgroundColor = .lightGray
+    }
+    
     @objc internal func registerImage(sender: UIButton){
         if self.image == nil {
             self.present(imagePicker, animated:true, completion:nil)
@@ -75,8 +85,7 @@ final class SignUpViewController: UIViewController {
     @objc internal func signUpUser(sender: UIButton){
         Task {
             do {
-                signUpButton.isEnabled = false
-                signUpButton.backgroundColor = .lightGray
+                buttonInvalidate()
                 var downloadUrl: String?
                 guard let email = idTextField.text, let name = nameTextField.text, let password = passwordTextField.text, let repassword = repasswordTextField.text else { return }
                 if password != repassword {
@@ -107,11 +116,9 @@ extension SignUpViewController: UITextFieldDelegate {
         let repasswordIsEmpty = repasswordTextField.text?.isEmpty ?? true
         
         if idIsEmpty || nameIsEmpty || passwordIsEmpty || repasswordIsEmpty {
-            signUpButton.isEnabled = false
-            signUpButton.backgroundColor = .lightGray
+            buttonInvalidate()
         } else {
-            signUpButton.isEnabled = true
-            signUpButton.backgroundColor = UIColor(named: "bg")
+            buttonValidate()
         }
     }
     
