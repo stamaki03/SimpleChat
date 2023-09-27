@@ -16,22 +16,15 @@ final class LoginViewController: UIViewController {
     let loginSelectButton = SelectButton(frame: .zero, title: "ログイン")
     let signUpButton = ExplanationButton(frame: .zero, title: "新規登録はこちら")
     
-    @Published private var validCheck1 = false
-    @Published private var validCheck2 = false
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         setView()
-        // ボタンアクション設定
-        loginSelectButton.addTarget(self, action: #selector(goToMainViewController(sender:)), for:.touchUpInside)
-        signUpButton.addTarget(self, action: #selector(goToSignUpViewController(sender:)), for:.touchUpInside)
+        setButtonAction()
     }
     
     private func setView() {
-        // ビュー設定
         view.backgroundColor = .white
-        // サブビュー設定
         idTextField.delegate = self
         passwordTextField.delegate = self
         loginSelectButton.isEnabled = false
@@ -46,6 +39,11 @@ final class LoginViewController: UIViewController {
         LoginViewConstraints.makeConstraints(view: view, appTitleLabel: appTitleLabel, idLabel: idLabel, idTextField: idTextField, passwordLabel: passwordLabel, passwordTextField: passwordTextField, loginSelectButton: loginSelectButton, signUpButton: signUpButton)
         // 暗号化設定
         passwordTextField.isSecureTextEntry = true
+    }
+    
+    private func setButtonAction() {
+        loginSelectButton.addTarget(self, action: #selector(goToMainViewController(sender:)), for:.touchUpInside)
+        signUpButton.addTarget(self, action: #selector(goToSignUpViewController(sender:)), for:.touchUpInside)
     }
     
     private func buttonValidate() {
@@ -65,7 +63,7 @@ final class LoginViewController: UIViewController {
                 guard let email = idTextField.text, let password = passwordTextField.text else { return }
                 try await AuthenticationManager.shared.signInUser(email: email, password: password)
                 let mainViewController = MainViewController()
-                self.navigationController?.pushViewController(mainViewController, animated: true)
+                self.navigationController?.pushViewController(mainViewController, animated: false)
                 buttonValidate()
             } catch {
                 buttonValidate()

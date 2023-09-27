@@ -8,7 +8,7 @@
 import UIKit
 import FirebaseAuth
 
-final class SettingViewController: UIViewController, UITextFieldDelegate {
+final class SettingViewController: UIViewController {
     let signUpTitleLabel = TitleLabel(frame: .zero, text: "設定変更")
     let iconImageView = CustomButton(frame: .zero, cornerRadius: 75, systemName: "camera")
     let idLabel = CustomLabel(frame: .zero, fontSize: 20.0, text: "ID", paddingSize: 0)
@@ -24,9 +24,12 @@ final class SettingViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        // ビュー設定
+        setView()
+        setButtonAction()
+    }
+    
+    private func setView() {
         view.backgroundColor = .white
-        // サブビュー設定
         idTextField.delegate = self
         nameTextField.delegate = self
         passwordTextField.delegate = self
@@ -45,14 +48,18 @@ final class SettingViewController: UIViewController, UITextFieldDelegate {
         view.addSubview(modifyButton)
         // 制約設定
         SettingViewConstraints.makeConstraints(view: view, iconImageView: iconImageView, signUpTitleLabel: signUpTitleLabel, idLabel: idLabel, idTextField: idTextField, nameLabel: nameLabel, nameTextField: nameTextField, passwordLabel: passwordLabel, passwordTextField: passwordTextField, repasswordLabel: repasswordLabel, repasswordTextField: repasswordTextField, modifyButton: modifyButton)
-        // ボタンアクション設定
+    }
+    
+    private func setButtonAction() {
         modifyButton.addTarget(self, action: #selector(userModify(sender:)), for:.touchUpInside)
     }
     
     @objc internal func userModify(sender: UIButton){
         
     }
-    
+}
+ 
+extension SettingViewController: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
         let idIsEmpty = idTextField.text?.isEmpty ?? true
         let nameIsEmpty = nameTextField.text?.isEmpty ?? true

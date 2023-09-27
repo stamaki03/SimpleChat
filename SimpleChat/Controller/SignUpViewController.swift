@@ -29,17 +29,13 @@ final class SignUpViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         setView()
-        // ボタンアクション設定
-        iconImageView.addTarget(self, action: #selector(registerImage(sender:)), for:.touchUpInside)
-        signUpButton.addTarget(self, action: #selector(signUpUser(sender:)), for:.touchUpInside)
+        setButtonAction()
         // イメージピッカー設定
         imagePicker.delegate = self
     }
     
     private func setView() {
-        // ビュー設定
         view.backgroundColor = .white
-        // サブビュー設定
         idTextField.delegate = self
         nameTextField.delegate = self
         passwordTextField.delegate = self
@@ -61,6 +57,11 @@ final class SignUpViewController: UIViewController {
         // 暗号化設定
         passwordTextField.isSecureTextEntry = true
         repasswordTextField.isSecureTextEntry = true
+    }
+    
+    private func setButtonAction() {
+        iconImageView.addTarget(self, action: #selector(registerImage(sender:)), for:.touchUpInside)
+        signUpButton.addTarget(self, action: #selector(signUpUser(sender:)), for:.touchUpInside)
     }
     
     private func buttonValidate() {

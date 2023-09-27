@@ -10,14 +10,9 @@ import FirebaseAuth
 import FirebaseFirestore
 
 final class ChatViewController: UIViewController, UITextFieldDelegate {
-    var chatroomId: String
-    
-    private var chatViewCellItems: [ChatModel] = []
-    
     let chatBaseView = ChatBaseView()
     let chatSendButton = CustomButton(frame: .zero, cornerRadius: 10, systemName: "paperplane")
     let chatTextField = CustomTextField(frame: .zero, placeholder: "メッセージを入力", paddingSize: 10)
-    
     private let tableView: UITableView = {
         let view = UITableView(frame: .zero, style: UITableView.Style.plain)
         view.allowsSelection = false
@@ -26,6 +21,9 @@ final class ChatViewController: UIViewController, UITextFieldDelegate {
         view.register(OthersChatTableViewCell.self, forCellReuseIdentifier: "OthersChatCell")
         return view
     }()
+    
+    private var chatroomId: String
+    private var chatViewCellItems: [ChatModel] = []
     
     init(chatroomId: String) {
         self.chatroomId = chatroomId
@@ -39,25 +37,29 @@ final class ChatViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        // ビュー設定
+        setView()
+        setButtonAction()
+        // チャットメッセージの読み込み
+        loadMessages()
+    }
+    
+    private func setView() {
         view.backgroundColor = .white
-        // テーブルビュー設定
         tableView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height - 120)
         tableView.separatorStyle = .none
         tableView.delegate = self
         tableView.dataSource = self
         view.addSubview(tableView)
-        // サブビュー設定
         chatTextField.delegate = self
         view.addSubview(chatBaseView)
         chatBaseView.addSubview(chatSendButton)
         chatBaseView.addSubview(chatTextField)
         // 制約設定
         ChatViewConstraints.makeConstraints(view: view, chatBaseView: chatBaseView, chatTextField: chatTextField, chatSendButton: chatSendButton)
-        // ボタンアクション設定
+    }
+    
+    private func setButtonAction() {
         chatSendButton.addTarget(self, action: #selector(sendMessage(sender:)), for:.touchUpInside)
-        // テキストの読み込み
-        loadMessages()
     }
     
     private func loadMessages() {

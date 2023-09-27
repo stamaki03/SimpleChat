@@ -15,6 +15,7 @@ final class SearchViewController: UIViewController {
         return view
     }()
     
+    private var otherMember: String?
     private var currentUser: AuthenticationModel?
     private var userIdArray: [String?]
     private var serchViewCellItems: [FSUserModel] = []
@@ -32,6 +33,7 @@ final class SearchViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         setView()
+        setBarItem()
         // ユーザ情報取得
         Task {
             self.currentUser = try AuthenticationManager.shared.getAuthenticatedUser()
@@ -41,14 +43,21 @@ final class SearchViewController: UIViewController {
     }
     
     private func setView() {
-        // ビュー設定
         view.backgroundColor = .white
-        // テーブルビュー設定
         tableView.frame = self.view.frame
         tableView.rowHeight = 70
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.isMultipleTouchEnabled = false
         view.addSubview(tableView)
+    }
+    
+    private func setBarItem() {
+        navigationItem.hidesBackButton = true
+        let backButton = UIBarButtonItem(title: "戻る", style: .plain, target: self, action: #selector(backView))
+        navigationItem.leftBarButtonItems = [backButton]
+        let registerButton = UIBarButtonItem(title: "登録", style: .plain, target: self, action: #selector(registerMember))
+        navigationItem.rightBarButtonItems = [registerButton]
     }
     
     private func fetchAllUserData(currentUser: AuthenticationModel?) async throws {
@@ -57,6 +66,29 @@ final class SearchViewController: UIViewController {
         for allUser in allUserArray {
             if allUser.uid != currentUser.uid && !userIdArray.contains(allUser.uid) {
                 self.serchViewCellItems.append(allUser)
+            }
+        }
+    }
+    
+    @objc internal func backView() {
+        self.navigationController?.popViewController(animated: false)
+    }
+    
+    @objc internal func registerMember() {
+        guard let otherMember = otherMember else { return }
+        Task {
+            do {
+                self.tableView.isUserInteractionEnabled = false
+                let chatroomId = UUID().uuidString
+                guard let member1 = currentUser?.uid else {return}
+                let member2 = otherMember
+                let members = [member1, member2]
+                try await ChatroomManager.shared.createChatroom(chatroomId: chatroomId, members: members)
+                try await UserManager.shared.adUserTodChatroom(chatroomId: chatroomId, user: member1)
+                try await UserManager.shared.adUserTodChatroom(chatroomId: chatroomId, user: member2)
+                self.navigationController?.popViewController(animated: false)
+            } catch {
+                print(error)
             }
         }
     }
@@ -74,20 +106,6 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        Task {
-            do {
-                self.tableView.isUserInteractionEnabled = false
-                let chatroomId = UUID().uuidString
-                guard let member1 = currentUser?.uid else {return}
-                let member2 = serchViewCellItems[indexPath.row].uid
-                let members = [member1, member2]
-                try await ChatroomManager.shared.createChatroom(chatroomId: chatroomId, members: members)
-                try await UserManager.shared.adUserTodChatroom(chatroomId: chatroomId, user: member1)
-                try await UserManager.shared.adUserTodChatroom(chatroomId: chatroomId, user: member2)
-                self.dismiss(animated: true, completion: nil)
-            } catch {
-                print(error)
-            }
-        }
+        self.otherMember = serchViewCellItems[indexPath.row].uid
     }
 }
