@@ -12,6 +12,5 @@ struct FSUserModel {
     let name: String?
     let email: String?
     let photoUrl: String?
-    let chatroom: [String?]
     let dateCreated: Date?
 }

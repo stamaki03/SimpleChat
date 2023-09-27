@@ -17,4 +17,11 @@ final class AlertMessage {
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         return alert
     }
+    
+    func confirmationAlert(message: String) -> UIAlertController {
+        let alert = UIAlertController(title: "確認", message: message, preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "いいえ", style: .cancel, handler: nil))
+        return alert
+    }
+    
 }

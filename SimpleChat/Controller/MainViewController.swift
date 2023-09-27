@@ -48,7 +48,7 @@ final class MainViewController: UIViewController {
                     Task {
                         let otherUserId = try await UserManager.shared.fetchOtherMember(chatroomId: chatroomId)
                         let otherUser = try await UserManager.shared.fetchUser(userId: otherUserId)
-                        self?.mainViewCellItems.append(UserModel(chatroomId: chatroomId, uid: otherUser.uid, name: otherUser.name, email: otherUser.email, photoUrl: otherUser.photoUrl, chatroom: otherUser.chatroom, dateCreated: otherUser.dateCreated))
+                        self?.mainViewCellItems.append(UserModel(chatroomId: chatroomId, uid: otherUser.uid, name: otherUser.name, email: otherUser.email, photoUrl: otherUser.photoUrl, dateCreated: otherUser.dateCreated))
                     }
                 }
             }

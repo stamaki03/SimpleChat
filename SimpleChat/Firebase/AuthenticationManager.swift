@@ -24,6 +24,16 @@ final class AuthenticationManager {
         return AuthenticationModel(user: authDataResult.user)
     }
     
+    func deleteUser(currentUser: User) {
+        currentUser.delete { error in
+            if let error = error {
+                print("Error removing document: \(error)")
+            } else {
+                print("user successfully removed!")
+            }
+        }
+    }
+    
     @discardableResult
     func signInUser(email: String, password: String) async throws -> AuthenticationModel {
         let authDataResult = try await Auth.auth().signIn(withEmail: email, password: password)

@@ -25,20 +25,11 @@ final class UserManager {
     }
     
     func deleteUser(userId: String) {
-        Firestore.firestore().collection("users").document(userId).collection("chatroom").getDocuments() { (querySnapshot, err)  in
-            if let err = err {
-                print("Error removing document: \(err)")
-            } else {
-                for document in querySnapshot!.documents {
-                    document.reference.delete()
-                }
-            }
-        }
         Firestore.firestore().collection("users").document(userId).delete() { err in
             if let err = err {
                 print("Error removing document: \(err)")
             } else {
-                print("UserData successfully removed!")
+                print("Document successfully removed!")
             }
         }
     }
@@ -60,6 +51,7 @@ final class UserManager {
         let name = data["name"] as? String
         let email = data["email"] as? String
         let photoUrl = data["photoUrl"] as? String
+        let chatroom = data["chatroom"] as? [String] ?? [String]()
         let dateCreated = data["dateCreated"] as? Date
         return FSUserModel(uid: uid, name: name, email: email, photoUrl: photoUrl, dateCreated: dateCreated)
     }
@@ -67,7 +59,7 @@ final class UserManager {
     func adUserTodChatroom(chatroomId: String, user: String) async throws {
         try await Firestore.firestore().collection("users").document(user).collection("chatroom").document(chatroomId).setData(["chatroomId": chatroomId])
     }
-    
+        
     func fetchOtherMember(chatroomId: String) async throws -> String {
         var otherUser: String?
         

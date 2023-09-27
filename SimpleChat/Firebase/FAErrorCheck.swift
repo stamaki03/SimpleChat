@@ -17,12 +17,14 @@ final class FAErrorCheck {
             switch errorCode {
             case .invalidEmail:
                 return "メールアドレスの形式が違います"
+            case .emailAlreadyInUse:
+                return "このメールアドレスはすでに使われています。"
             case .weakPassword, .userNotFound, .wrongPassword:
                 return "メールアドレスまたはパスワードが間違っています"
             case .userDisabled:
                 return "このユーザーアカウントは無効化されています"
             default:
-                return "ログインできません"
+                return "登録に失敗しました"
             }
         }
         return "エラーが発生しました"
