@@ -32,6 +32,7 @@ final class MainViewController: UIViewController {
         Task {
             let currentUser = try AuthenticationManager.shared.getAuthenticatedUser()
             loadMessages(user: currentUser.uid)
+            try await setBarTitle(currentUser: currentUser)
         }
     }
     
@@ -72,6 +73,14 @@ final class MainViewController: UIViewController {
         let searchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(goToSearchViewController))
         let settingButton = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(goToSettingViewController))
         navigationItem.rightBarButtonItems = [searchButton, settingButton]
+    }
+    
+    private func setBarTitle(currentUser: AuthenticationModel) async throws {
+        let titleLabel = UILabel()
+        let currentUserData = try await UserManager.shared.fetchUser(userId: currentUser.uid)
+        titleLabel.text = currentUserData.name
+        titleLabel.textColor = .white
+        navigationItem.titleView = titleLabel
     }
     
     @objc internal func logout() {

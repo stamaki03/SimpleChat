@@ -94,6 +94,11 @@ final class SignUpViewController: UIViewController {
                     present(alert, animated: true, completion: nil)
                     return
                 }
+                if password.count < 8 {
+                    let alert = AlertMessage.shared.notificationAlert(message: "パスワードは8文字以上入力してください")
+                    present(alert, animated: true, completion: nil)
+                    return
+                }
                 let authDataResult = try await AuthenticationManager.shared.createUser(email: email, password: password)
                 if let uploadImage = self.image?.jpegData(compressionQuality: 0.1) {
                     downloadUrl = try await StorageManager.shared.saveImage(data: uploadImage, userId: authDataResult.uid)

@@ -18,6 +18,11 @@ final class AlertMessage {
         return alert
     }
     
+    func notificationAlertWithDismiss(message: String) -> UIAlertController {
+        let alert = UIAlertController(title: "完了", message: message, preferredStyle: UIAlertController.Style.alert)
+        return alert
+    }
+    
     func confirmationAlert(message: String) -> UIAlertController {
         let alert = UIAlertController(title: "確認", message: message, preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "いいえ", style: .cancel, handler: nil))

@@ -61,6 +61,11 @@ final class LoginViewController: UIViewController {
             do {
                 buttonInvalidate()
                 guard let email = idTextField.text, let password = passwordTextField.text else { return }
+                if password.count < 8 {
+                    let alert = AlertMessage.shared.notificationAlert(message: "パスワードは8文字以上入力してください")
+                    present(alert, animated: true, completion: nil)
+                    return
+                }
                 try await AuthenticationManager.shared.signInUser(email: email, password: password)
                 let mainViewController = MainViewController()
                 self.navigationController?.pushViewController(mainViewController, animated: false)

@@ -19,6 +19,13 @@ final class AuthenticationManager {
         return AuthenticationModel(user: user)
     }
     
+    func getcurrentUser() -> User? {
+        guard let user = Auth.auth().currentUser else {
+            return nil
+        }
+        return user
+    }
+    
     func createUser(email: String, password: String) async throws -> AuthenticationModel {
         let authDataResult = try await Auth.auth().createUser(withEmail: email, password: password)
         return AuthenticationModel(user: authDataResult.user)
@@ -44,6 +51,13 @@ final class AuthenticationManager {
         try Auth.auth().signOut()
     }
     
+    func updateEmail(email: String) async throws {
+        guard let user = Auth.auth().currentUser else {
+            throw URLError(.badServerResponse)
+        }
+        try await user.updateEmail(to: email)
+    }
+    
     func resetPassword(email: String) async throws {
         try await Auth.auth().sendPasswordReset(withEmail: email)
     }
@@ -53,12 +67,5 @@ final class AuthenticationManager {
             throw URLError(.badServerResponse)
         }
         try await user.updatePassword(to: password)
-    }
-    
-    func updateEmail(email: String) async throws {
-        guard let user = Auth.auth().currentUser else {
-            throw URLError(.badServerResponse)
-        }
-        try await user.updateEmail(to: email)
     }
 }

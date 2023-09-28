@@ -83,4 +83,36 @@ final class UserManager {
         }
         return otherUser ?? ""
     }
+    
+    func changeUserName(name: String) throws {
+        let userId = try AuthenticationManager.shared.getAuthenticatedUser().uid
+        Firestore.firestore().collection("users").document(userId).updateData(["name": name]) { err in
+            if let err = err {
+                print("Error updating document: \(err)")
+            } else {
+                print("Document successfully updated")
+            }
+        }
+    }
+    
+    func changeUserEmail(email: String) throws {
+        let userId = try AuthenticationManager.shared.getAuthenticatedUser().uid
+        Firestore.firestore().collection("users").document(userId).updateData(["email": email]) { err in
+            if let err = err {
+                print("Error updating document: \(err)")
+            } else {
+                print("Document successfully updated")
+            }
+        }
+    }
+    
+    func updatePhotoUrl(userId: String, photoUrl: String) throws {
+        Firestore.firestore().collection("users").document(userId).updateData(["photoUrl": photoUrl]) { err in
+            if let err = err {
+                print("Error updating document: \(err)")
+            } else {
+                print("Document successfully updated")
+            }
+        }
+    }
 }

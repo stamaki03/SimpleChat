@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import FirebaseAuth
 
 final class SettingViewController: UIViewController {
     let signUpTitleLabel = TitleLabel(frame: .zero, text: "設定変更")
@@ -56,6 +55,9 @@ final class SettingViewController: UIViewController {
         view.addSubview(modifyButton)
         // 制約設定
         SettingViewConstraints.makeConstraints(view: view, iconImageView: iconImageView, signUpTitleLabel: signUpTitleLabel, idLabel: idLabel, idTextField: idTextField, nameLabel: nameLabel, nameTextField: nameTextField, passwordLabel: passwordLabel, passwordTextField: passwordTextField, repasswordLabel: repasswordLabel, repasswordTextField: repasswordTextField, modifyButton: modifyButton)
+        // 暗号化設定
+        passwordTextField.isSecureTextEntry = true
+        repasswordTextField.isSecureTextEntry = true
     }
     
     private func setButtonAction() {
@@ -107,15 +109,73 @@ final class SettingViewController: UIViewController {
     }
     
     @objc internal func userModify(sender: UIButton){
-        if let image = image {
-            
-        } else if let id = idTextField.text {
-            
-        } else if let name = nameTextField.text {
-            
-        } else if let password = passwordTextField.text {
-            
+        Task {
+            do {
+                if let image = image {
+                    try await changePhoto(image: image)
+                } else if idTextField.text != "" {
+                    try await changeEmail()
+                } else if nameTextField.text != "" {
+                    try changeName()
+                } else if passwordTextField.text != "" {
+                    try await changePassword()
+                }
+            } catch {
+                let alert = AlertMessage.shared.notificationAlert(message: "エラーが発生しました")
+                present(alert, animated: true, completion: nil)
+            }
         }
+    }
+    
+    private func changePhoto(image: UIImage) async throws {
+        try await StorageManager.shared.updateImage(image: image)
+        self.navigationController?.popViewController(animated: false)
+        let alert = AlertMessage.shared.notificationAlertWithDismiss(message: "プロフィール画像を変更しました")
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+            self.navigationController?.popViewController(animated: false)
+        }))
+        present(alert, animated: true, completion: nil)
+    }
+    
+    private func changeEmail() async throws {
+        guard let email = idTextField.text else { return }
+        try await AuthenticationManager.shared.updateEmail(email: email)
+        //try UserManager.shared.changeUserEmail(email: email)
+        let alert = AlertMessage.shared.notificationAlertWithDismiss(message: "IDを変更しました")
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+            self.navigationController?.popToRootViewController(animated: true)
+        }))
+        present(alert, animated: true, completion: nil)
+    }
+    
+    private func changeName() throws {
+        guard let name = nameTextField.text else { return }
+        try UserManager.shared.changeUserName(name: name)
+        let alert = AlertMessage.shared.notificationAlertWithDismiss(message: "名前を変更しました")
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+            self.navigationController?.popViewController(animated: false)
+        }))
+        present(alert, animated: true, completion: nil)
+    }
+    
+    private func changePassword() async throws {
+        guard let password = passwordTextField.text, let repassword = repasswordTextField.text else { return }
+        if password != repassword {
+            let alert = AlertMessage.shared.notificationAlert(message: "パスワードが一致してません")
+            present(alert, animated: true, completion: nil)
+            return
+        }
+        if password.count < 8 {
+            let alert = AlertMessage.shared.notificationAlert(message: "パスワードは8文字以上入力してください")
+            present(alert, animated: true, completion: nil)
+            return
+        }
+        try await AuthenticationManager.shared.updatePassword(password: password)
+        let alert = AlertMessage.shared.notificationAlertWithDismiss(message: "パスワードを変更しました")
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+            self.navigationController?.popToRootViewController(animated: true)
+        }))
+        present(alert, animated: true, completion: nil)
     }
     
     @objc internal func backView() {
@@ -125,7 +185,7 @@ final class SettingViewController: UIViewController {
     @objc internal func deleteAccount() {
         let alert = AlertMessage.shared.confirmationAlert(message: "アカウント削除してよろしいですか？")
         alert.addAction(UIAlertAction(title: "はい", style: .destructive, handler: { _ in
-            guard let currentUser = Auth.auth().currentUser else { return }
+            guard let currentUser = AuthenticationManager.shared.getcurrentUser() else { return }
             StorageManager.shared.deleteImage(userId: currentUser.uid)
             UserManager.shared.deleteUser(userId: currentUser.uid)
             AuthenticationManager.shared.deleteUser(currentUser: currentUser)
