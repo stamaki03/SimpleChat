@@ -8,6 +8,7 @@
 import UIKit
 
 struct ChatModel {
-    var userName: String
+    var userId: String
     var userMessage: String
+    var updateDate: Date
 }

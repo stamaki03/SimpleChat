@@ -10,8 +10,8 @@ import UIKit
 struct UserModel {
     let chatroomId: String
     let uid: String
-    let name: String?
-    let email: String?
+    let name: String
     let photoUrl: String?
-    let dateCreated: Date?
+    let lastMessage: String
+    let updateDate: Date
 }

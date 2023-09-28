@@ -23,10 +23,12 @@ final class ChatViewController: UIViewController, UITextFieldDelegate {
     }()
     
     private var chatroomId: String
+    private var otherMemberId: String
     private var chatViewCellItems: [ChatModel] = []
     
-    init(chatroomId: String) {
+    init(chatroomId: String, otherMemberId: String) {
         self.chatroomId = chatroomId
+        self.otherMemberId = otherMemberId
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -71,9 +73,8 @@ final class ChatViewController: UIViewController, UITextFieldDelegate {
                 if let snapshotDocments = querrySnapshot?.documents {
                     for doc in snapshotDocments {
                         let data = doc.data()
-                        if let userName = data["userName"] as? String, let chatText = data["chatText"] as? String {
-                            let newMessage = ChatModel(userName: userName, userMessage: chatText)
-                            print(newMessage)
+                        if let userId = data["userId"] as? String, let chatText = data["chatText"] as? String, let updateDate = data["sendTime"] as? Timestamp {
+                            let newMessage = ChatModel(userId: userId, userMessage: chatText, updateDate: updateDate.dateValue())
                             self?.chatViewCellItems.append(newMessage)
                             Task.detached { @MainActor in
                                 self?.tableView.reloadData()
@@ -90,9 +91,10 @@ final class ChatViewController: UIViewController, UITextFieldDelegate {
     @objc internal func sendMessage(sender: UIButton) {
         Task {
             do {
-                let userName = try AuthenticationManager.shared.getAuthenticatedUser()
-                guard let userEmail = userName.email, let chatText = chatTextField.text else {return}
-                try await ChatroomManager.shared.addDocument(chatroomId: self.chatroomId, userEmail: userEmail, chatText: chatText)
+                let currentUser = try AuthenticationManager.shared.getAuthenticatedUser()
+                guard let chatText = chatTextField.text else {return}
+                UserManager.shared.updatelatesteMessageInfo(userId1: currentUser.uid, userId2: otherMemberId, chatroomId: self.chatroomId, chatText: chatText)
+                try await ChatroomManager.shared.addDocument(chatroomId: self.chatroomId, userId: currentUser.uid, chatText: chatText)
                 self.chatTextField.text = ""
             } catch {
                 print(error)
@@ -107,7 +109,7 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if chatViewCellItems[indexPath.row].userName == Auth.auth().currentUser?.email {
+        if chatViewCellItems[indexPath.row].userId == Auth.auth().currentUser?.uid {
             let cell = tableView.dequeueReusableCell(withIdentifier: "MyChatCell", for: indexPath) as! MyChatTableViewCell
             cell.userMessage.text = chatViewCellItems[indexPath.row].userMessage
             return cell

@@ -16,13 +16,12 @@ final class ChatroomManager {
     func createChatroom(chatroomId: String, members: [String]) async throws {
         let userData: [String:Any] = [
             "chatroomId": chatroomId,
-            "members": members,
-            "dateCreated": Timestamp()
+            "members": members
         ]
         try await Firestore.firestore().collection("chatroom").document(chatroomId).setData(userData, merge: false)
     }
     
-    func addDocument(chatroomId: String, userEmail: String, chatText: String) async throws {
-        try await Firestore.firestore().collection("chatroom").document(chatroomId).collection("chats").addDocument(data: ["userName" : userEmail, "chatText" : chatText, "sendTime" : Date().timeIntervalSince1970])
+    func addDocument(chatroomId: String, userId: String, chatText: String) async throws {
+        try await Firestore.firestore().collection("chatroom").document(chatroomId).collection("chats").addDocument(data: ["userId" : userId, "chatText" : chatText, "sendTime" : Timestamp()])
     }
 }

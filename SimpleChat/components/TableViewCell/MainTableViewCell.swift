@@ -12,7 +12,6 @@ final class MainTableViewCell: UITableViewCell {
     var userName = CustomLabel(frame: .zero, fontSize: 15.0, text: "", paddingSize: 0)
     var userLastMessage = CustomLabel(frame: .zero, fontSize: 15.0, text: "", paddingSize: 0)
     var userLastMessageTime = CustomLabel(frame: .zero, fontSize: 15.0, text: "", paddingSize: 0)
-    var badgeIcon = BadgeImageView(frame: .zero)
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -23,9 +22,8 @@ final class MainTableViewCell: UITableViewCell {
         contentView.addSubview(userName)
         contentView.addSubview(userLastMessage)
         contentView.addSubview(userLastMessageTime)
-        contentView.addSubview(badgeIcon)
         // 制約設定
-        MainTableViewConstraints.makeConstraints(contentView: contentView, userIcon: userIcon, userName: userName, userLastMessage: userLastMessage, userLastMessageTime: userLastMessageTime, badgeIcon: badgeIcon)
+        MainTableViewConstraints.makeConstraints(contentView: contentView, userIcon: userIcon, userName: userName, userLastMessage: userLastMessage, userLastMessageTime: userLastMessageTime)
     }
     
     required init?(coder: NSCoder) {

@@ -48,7 +48,7 @@ final class UserManager {
         let snapshot = try await Firestore.firestore().collection("users").getDocuments()
         for document in snapshot.documents {
             let data = document.data()
-            let dbUser = FSUserModel(uid: data["uid"] as! String, name: data["name"] as? String, email: data["email"] as? String, photoUrl: data["photoUrl"] as? String, dateCreated: data["dateCreated"] as? Date)
+            let dbUser = FSUserModel(uid: data["uid"] as! String, name: data["name"] as! String, email: data["email"] as! String, photoUrl: data["photoUrl"] as? String)
             dbUserArray.append(dbUser)
         }
         return dbUserArray
@@ -56,12 +56,10 @@ final class UserManager {
     
     func fetchUser(userId: String) async throws -> FSUserModel {
         let snapshot = try await Firestore.firestore().collection("users").document(userId).getDocument()
-        guard let data = snapshot.data(), let uid = data["uid"] as? String else { throw URLError(.badServerResponse) }
-        let name = data["name"] as? String
-        let email = data["email"] as? String
+        guard let data = snapshot.data(), let uid = data["uid"] as? String, let name = data["name"] as? String, let email = data["email"] as? String else { throw URLError(.badServerResponse) }
         let photoUrl = data["photoUrl"] as? String
         let dateCreated = data["dateCreated"] as? Date
-        return FSUserModel(uid: uid, name: name, email: email, photoUrl: photoUrl, dateCreated: dateCreated)
+        return FSUserModel(uid: uid, name: name, email: email, photoUrl: photoUrl)
     }
     
     func adUserTodChatroom(chatroomId: String, user: String) async throws {
@@ -108,6 +106,29 @@ final class UserManager {
     
     func updatePhotoUrl(userId: String, photoUrl: String) throws {
         Firestore.firestore().collection("users").document(userId).updateData(["photoUrl": photoUrl]) { err in
+            if let err = err {
+                print("Error updating document: \(err)")
+            } else {
+                print("Document successfully updated")
+            }
+        }
+    }
+    
+    func updatelatesteMessageInfo(userId1: String, userId2: String, chatroomId: String, chatText: String) {
+        Firestore.firestore().collection("users").document(userId1).collection("chatroom").document(chatroomId).updateData([
+            "lastMessage": chatText,
+            "updateDate" : Timestamp()
+        ]) { err in
+            if let err = err {
+                print("Error updating document: \(err)")
+            } else {
+                print("Document successfully updated")
+            }
+        }
+        Firestore.firestore().collection("users").document(userId2).collection("chatroom").document(chatroomId).updateData([
+            "lastMessage": chatText,
+            "updateDate" : Timestamp()
+        ]) { err in
             if let err = err {
                 print("Error updating document: \(err)")
             } else {

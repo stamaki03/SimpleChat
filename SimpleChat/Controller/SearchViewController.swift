@@ -86,6 +86,7 @@ final class SearchViewController: UIViewController {
                 try await ChatroomManager.shared.createChatroom(chatroomId: chatroomId, members: members)
                 try await UserManager.shared.adUserTodChatroom(chatroomId: chatroomId, user: member1)
                 try await UserManager.shared.adUserTodChatroom(chatroomId: chatroomId, user: member2)
+                UserManager.shared.updatelatesteMessageInfo(userId1: member1, userId2: member2, chatroomId: chatroomId, chatText: "新規メッセージ")
                 self.navigationController?.popViewController(animated: false)
             } catch {
                 print(error)
@@ -102,6 +103,21 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! SearchTableViewCell
         cell.userName.text = serchViewCellItems[indexPath.row].name
+        if let url = serchViewCellItems[indexPath.row].photoUrl {
+            if !url.isEmpty {
+                Task.detached { @MainActor in
+                    let imageUrl = URL(string: url)!
+                    let (imageData, urlResponse) = try await URLSession.shared.data(from: imageUrl)
+                    guard let urlResponse = urlResponse as? HTTPURLResponse else {
+                        throw URLError(.badServerResponse)
+                    }
+                    guard 200 ..< 300 ~= urlResponse.statusCode else {
+                        throw URLError(.badServerResponse)
+                    }
+                    cell.userIcon.image = UIImage(data: imageData)!
+                }
+            }
+        }
         return cell
     }
     

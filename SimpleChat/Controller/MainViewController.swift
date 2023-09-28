@@ -31,13 +31,13 @@ final class MainViewController: UIViewController {
         // チャットルームの読み込み
         Task {
             let currentUser = try AuthenticationManager.shared.getAuthenticatedUser()
-            loadMessages(user: currentUser.uid)
+            loadChatroom(user: currentUser.uid)
             try await setBarTitle(currentUser: currentUser)
         }
     }
     
-    private func loadMessages(user: String) {
-        Firestore.firestore().collection("users").document(user).collection("chatroom").order(by: "chatroomId").addSnapshotListener { [weak self] (querrySnapshot, error) in
+    private func loadChatroom(user: String) {
+        Firestore.firestore().collection("users").document(user).collection("chatroom").order(by: "updateDate", descending: true).addSnapshotListener { [weak self] (querrySnapshot, error) in
             if let error = error {
                 print(error)
             } else {
@@ -45,11 +45,11 @@ final class MainViewController: UIViewController {
                 self?.mainViewCellItems = []
                 for doc in snapshotDocments {
                     let data = doc.data()
-                    guard let chatroomId = data["chatroomId"] as? String else { return }
+                    guard let chatroomId = data["chatroomId"] as? String, let lastMessage = data["lastMessage"] as? String, let updateDate = data["updateDate"] as? Timestamp else { return }
                     Task {
                         let otherUserId = try await UserManager.shared.fetchOtherMember(chatroomId: chatroomId)
                         let otherUser = try await UserManager.shared.fetchUser(userId: otherUserId)
-                        self?.mainViewCellItems.append(UserModel(chatroomId: chatroomId, uid: otherUser.uid, name: otherUser.name, email: otherUser.email, photoUrl: otherUser.photoUrl, dateCreated: otherUser.dateCreated))
+                        self?.mainViewCellItems.append(UserModel(chatroomId: chatroomId, uid: otherUser.uid, name: otherUser.name, photoUrl: otherUser.photoUrl, lastMessage: lastMessage, updateDate: updateDate.dateValue()))
                     }
                 }
             }
@@ -116,9 +116,19 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! MainTableViewCell
         cell.userName.text = self.mainViewCellItems[indexPath.row]?.name
+        cell.userLastMessage.text = self.mainViewCellItems[indexPath.row]?.lastMessage
+        if let date = self.mainViewCellItems[indexPath.row]?.updateDate {
+            let df = DateFormatter()
+            df.calendar = Calendar(identifier: .gregorian)
+            df.locale = Locale(identifier: "ja_JP")
+            df.timeZone = TimeZone(identifier: "Asia/Tokyo")
+            df.dateStyle = .short
+            df.timeStyle = .short
+            cell.userLastMessageTime.text = df.string(from: date)
+        }
         if let url = mainViewCellItems[indexPath.row]?.photoUrl {
             if !url.isEmpty {
-                Task.detached { @MainActor in
+                Task {
                     let imageUrl = URL(string: url)!
                     let (imageData, urlResponse) = try await URLSession.shared.data(from: imageUrl)
                     guard let urlResponse = urlResponse as? HTTPURLResponse else {
@@ -135,7 +145,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let chatViewController = ChatViewController(chatroomId: mainViewCellItems[indexPath.row]?.chatroomId ?? "")
+        let chatViewController = ChatViewController(chatroomId: mainViewCellItems[indexPath.row]?.chatroomId ?? "", otherMemberId: mainViewCellItems[indexPath.row]?.uid ?? "")
         self.navigationController?.pushViewController(chatViewController, animated: true)
     }
 }

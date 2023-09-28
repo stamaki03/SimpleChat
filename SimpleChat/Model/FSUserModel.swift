@@ -9,8 +9,7 @@ import Foundation
 
 struct FSUserModel {
     let uid: String
-    let name: String?
-    let email: String?
+    let name: String
+    let email: String
     let photoUrl: String?
-    let dateCreated: Date?
 }
