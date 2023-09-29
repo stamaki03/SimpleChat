@@ -9,7 +9,7 @@ import UIKit
 
 final class SignUpViewController: UIViewController {
     let signUpTitleLabel = TitleLabel(frame: .zero, text: "新規登録")
-    let iconImageView = CustomButton(frame: .zero, cornerRadius: 75, systemName: "camera")
+    let iconImageView = CustomButton(frame: .zero, cornerRadius: 75, systemName: "person")
     let idLabel = CustomLabel(frame: .zero, fontSize: 20.0, text: "ID", paddingSize: 0)
     let idTextField = CustomTextField(frame: .zero, placeholder: "example@co.jp", paddingSize: 0)
     let nameLabel = CustomLabel(frame: .zero, fontSize: 20.0, text: "名前", paddingSize: 0)
@@ -78,7 +78,7 @@ final class SignUpViewController: UIViewController {
         if self.image == nil {
             self.present(imagePicker, animated:true, completion:nil)
         } else {
-            self.iconImageView.setImage(UIImage(systemName: "camera"), for: .normal)
+            self.iconImageView.setImage(UIImage(systemName: "person"), for: .normal)
             self.image = nil
         }
     }

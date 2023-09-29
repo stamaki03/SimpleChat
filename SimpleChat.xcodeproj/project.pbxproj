@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BF14F14C2AC6E7AA00D59926 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF14F14B2AC6E7AA00D59926 /* ProfileViewController.swift */; };
+		BF14F14E2AC70E1B00D59926 /* ProfileViewConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF14F14D2AC70E1B00D59926 /* ProfileViewConstraints.swift */; };
 		BF6C1C562AC1581600798D08 /* FAErrorCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6C1C552AC1581600798D08 /* FAErrorCheck.swift */; };
 		BF6C1C5A2AC15B4F00798D08 /* AlertMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6C1C592AC15B4F00798D08 /* AlertMessage.swift */; };
 		BFAE271D2AB7D9D70004A47C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAE271C2AB7D9D70004A47C /* AppDelegate.swift */; };
@@ -94,6 +96,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BF14F14B2AC6E7AA00D59926 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		BF14F14D2AC70E1B00D59926 /* ProfileViewConstraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewConstraints.swift; sourceTree = "<group>"; };
 		BF6C1C552AC1581600798D08 /* FAErrorCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAErrorCheck.swift; sourceTree = "<group>"; };
 		BF6C1C592AC15B4F00798D08 /* AlertMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertMessage.swift; sourceTree = "<group>"; };
 		BFAE27192AB7D9D70004A47C /* SimpleChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -259,6 +263,7 @@
 				BFAE27772AB92B630004A47C /* ChatViewController.swift */,
 				BFAE27502AB7E8CE0004A47C /* LoginViewController.swift */,
 				BFAE27652AB82E9C0004A47C /* MainViewController.swift */,
+				BF14F14B2AC6E7AA00D59926 /* ProfileViewController.swift */,
 				BFAE27732AB92B030004A47C /* SearchViewController.swift */,
 				BFAE27752AB92B310004A47C /* SettingViewController.swift */,
 				BFAE275F2AB82C540004A47C /* SignUpViewController.swift */,
@@ -289,6 +294,7 @@
 			children = (
 				BFAE278D2AB92EDF0004A47C /* ChatViewConstraints.swift */,
 				BFAE275D2AB82C080004A47C /* LoginViewConstraints.swift */,
+				BF14F14D2AC70E1B00D59926 /* ProfileViewConstraints.swift */,
 				BFAE27802AB92D4D0004A47C /* SettingViewConstraints.swift */,
 				BFAE27632AB82DF00004A47C /* SignUpViewConstraints.swift */,
 			);
@@ -507,6 +513,8 @@
 				BFAE27642AB82DF00004A47C /* SignUpViewConstraints.swift in Sources */,
 				BFAE27B32ABE6C9C0004A47C /* UserManager.swift in Sources */,
 				BFAE27572AB7E9730004A47C /* CustomTextField.swift in Sources */,
+				BF14F14E2AC70E1B00D59926 /* ProfileViewConstraints.swift in Sources */,
+				BF14F14C2AC6E7AA00D59926 /* ProfileViewController.swift in Sources */,
 				BF6C1C5A2AC15B4F00798D08 /* AlertMessage.swift in Sources */,
 				BFAE27602AB82C540004A47C /* SignUpViewController.swift in Sources */,
 				BFAE27AB2ABD690E0004A47C /* AuthenticationManager.swift in Sources */,

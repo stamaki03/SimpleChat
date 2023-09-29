@@ -8,11 +8,12 @@
 import UIKit
 
 final class IconImageView: UIImageView {
-    override init(frame: CGRect) {
+    init(frame: CGRect, cornerRadius: CGFloat) {
         super.init(frame: frame)
-        self.image = UIImage(systemName: "camera")
+        self.image = UIImage(systemName: "person.circle")
         self.clipsToBounds = true
-        self.layer.cornerRadius = 25
+        self.contentMode = .scaleToFill
+        self.layer.cornerRadius = cornerRadius
         self.layer.masksToBounds = true
         self.translatesAutoresizingMaskIntoConstraints = false
     }

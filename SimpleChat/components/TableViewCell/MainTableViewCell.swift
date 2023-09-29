@@ -8,7 +8,7 @@
 import UIKit
 
 final class MainTableViewCell: UITableViewCell {
-    var userIcon = IconImageView(frame: .zero)
+    var userIcon = IconImageView(frame: .zero, cornerRadius: 25)
     var userName = CustomLabel(frame: .zero, fontSize: 15.0, text: "", paddingSize: 0)
     var userLastMessage = CustomLabel(frame: .zero, fontSize: 15.0, text: "", paddingSize: 0)
     var userLastMessageTime = CustomLabel(frame: .zero, fontSize: 15.0, text: "", paddingSize: 0)

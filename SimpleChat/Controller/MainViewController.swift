@@ -69,9 +69,10 @@ final class MainViewController: UIViewController {
         navigationItem.hidesBackButton = true
         let logoutButton = UIBarButtonItem(title: "ログアウト", style: .plain, target: self, action: #selector(logout))
         navigationItem.leftBarButtonItems = [logoutButton]
+        let profileButton = UIBarButtonItem(image: UIImage(systemName: "person"), style: .plain, target: self, action: #selector(goToProfileViewController))
         let searchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(goToSearchViewController))
         let settingButton = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(goToSettingViewController))
-        navigationItem.rightBarButtonItems = [searchButton, settingButton]
+        navigationItem.rightBarButtonItems = [searchButton, settingButton, profileButton]
     }
     
     @objc internal func logout() {
@@ -81,6 +82,11 @@ final class MainViewController: UIViewController {
         } catch {
             print(error)
         }
+    }
+    
+    @objc internal func goToProfileViewController() {
+        let settingViewController = ProfileViewController()
+        self.navigationController?.pushViewController(settingViewController, animated: false)
     }
     
     @objc internal func goToSearchViewController() {
@@ -108,7 +114,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! MainTableViewCell
         cell.userName.text = self.mainViewCellItems[indexPath.row]?.name
         cell.userLastMessage.text = self.mainViewCellItems[indexPath.row]?.lastMessage
-        cell.userIcon.image = UIImage(systemName: "camera")
+        cell.userIcon.image = UIImage(systemName: "person.circle")
         if let date = self.mainViewCellItems[indexPath.row]?.updateDate {
             let df = DateFormatter()
             df.calendar = Calendar(identifier: .gregorian)
@@ -139,7 +145,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let url = mainViewCellItems[indexPath.row]?.photoUrl {
             if url.isEmpty {
-                let chatViewController = ChatViewController(chatroomId: mainViewCellItems[indexPath.row]?.chatroomId ?? "", otherMemberId: mainViewCellItems[indexPath.row]?.uid ?? "", otherMemberName: mainViewCellItems[indexPath.row]?.name ?? "", otherMemberImage: UIImage(systemName: "camera")!)
+                let chatViewController = ChatViewController(chatroomId: mainViewCellItems[indexPath.row]?.chatroomId ?? "", otherMemberId: mainViewCellItems[indexPath.row]?.uid ?? "", otherMemberName: mainViewCellItems[indexPath.row]?.name ?? "", otherMemberImage: UIImage(systemName: "person.circle")!)
                 self.navigationController?.pushViewController(chatViewController, animated: true)
             } else {
                 Task {
@@ -151,7 +157,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
                     guard 200 ..< 300 ~= urlResponse.statusCode else {
                         throw URLError(.badServerResponse)
                     }
-                    let chatViewController = ChatViewController(chatroomId: mainViewCellItems[indexPath.row]?.chatroomId ?? "", otherMemberId: mainViewCellItems[indexPath.row]?.uid ?? "", otherMemberName: mainViewCellItems[indexPath.row]?.name ?? "", otherMemberImage: UIImage(data: imageData) ?? UIImage(systemName: "camera")!)
+                    let chatViewController = ChatViewController(chatroomId: mainViewCellItems[indexPath.row]?.chatroomId ?? "", otherMemberId: mainViewCellItems[indexPath.row]?.uid ?? "", otherMemberName: mainViewCellItems[indexPath.row]?.name ?? "", otherMemberImage: UIImage(data: imageData) ?? UIImage(systemName: "person.circle")!)
                     self.navigationController?.pushViewController(chatViewController, animated: true)
                 }
             }

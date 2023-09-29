@@ -103,7 +103,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! SearchTableViewCell
         cell.userName.text = serchViewCellItems[indexPath.row].name
-        cell.userIcon.image = UIImage(systemName: "camera")
+        cell.userIcon.image = UIImage(systemName: "person.circle")
         if let url = serchViewCellItems[indexPath.row].photoUrl {
             if !url.isEmpty {
                 Task {
