@@ -24,11 +24,13 @@ final class ChatViewController: UIViewController, UITextFieldDelegate {
     
     private var chatroomId: String
     private var otherMemberId: String
+    private var otherMemberImage: UIImage
     private var chatViewCellItems: [ChatModel] = []
     
-    init(chatroomId: String, otherMemberId: String) {
+    init(chatroomId: String, otherMemberId: String, otherMemberImage: UIImage) {
         self.chatroomId = chatroomId
         self.otherMemberId = otherMemberId
+        self.otherMemberImage = otherMemberImage
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -116,6 +118,7 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "OthersChatCell", for: indexPath) as! OthersChatTableViewCell
             cell.userMessage.text = chatViewCellItems[indexPath.row].userMessage
+            cell.userIcon.image = otherMemberImage
             return cell
         }
     }

@@ -41,12 +41,12 @@ final class MainViewController: UIViewController {
             if let error = error {
                 print(error)
             } else {
-                guard let snapshotDocments = querrySnapshot?.documents else {return }
-                self?.mainViewCellItems = []
-                for doc in snapshotDocments {
-                    let data = doc.data()
-                    guard let chatroomId = data["chatroomId"] as? String, let lastMessage = data["lastMessage"] as? String, let updateDate = data["updateDate"] as? Timestamp else { return }
-                    Task {
+                Task {
+                    guard let snapshotDocments = querrySnapshot?.documents else {return }
+                    self?.mainViewCellItems = []
+                    for doc in snapshotDocments {
+                        let data = doc.data()
+                        guard let chatroomId = data["chatroomId"] as? String, let lastMessage = data["lastMessage"] as? String, let updateDate = data["updateDate"] as? Timestamp else { return }
                         let otherUserId = try await UserManager.shared.fetchOtherMember(chatroomId: chatroomId)
                         let otherUser = try await UserManager.shared.fetchUser(userId: otherUserId)
                         self?.mainViewCellItems.append(UserModel(chatroomId: chatroomId, uid: otherUser.uid, name: otherUser.name, photoUrl: otherUser.photoUrl, lastMessage: lastMessage, updateDate: updateDate.dateValue()))
@@ -117,6 +117,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! MainTableViewCell
         cell.userName.text = self.mainViewCellItems[indexPath.row]?.name
         cell.userLastMessage.text = self.mainViewCellItems[indexPath.row]?.lastMessage
+        cell.userIcon.image = UIImage(systemName: "camera")
         if let date = self.mainViewCellItems[indexPath.row]?.updateDate {
             let df = DateFormatter()
             df.calendar = Calendar(identifier: .gregorian)
@@ -145,7 +146,24 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let chatViewController = ChatViewController(chatroomId: mainViewCellItems[indexPath.row]?.chatroomId ?? "", otherMemberId: mainViewCellItems[indexPath.row]?.uid ?? "")
-        self.navigationController?.pushViewController(chatViewController, animated: true)
+        if let url = mainViewCellItems[indexPath.row]?.photoUrl {
+            if url.isEmpty {
+                let chatViewController = ChatViewController(chatroomId: mainViewCellItems[indexPath.row]?.chatroomId ?? "", otherMemberId: mainViewCellItems[indexPath.row]?.uid ?? "", otherMemberImage: UIImage(systemName: "camera")!)
+                self.navigationController?.pushViewController(chatViewController, animated: true)
+            } else {
+                Task {
+                    let imageUrl = URL(string: url)!
+                    let (imageData, urlResponse) = try await URLSession.shared.data(from: imageUrl)
+                    guard let urlResponse = urlResponse as? HTTPURLResponse else {
+                        throw URLError(.badServerResponse)
+                    }
+                    guard 200 ..< 300 ~= urlResponse.statusCode else {
+                        throw URLError(.badServerResponse)
+                    }
+                    let chatViewController = ChatViewController(chatroomId: mainViewCellItems[indexPath.row]?.chatroomId ?? "", otherMemberId: mainViewCellItems[indexPath.row]?.uid ?? "", otherMemberImage: UIImage(data: imageData) ?? UIImage(systemName: "camera")!)
+                    self.navigationController?.pushViewController(chatViewController, animated: true)
+                }
+            }
+        }
     }
 }

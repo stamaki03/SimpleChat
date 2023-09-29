@@ -103,9 +103,10 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! SearchTableViewCell
         cell.userName.text = serchViewCellItems[indexPath.row].name
+        cell.userIcon.image = UIImage(systemName: "camera")
         if let url = serchViewCellItems[indexPath.row].photoUrl {
             if !url.isEmpty {
-                Task.detached { @MainActor in
+                Task {
                     let imageUrl = URL(string: url)!
                     let (imageData, urlResponse) = try await URLSession.shared.data(from: imageUrl)
                     guard let urlResponse = urlResponse as? HTTPURLResponse else {
