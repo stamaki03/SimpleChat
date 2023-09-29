@@ -32,7 +32,6 @@ final class MainViewController: UIViewController {
         Task {
             let currentUser = try AuthenticationManager.shared.getAuthenticatedUser()
             loadChatroom(user: currentUser.uid)
-            try await setBarTitle(currentUser: currentUser)
         }
     }
     
@@ -73,14 +72,6 @@ final class MainViewController: UIViewController {
         let searchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(goToSearchViewController))
         let settingButton = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(goToSettingViewController))
         navigationItem.rightBarButtonItems = [searchButton, settingButton]
-    }
-    
-    private func setBarTitle(currentUser: AuthenticationModel) async throws {
-        let titleLabel = UILabel()
-        let currentUserData = try await UserManager.shared.fetchUser(userId: currentUser.uid)
-        titleLabel.text = currentUserData.name
-        titleLabel.textColor = .white
-        navigationItem.titleView = titleLabel
     }
     
     @objc internal func logout() {
@@ -148,7 +139,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let url = mainViewCellItems[indexPath.row]?.photoUrl {
             if url.isEmpty {
-                let chatViewController = ChatViewController(chatroomId: mainViewCellItems[indexPath.row]?.chatroomId ?? "", otherMemberId: mainViewCellItems[indexPath.row]?.uid ?? "", otherMemberImage: UIImage(systemName: "camera")!)
+                let chatViewController = ChatViewController(chatroomId: mainViewCellItems[indexPath.row]?.chatroomId ?? "", otherMemberId: mainViewCellItems[indexPath.row]?.uid ?? "", otherMemberName: mainViewCellItems[indexPath.row]?.name ?? "", otherMemberImage: UIImage(systemName: "camera")!)
                 self.navigationController?.pushViewController(chatViewController, animated: true)
             } else {
                 Task {
@@ -160,7 +151,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
                     guard 200 ..< 300 ~= urlResponse.statusCode else {
                         throw URLError(.badServerResponse)
                     }
-                    let chatViewController = ChatViewController(chatroomId: mainViewCellItems[indexPath.row]?.chatroomId ?? "", otherMemberId: mainViewCellItems[indexPath.row]?.uid ?? "", otherMemberImage: UIImage(data: imageData) ?? UIImage(systemName: "camera")!)
+                    let chatViewController = ChatViewController(chatroomId: mainViewCellItems[indexPath.row]?.chatroomId ?? "", otherMemberId: mainViewCellItems[indexPath.row]?.uid ?? "", otherMemberName: mainViewCellItems[indexPath.row]?.name ?? "", otherMemberImage: UIImage(data: imageData) ?? UIImage(systemName: "camera")!)
                     self.navigationController?.pushViewController(chatViewController, animated: true)
                 }
             }

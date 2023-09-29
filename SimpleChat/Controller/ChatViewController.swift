@@ -24,12 +24,14 @@ final class ChatViewController: UIViewController, UITextFieldDelegate {
     
     private var chatroomId: String
     private var otherMemberId: String
+    private var otherMemberName: String
     private var otherMemberImage: UIImage
     private var chatViewCellItems: [ChatModel] = []
     
-    init(chatroomId: String, otherMemberId: String, otherMemberImage: UIImage) {
+    init(chatroomId: String, otherMemberId: String, otherMemberName: String, otherMemberImage: UIImage) {
         self.chatroomId = chatroomId
         self.otherMemberId = otherMemberId
+        self.otherMemberName = otherMemberName
         self.otherMemberImage = otherMemberImage
         super.init(nibName: nil, bundle: nil)
     }
@@ -42,6 +44,7 @@ final class ChatViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         setView()
+        setBarTitle()
         setButtonAction()
         // チャットメッセージの読み込み
         loadMessages()
@@ -60,6 +63,13 @@ final class ChatViewController: UIViewController, UITextFieldDelegate {
         chatBaseView.addSubview(chatTextField)
         // 制約設定
         ChatViewConstraints.makeConstraints(view: view, chatBaseView: chatBaseView, chatTextField: chatTextField, chatSendButton: chatSendButton)
+    }
+    
+    private func setBarTitle(){
+        let titleLabel = UILabel()
+        titleLabel.text = otherMemberName
+        titleLabel.textColor = .white
+        navigationItem.titleView = titleLabel
     }
     
     private func setButtonAction() {
