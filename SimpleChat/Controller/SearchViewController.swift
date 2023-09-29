@@ -84,8 +84,8 @@ final class SearchViewController: UIViewController {
                 let member2 = otherMember
                 let members = [member1, member2]
                 try await ChatroomManager.shared.createChatroom(chatroomId: chatroomId, members: members)
-                try await UserManager.shared.adUserTodChatroom(chatroomId: chatroomId, user: member1)
-                try await UserManager.shared.adUserTodChatroom(chatroomId: chatroomId, user: member2)
+                try await UserManager.shared.adUserTodChatroom(chatroomId: chatroomId, user: member1, otherUserId: member2)
+                try await UserManager.shared.adUserTodChatroom(chatroomId: chatroomId, user: member2, otherUserId: member1)
                 UserManager.shared.updatelatesteMessageInfo(userId1: member1, userId2: member2, chatroomId: chatroomId, chatText: "新規メッセージ")
                 self.navigationController?.popViewController(animated: false)
             } catch {
@@ -107,19 +107,24 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         if let url = serchViewCellItems[indexPath.row].photoUrl {
             if !url.isEmpty {
                 Task {
-                    let imageUrl = URL(string: url)!
-                    let (imageData, urlResponse) = try await URLSession.shared.data(from: imageUrl)
-                    guard let urlResponse = urlResponse as? HTTPURLResponse else {
-                        throw URLError(.badServerResponse)
-                    }
-                    guard 200 ..< 300 ~= urlResponse.statusCode else {
-                        throw URLError(.badServerResponse)
-                    }
+                    let imageData = try await fetchImage(url: url)
                     cell.userIcon.image = UIImage(data: imageData)!
                 }
             }
         }
         return cell
+    }
+    
+    private func fetchImage(url: String) async throws -> Data {
+        let imageUrl = URL(string: url)!
+        let (imageData, urlResponse) = try await URLSession.shared.data(from: imageUrl)
+        guard let urlResponse = urlResponse as? HTTPURLResponse else {
+            throw URLError(.badServerResponse)
+        }
+        guard 200 ..< 300 ~= urlResponse.statusCode else {
+            throw URLError(.badServerResponse)
+        }
+        return imageData
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

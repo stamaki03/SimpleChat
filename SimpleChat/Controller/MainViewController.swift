@@ -45,8 +45,7 @@ final class MainViewController: UIViewController {
                     self?.mainViewCellItems = []
                     for doc in snapshotDocments {
                         let data = doc.data()
-                        guard let chatroomId = data["chatroomId"] as? String, let lastMessage = data["lastMessage"] as? String, let updateDate = data["updateDate"] as? Timestamp else { return }
-                        let otherUserId = try await UserManager.shared.fetchOtherMember(chatroomId: chatroomId)
+                        guard let chatroomId = data["chatroomId"] as? String, let lastMessage = data["lastMessage"] as? String, let updateDate = data["updateDate"] as? Timestamp, let otherUserId = data["otherUserId"] as? String else { return }
                         let otherUser = try await UserManager.shared.fetchUser(userId: otherUserId)
                         self?.mainViewCellItems.append(UserModel(chatroomId: chatroomId, uid: otherUser.uid, name: otherUser.name, photoUrl: otherUser.photoUrl, lastMessage: lastMessage, updateDate: updateDate.dateValue()))
                     }
@@ -116,25 +115,13 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         cell.userLastMessage.text = self.mainViewCellItems[indexPath.row]?.lastMessage
         cell.userIcon.image = UIImage(systemName: "person.circle")
         if let date = self.mainViewCellItems[indexPath.row]?.updateDate {
-            let df = DateFormatter()
-            df.calendar = Calendar(identifier: .gregorian)
-            df.locale = Locale(identifier: "ja_JP")
-            df.timeZone = TimeZone(identifier: "Asia/Tokyo")
-            df.dateStyle = .short
-            df.timeStyle = .short
+            let df = makeDateFormatter()
             cell.userLastMessageTime.text = df.string(from: date)
         }
         if let url = mainViewCellItems[indexPath.row]?.photoUrl {
             if !url.isEmpty {
                 Task {
-                    let imageUrl = URL(string: url)!
-                    let (imageData, urlResponse) = try await URLSession.shared.data(from: imageUrl)
-                    guard let urlResponse = urlResponse as? HTTPURLResponse else {
-                        throw URLError(.badServerResponse)
-                    }
-                    guard 200 ..< 300 ~= urlResponse.statusCode else {
-                        throw URLError(.badServerResponse)
-                    }
+                    let imageData = try await fetchImage(url: url)
                     cell.userIcon.image = UIImage(data: imageData)!
                 }
             }
@@ -149,18 +136,33 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
                 self.navigationController?.pushViewController(chatViewController, animated: true)
             } else {
                 Task {
-                    let imageUrl = URL(string: url)!
-                    let (imageData, urlResponse) = try await URLSession.shared.data(from: imageUrl)
-                    guard let urlResponse = urlResponse as? HTTPURLResponse else {
-                        throw URLError(.badServerResponse)
-                    }
-                    guard 200 ..< 300 ~= urlResponse.statusCode else {
-                        throw URLError(.badServerResponse)
-                    }
+                    let imageData = try await fetchImage(url: url)
                     let chatViewController = ChatViewController(chatroomId: mainViewCellItems[indexPath.row]?.chatroomId ?? "", otherMemberId: mainViewCellItems[indexPath.row]?.uid ?? "", otherMemberName: mainViewCellItems[indexPath.row]?.name ?? "", otherMemberImage: UIImage(data: imageData) ?? UIImage(systemName: "person.circle")!)
                     self.navigationController?.pushViewController(chatViewController, animated: true)
                 }
             }
         }
+    }
+    
+    private func makeDateFormatter() -> DateFormatter {
+        let df = DateFormatter()
+        df.calendar = Calendar(identifier: .gregorian)
+        df.locale = Locale(identifier: "ja_JP")
+        df.timeZone = TimeZone(identifier: "Asia/Tokyo")
+        df.dateStyle = .short
+        df.timeStyle = .short
+        return df
+    }
+    
+    private func fetchImage(url: String) async throws -> Data {
+        let imageUrl = URL(string: url)!
+        let (imageData, urlResponse) = try await URLSession.shared.data(from: imageUrl)
+        guard let urlResponse = urlResponse as? HTTPURLResponse else {
+            throw URLError(.badServerResponse)
+        }
+        guard 200 ..< 300 ~= urlResponse.statusCode else {
+            throw URLError(.badServerResponse)
+        }
+        return imageData
     }
 }
