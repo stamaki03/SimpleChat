@@ -94,7 +94,7 @@ final class LoginViewController: UIViewController {
             let resetEmail = remindPasswordAlert.textFields?.first?.text
             Auth.auth().sendPasswordReset(withEmail: resetEmail!, completion: { (error) in
                 Task.detached { @MainActor in
-                    if let error = error {
+                    if let _ = error {
                         let alert = AlertMessage.shared.notificationAlert(message: "このメールアドレスは登録されてません。")
                         self.present(alert, animated: true, completion: nil)
                     } else {

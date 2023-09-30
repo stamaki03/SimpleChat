@@ -58,7 +58,6 @@ final class UserManager {
         let snapshot = try await Firestore.firestore().collection("users").document(userId).getDocument()
         guard let data = snapshot.data(), let uid = data["uid"] as? String, let name = data["name"] as? String, let email = data["email"] as? String else { throw URLError(.badServerResponse) }
         let photoUrl = data["photoUrl"] as? String
-        let dateCreated = data["dateCreated"] as? Date
         return FSUserModel(uid: uid, name: name, email: email, photoUrl: photoUrl)
     }
     

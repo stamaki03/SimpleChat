@@ -103,6 +103,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! SearchTableViewCell
+        cell.selectionStyle = UITableViewCell.SelectionStyle.none
         cell.userName.text = serchViewCellItems[indexPath.row].name
         cell.userIcon.image = UIImage(systemName: "person.circle")
         if let url = serchViewCellItems[indexPath.row].photoUrl {
@@ -129,6 +130,13 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at:indexPath)
+        cell?.accessoryType = .checkmark
         self.otherMember = serchViewCellItems[indexPath.row].uid
+    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at:indexPath)
+        cell?.accessoryType = .none
     }
 }
