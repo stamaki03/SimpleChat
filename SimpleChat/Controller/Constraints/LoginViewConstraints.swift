@@ -8,7 +8,7 @@
 import UIKit
 
 struct LoginViewConstraints {
-    static func makeConstraints(view: UIView, appTitleLabel: TitleLabel, idLabel: CustomLabel, idTextField: CustomTextField, passwordLabel: CustomLabel, passwordTextField: CustomTextField, loginSelectButton: SelectButton, signUpButton: ExplanationButton){
+    static func makeConstraints(view: UIView, appTitleLabel: TitleLabel, idLabel: CustomLabel, idTextField: CustomTextField, passwordLabel: CustomLabel, passwordTextField: CustomTextField, loginSelectButton: SelectButton, signUpButton: ExplanationButton, resetPasswordButton: ExplanationButton){
         appTitleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50).isActive = true
         appTitleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
         appTitleLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true
@@ -34,14 +34,19 @@ struct LoginViewConstraints {
         passwordTextField.heightAnchor.constraint(equalToConstant: 30).isActive = true
         passwordTextField.widthAnchor.constraint(equalToConstant: 300).isActive = true
         
-        loginSelectButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 70).isActive = true
+        loginSelectButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 30).isActive = true
         loginSelectButton.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
         loginSelectButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
         loginSelectButton.widthAnchor.constraint(equalToConstant: 300).isActive = true
         
-        signUpButton.topAnchor.constraint(equalTo: loginSelectButton.bottomAnchor, constant: 50).isActive = true
+        signUpButton.topAnchor.constraint(equalTo: loginSelectButton.bottomAnchor, constant: 30).isActive = true
         signUpButton.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
         signUpButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
         signUpButton.widthAnchor.constraint(equalToConstant: 300).isActive = true
+        
+        resetPasswordButton.topAnchor.constraint(equalTo: signUpButton.bottomAnchor, constant: 30).isActive = true
+        resetPasswordButton.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
+        resetPasswordButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        resetPasswordButton.widthAnchor.constraint(equalToConstant: 300).isActive = true
     }
 }

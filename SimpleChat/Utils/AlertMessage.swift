@@ -29,4 +29,12 @@ final class AlertMessage {
         return alert
     }
     
+    func resetPasswordAlert() -> UIAlertController {
+        let alert = UIAlertController(title: "パスワードをリセット", message: "メールアドレスを入力してください", preferredStyle: .alert)
+        alert.addTextField { (textField) in
+            textField.placeholder = "example@co.jp"
+        }
+        alert.addAction(UIAlertAction(title: "キャンセル", style: .cancel, handler: nil))
+        return alert
+    }
 }

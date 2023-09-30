@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 final class LoginViewController: UIViewController {
     let appTitleLabel = TitleLabel(frame: .zero, text: "SIMPLE CHAT")
@@ -15,6 +16,7 @@ final class LoginViewController: UIViewController {
     let passwordTextField = CustomTextField(frame: .zero, placeholder: "パスワード", paddingSize: 0)
     let loginSelectButton = SelectButton(frame: .zero, title: "ログイン")
     let signUpButton = ExplanationButton(frame: .zero, title: "新規登録はこちら")
+    let resetPasswordButton = ExplanationButton(frame: .zero, title: "パスワードリセット")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,8 +37,9 @@ final class LoginViewController: UIViewController {
         view.addSubview(passwordTextField)
         view.addSubview(loginSelectButton)
         view.addSubview(signUpButton)
+        view.addSubview(resetPasswordButton)
         // 制約設定
-        LoginViewConstraints.makeConstraints(view: view, appTitleLabel: appTitleLabel, idLabel: idLabel, idTextField: idTextField, passwordLabel: passwordLabel, passwordTextField: passwordTextField, loginSelectButton: loginSelectButton, signUpButton: signUpButton)
+        LoginViewConstraints.makeConstraints(view: view, appTitleLabel: appTitleLabel, idLabel: idLabel, idTextField: idTextField, passwordLabel: passwordLabel, passwordTextField: passwordTextField, loginSelectButton: loginSelectButton, signUpButton: signUpButton, resetPasswordButton: resetPasswordButton)
         // 暗号化設定
         passwordTextField.isSecureTextEntry = true
     }
@@ -44,6 +47,7 @@ final class LoginViewController: UIViewController {
     private func setButtonAction() {
         loginSelectButton.addTarget(self, action: #selector(goToMainViewController(sender:)), for:.touchUpInside)
         signUpButton.addTarget(self, action: #selector(goToSignUpViewController(sender:)), for:.touchUpInside)
+        resetPasswordButton.addTarget(self, action: #selector(resetPassword(sender:)), for:.touchUpInside)
     }
     
     private func buttonValidate() {
@@ -82,6 +86,25 @@ final class LoginViewController: UIViewController {
     @objc internal func goToSignUpViewController(sender: UIButton){
         let signUpViewController = SignUpViewController()
         self.navigationController?.present(signUpViewController, animated: true)
+    }
+    
+    @objc internal func resetPassword(sender: UIButton){
+        let remindPasswordAlert = AlertMessage.shared.resetPasswordAlert()
+        remindPasswordAlert.addAction(UIAlertAction(title: "リセット", style: .default, handler: { (action) in
+            let resetEmail = remindPasswordAlert.textFields?.first?.text
+            Auth.auth().sendPasswordReset(withEmail: resetEmail!, completion: { (error) in
+                Task.detached { @MainActor in
+                    if let error = error {
+                        let alert = AlertMessage.shared.notificationAlert(message: "このメールアドレスは登録されてません。")
+                        self.present(alert, animated: true, completion: nil)
+                    } else {
+                        let alert = AlertMessage.shared.notificationAlert(message: "メールでパスワードの再設定を行ってください。")
+                        self.present(alert, animated: true, completion: nil)
+                    }
+                }
+            })
+        }))
+        self.present(remindPasswordAlert, animated: true, completion: nil)
     }
 }
 
