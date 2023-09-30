@@ -84,8 +84,8 @@ final class SearchViewController: UIViewController {
                 let member2 = otherMember
                 let members = [member1, member2]
                 try await ChatroomManager.shared.createChatroom(chatroomId: chatroomId, members: members)
-                try await UserManager.shared.adUserTodChatroom(chatroomId: chatroomId, user: member1, otherUserId: member2)
-                try await UserManager.shared.adUserTodChatroom(chatroomId: chatroomId, user: member2, otherUserId: member1)
+                try await UserManager.shared.addChatroom(chatroomId: chatroomId, user: member1, otherUserId: member2)
+                try await UserManager.shared.addChatroom(chatroomId: chatroomId, user: member2, otherUserId: member1)
                 UserManager.shared.updatelatesteMessageInfo(userId1: member1, userId2: member2, chatroomId: chatroomId, chatText: "新規メッセージ")
                 self.navigationController?.popViewController(animated: false)
             } catch {

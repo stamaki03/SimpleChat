@@ -62,8 +62,12 @@ final class UserManager {
         return FSUserModel(uid: uid, name: name, email: email, photoUrl: photoUrl)
     }
     
-    func adUserTodChatroom(chatroomId: String, user: String, otherUserId: String) async throws {
+    func addChatroom(chatroomId: String, user: String, otherUserId: String) async throws {
         try await Firestore.firestore().collection("users").document(user).collection("chatroom").document(chatroomId).setData(["chatroomId": chatroomId, "otherUserId": otherUserId])
+    }
+    
+    func deleteChatroom(user: String, chatroomId: String) async throws {
+        try await Firestore.firestore().collection("users").document(user).collection("chatroom").document(chatroomId).delete()
     }
     
     func fetchOtherMember(chatroomId: String) async throws -> String {

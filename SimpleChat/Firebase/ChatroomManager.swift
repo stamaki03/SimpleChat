@@ -24,4 +24,8 @@ final class ChatroomManager {
     func addDocument(chatroomId: String, userId: String, chatText: String) async throws {
         try await Firestore.firestore().collection("chatroom").document(chatroomId).collection("chats").addDocument(data: ["userId" : userId, "chatText" : chatText, "sendTime" : Timestamp()])
     }
+    
+    func deleteChatroom(chatroomId: String) async throws {
+        try await Firestore.firestore().collection("chatroom").document(chatroomId).delete()
+    }
 }

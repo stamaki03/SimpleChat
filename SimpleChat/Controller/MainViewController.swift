@@ -165,4 +165,17 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         }
         return imageData
     }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let normalAction = UIContextualAction(style: .destructive, title: "削除") { (action, view, completionHandler) in
+            Task {
+                guard let currentUser = AuthenticationManager.shared.getcurrentUser(), let chatroomId = self.mainViewCellItems[indexPath.row]?.chatroomId, let otherUser = self.mainViewCellItems[indexPath.row]?.uid else { return }
+                try await ChatroomManager.shared.deleteChatroom(chatroomId: chatroomId)
+                try await UserManager.shared.deleteChatroom(user: currentUser.uid, chatroomId: chatroomId)
+                try await UserManager.shared.deleteChatroom(user: otherUser, chatroomId: chatroomId)
+            }
+          }
+          let configuration = UISwipeActionsConfiguration(actions: [normalAction])
+          return configuration
+      }
 }
