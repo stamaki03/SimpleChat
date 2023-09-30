@@ -10,6 +10,7 @@ import FirebaseAuth
 import FirebaseFirestore
 
 final class MainViewController: UIViewController {
+    // MARK: - Properties
     private let tableView: UITableView = {
         let view = UITableView(frame: .zero, style: UITableView.Style.plain)
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -23,6 +24,7 @@ final class MainViewController: UIViewController {
         }
     }
     
+    // MARK: - SetUp
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -75,6 +77,7 @@ final class MainViewController: UIViewController {
         navigationItem.rightBarButtonItems = [searchButton, settingButton, profileButton]
     }
     
+    // MARK: - Actions
     @objc internal func logout() {
         do {
             try AuthenticationManager.shared.signOutUser()
@@ -105,6 +108,7 @@ final class MainViewController: UIViewController {
     }
 }
 
+// MARK: - Extensions
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return mainViewCellItems.count

@@ -8,23 +8,25 @@
 import UIKit
 
 final class SettingViewController: UIViewController {
-    let signUpTitleLabel = TitleLabel(frame: .zero, text: "設定変更")
-    let iconImageView = CustomButton(frame: .zero, cornerRadius: 75, systemName: "person")
-    let idLabel = CustomLabel(frame: .zero, fontSize: 20.0, text: "ID", paddingSize: 0)
-    let idTextField = CustomTextField(frame: .zero, placeholder: "example@co.jp", paddingSize: 0)
-    let nameLabel = CustomLabel(frame: .zero, fontSize: 20.0, text: "名前", paddingSize: 0)
-    let nameTextField = CustomTextField(frame: .zero, placeholder: "名前", paddingSize: 0)
-    let passwordLabel = CustomLabel(frame: .zero, fontSize: 20.0, text: "パスワード", paddingSize: 0)
-    let passwordTextField = CustomTextField(frame: .zero, placeholder: "パスワード", paddingSize: 0)
-    let repasswordLabel = CustomLabel(frame: .zero, fontSize: 20.0, text: "パスワード(確認)", paddingSize: 0)
-    let repasswordTextField = CustomTextField(frame: .zero, placeholder: "パスワード(確認)", paddingSize: 0)
-    let modifyButton = SelectButton(frame: .zero, title: "修正", backgroundcolor: .lightGray, borderColor: UIColor.clear.cgColor, borderWidth: 0, foregroundcolor: .white)
+    // MARK: - Properties
+    private let signUpTitleLabel = TitleLabel(frame: .zero, text: "設定変更")
+    private let iconImageView = CustomButton(frame: .zero, cornerRadius: 75, systemName: "person")
+    private let idLabel = CustomLabel(frame: .zero, fontSize: 20.0, text: "ID", paddingSize: 0)
+    private let idTextField = CustomTextField(frame: .zero, placeholder: "example@co.jp", paddingSize: 0)
+    private let nameLabel = CustomLabel(frame: .zero, fontSize: 20.0, text: "名前", paddingSize: 0)
+    private let nameTextField = CustomTextField(frame: .zero, placeholder: "名前", paddingSize: 0)
+    private let passwordLabel = CustomLabel(frame: .zero, fontSize: 20.0, text: "パスワード", paddingSize: 0)
+    private let passwordTextField = CustomTextField(frame: .zero, placeholder: "パスワード", paddingSize: 0)
+    private let repasswordLabel = CustomLabel(frame: .zero, fontSize: 20.0, text: "パスワード(確認)", paddingSize: 0)
+    private let repasswordTextField = CustomTextField(frame: .zero, placeholder: "パスワード(確認)", paddingSize: 0)
+    private let modifyButton = SelectButton(frame: .zero, title: "修正", backgroundcolor: .lightGray, borderColor: UIColor.clear.cgColor, borderWidth: 0, foregroundcolor: .white)
     
-    let imagePicker = UIImagePickerController()
+    private let imagePicker = UIImagePickerController()
     
-    var image: UIImage?
-    var localImageURL: URL?
+    private var image: UIImage?
+    private var localImageURL: URL?
     
+    // MARK: - SetUp
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -73,30 +75,7 @@ final class SettingViewController: UIViewController {
         navigationItem.rightBarButtonItems = [registerButton]
     }
     
-    private func buttonValidate() {
-        modifyButton.isEnabled = true
-        modifyButton.backgroundColor = UIColor(named: "bg")
-    }
-    
-    private func buttonInvalidate() {
-        modifyButton.isEnabled = false
-        modifyButton.backgroundColor = .lightGray
-    }
-    
-    private func inputValidate(image: Bool, id: Bool, name: Bool, password: Bool) {
-        iconImageView.isEnabled = image
-        iconImageView.backgroundColor = image ? .white : .lightGray
-        idTextField.isEnabled = id
-        idTextField.backgroundColor  = id ? .white : .lightGray
-        nameTextField.isEnabled = name
-        nameTextField.backgroundColor  = name ? .white : .lightGray
-        passwordTextField.isEnabled = password
-        passwordTextField.backgroundColor  = password ? .white : .lightGray
-        repasswordTextField.isEnabled = password
-        repasswordTextField.backgroundColor  = password ? .white : .lightGray
-    }
-    
-    
+    // MARK: - Actions
     @objc internal func registerImage(sender: UIButton){
         if self.image == nil {
             self.present(imagePicker, animated:true, completion:nil)
@@ -193,8 +172,33 @@ final class SettingViewController: UIViewController {
         }))
         present(alert, animated: true, completion: nil)
     }
+    
+    // MARK: - Helpers
+    private func buttonValidate() {
+        modifyButton.isEnabled = true
+        modifyButton.backgroundColor = UIColor(named: "bg")
+    }
+    
+    private func buttonInvalidate() {
+        modifyButton.isEnabled = false
+        modifyButton.backgroundColor = .lightGray
+    }
+    
+    private func inputValidate(image: Bool, id: Bool, name: Bool, password: Bool) {
+        iconImageView.isEnabled = image
+        iconImageView.backgroundColor = image ? .white : .lightGray
+        idTextField.isEnabled = id
+        idTextField.backgroundColor  = id ? .white : .lightGray
+        nameTextField.isEnabled = name
+        nameTextField.backgroundColor  = name ? .white : .lightGray
+        passwordTextField.isEnabled = password
+        passwordTextField.backgroundColor  = password ? .white : .lightGray
+        repasswordTextField.isEnabled = password
+        repasswordTextField.backgroundColor  = password ? .white : .lightGray
+    }
 }
 
+// MARK: - Extensions
 extension SettingViewController: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
         let idIsEmpty = idTextField.text?.isEmpty ?? true

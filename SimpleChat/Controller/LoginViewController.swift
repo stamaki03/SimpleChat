@@ -9,15 +9,17 @@ import UIKit
 import FirebaseAuth
 
 final class LoginViewController: UIViewController {
-    let appTitleLabel = TitleLabel(frame: .zero, text: "SIMPLE CHAT")
-    let idLabel = CustomLabel(frame: .zero, fontSize: 20.0, text: "ID", paddingSize: 0)
-    let idTextField = CustomTextField(frame: .zero, placeholder: "example@co.jp", paddingSize: 0)
-    let passwordLabel = CustomLabel(frame: .zero, fontSize: 20.0, text: "パスワード", paddingSize: 0)
-    let passwordTextField = CustomTextField(frame: .zero, placeholder: "パスワード", paddingSize: 0)
-    let loginSelectButton = SelectButton(frame: .zero, title: "ログイン", backgroundcolor: .lightGray, borderColor: UIColor.clear.cgColor, borderWidth: 0, foregroundcolor: .white)
-    let signUpButton = SelectButton(frame: .zero, title: "新規登録", backgroundcolor: .clear, borderColor: (UIColor(named: "bg") ?? .white).cgColor, borderWidth: 1, foregroundcolor: UIColor(named: "bg") ?? .black)
-    let resetPasswordButton = SelectButton(frame: .zero, title: "パスワードリセット", backgroundcolor: UIColor.clear, borderColor: UIColor.clear.cgColor, borderWidth: 0, foregroundcolor: UIColor(named: "bg") ?? .black)
+    // MARK: - Properties
+    private let appTitleLabel = TitleLabel(frame: .zero, text: "SIMPLE CHAT")
+    private let idLabel = CustomLabel(frame: .zero, fontSize: 20.0, text: "ID", paddingSize: 0)
+    private let idTextField = CustomTextField(frame: .zero, placeholder: "example@co.jp", paddingSize: 0)
+    private let passwordLabel = CustomLabel(frame: .zero, fontSize: 20.0, text: "パスワード", paddingSize: 0)
+    private let passwordTextField = CustomTextField(frame: .zero, placeholder: "パスワード", paddingSize: 0)
+    private let loginSelectButton = SelectButton(frame: .zero, title: "ログイン", backgroundcolor: .lightGray, borderColor: UIColor.clear.cgColor, borderWidth: 0, foregroundcolor: .white)
+    private let signUpButton = SelectButton(frame: .zero, title: "新規登録", backgroundcolor: .clear, borderColor: (UIColor(named: "bg") ?? .white).cgColor, borderWidth: 1, foregroundcolor: UIColor(named: "bg") ?? .black)
+    private let resetPasswordButton = SelectButton(frame: .zero, title: "パスワードリセット", backgroundcolor: UIColor.clear, borderColor: UIColor.clear.cgColor, borderWidth: 0, foregroundcolor: UIColor(named: "bg") ?? .black)
     
+    // MARK: - SetUp
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -50,16 +52,7 @@ final class LoginViewController: UIViewController {
         resetPasswordButton.addTarget(self, action: #selector(resetPassword(sender:)), for:.touchUpInside)
     }
     
-    private func buttonValidate() {
-        loginSelectButton.isEnabled = true
-        loginSelectButton.backgroundColor = UIColor(named: "bg")
-    }
-    
-    private func buttonInvalidate() {
-        loginSelectButton.isEnabled = false
-        loginSelectButton.backgroundColor = .lightGray
-    }
-    
+    // MARK: - Actions
     @objc internal func goToMainViewController(sender: UIButton){
         Task {
             do {
@@ -106,8 +99,20 @@ final class LoginViewController: UIViewController {
         }))
         self.present(remindPasswordAlert, animated: true, completion: nil)
     }
+    
+    // MARK: - Helpers
+    private func buttonValidate() {
+        loginSelectButton.isEnabled = true
+        loginSelectButton.backgroundColor = UIColor(named: "bg")
+    }
+    
+    private func buttonInvalidate() {
+        loginSelectButton.isEnabled = false
+        loginSelectButton.backgroundColor = .lightGray
+    }
 }
 
+// MARK: - Extensions
 extension LoginViewController: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
         let idIsEmpty = idTextField.text?.isEmpty ?? true

@@ -10,9 +10,10 @@ import FirebaseAuth
 import FirebaseFirestore
 
 final class ChatViewController: UIViewController, UITextFieldDelegate {
-    let chatBaseView = ChatBaseView()
-    let chatSendButton = CustomButton(frame: .zero, cornerRadius: 10, systemName: "paperplane")
-    let chatTextField = CustomTextField(frame: .zero, placeholder: "メッセージを入力", paddingSize: 10)
+    // MARK: - Properties
+    private let chatBaseView = ChatBaseView()
+    private let chatSendButton = CustomButton(frame: .zero, cornerRadius: 10, systemName: "paperplane")
+    private let chatTextField = CustomTextField(frame: .zero, placeholder: "メッセージを入力", paddingSize: 10)
     private let tableView: UITableView = {
         let view = UITableView(frame: .zero, style: UITableView.Style.plain)
         view.allowsSelection = false
@@ -22,12 +23,14 @@ final class ChatViewController: UIViewController, UITextFieldDelegate {
         return view
     }()
     
-    private var chatroomId: String
-    private var otherMemberId: String
-    private var otherMemberName: String
-    private var otherMemberImage: UIImage
+    private let chatroomId: String
+    private let otherMemberId: String
+    private let otherMemberName: String
+    private let otherMemberImage: UIImage
+    
     private var chatViewCellItems: [ChatModel] = []
     
+    // MARK: - Init
     init(chatroomId: String, otherMemberId: String, otherMemberName: String, otherMemberImage: UIImage) {
         self.chatroomId = chatroomId
         self.otherMemberId = otherMemberId
@@ -40,6 +43,7 @@ final class ChatViewController: UIViewController, UITextFieldDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - SetUp
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -101,6 +105,7 @@ final class ChatViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    // MARK: - Actions
     @objc internal func sendMessage(sender: UIButton) {
         Task {
             do {
@@ -116,6 +121,7 @@ final class ChatViewController: UIViewController, UITextFieldDelegate {
     }
 }
 
+// MARK: - Extensions
 extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return chatViewCellItems.count

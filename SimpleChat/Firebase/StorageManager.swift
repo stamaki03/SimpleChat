@@ -43,5 +43,4 @@ final class StorageManager {
         let photoUrl = try await reference.downloadURL().absoluteString
         try UserManager.shared.updatePhotoUrl(userId: userId, photoUrl: photoUrl)
     }
-    
 }

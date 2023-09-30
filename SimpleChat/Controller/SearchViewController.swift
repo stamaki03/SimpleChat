@@ -8,6 +8,7 @@
 import UIKit
 
 final class SearchViewController: UIViewController {
+    // MARK: - Properties
     private let tableView: UITableView = {
         let view = UITableView(frame: .zero, style: UITableView.Style.plain)
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -15,11 +16,13 @@ final class SearchViewController: UIViewController {
         return view
     }()
     
+    private let userIdArray: [String?]
+    
     private var otherMember: String?
     private var currentUser: AuthenticationModel?
-    private var userIdArray: [String?]
     private var serchViewCellItems: [FSUserModel] = []
     
+    // MARK: - Init
     init(userId: [String?]) {
         self.userIdArray = userId
         super.init(nibName: nil, bundle: nil)
@@ -29,6 +32,7 @@ final class SearchViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - SetUp
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -71,6 +75,7 @@ final class SearchViewController: UIViewController {
         }
     }
     
+    // MARK: - Actions
     @objc internal func backView() {
         self.navigationController?.popViewController(animated: false)
     }
@@ -96,6 +101,7 @@ final class SearchViewController: UIViewController {
     }
 }
 
+// MARK: - Extensions
 extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return serchViewCellItems.count

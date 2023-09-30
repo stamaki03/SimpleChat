@@ -8,14 +8,16 @@
 import UIKit
 
 final class ProfileViewController: UIViewController {
-    let signUpTitleLabel = TitleLabel(frame: .zero, text: "プロフィール")
-    let iconImageView = CustomImageView(frame: .zero, cornerRadius: 75)
-    let idLabel = CustomLabel(frame: .zero, fontSize: 20.0, text: "ID：", paddingSize: 0)
-    let idText = CustomLabel(frame: .zero, fontSize: 20.0, text: "", paddingSize: 0)
-    let nameLabel = CustomLabel(frame: .zero, fontSize: 20.0, text: "名前：", paddingSize: 0)
-    let nameText = CustomLabel(frame: .zero, fontSize: 20.0, text: "", paddingSize: 0)
-    let backButton = SelectButton(frame: .zero, title: "戻る", backgroundcolor: UIColor(named: "bg") ?? .white, borderColor: UIColor.clear.cgColor, borderWidth: 0, foregroundcolor: .white)
+    // MARK: - Properties
+    private let signUpTitleLabel = TitleLabel(frame: .zero, text: "プロフィール")
+    private let iconImageView = CustomImageView(frame: .zero, cornerRadius: 75)
+    private let idLabel = CustomLabel(frame: .zero, fontSize: 20.0, text: "ID：", paddingSize: 0)
+    private let idText = CustomLabel(frame: .zero, fontSize: 20.0, text: "", paddingSize: 0)
+    private let nameLabel = CustomLabel(frame: .zero, fontSize: 20.0, text: "名前：", paddingSize: 0)
+    private let nameText = CustomLabel(frame: .zero, fontSize: 20.0, text: "", paddingSize: 0)
+    private let backButton = SelectButton(frame: .zero, title: "戻る", backgroundcolor: UIColor(named: "bg") ?? .white, borderColor: UIColor.clear.cgColor, borderWidth: 0, foregroundcolor: .white)
     
+    // MARK: - SetUp
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -67,6 +69,7 @@ final class ProfileViewController: UIViewController {
         navigationItem.hidesBackButton = true
     }
     
+    // MARK: - Actions
     @objc internal func userBack(sender: UIButton){
         self.navigationController?.popViewController(animated: false)
     }
