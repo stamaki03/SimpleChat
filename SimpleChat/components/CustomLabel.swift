@@ -15,9 +15,9 @@ final class CustomLabel: UILabel {
         super.init(frame: frame)
         self.adjustsFontSizeToFitWidth = true
         self.font = UIFont.systemFont(ofSize: fontSize)
+        self.numberOfLines = 0
         self.text = text
         self.textColor = .black
-        self.numberOfLines = 0
         self.translatesAutoresizingMaskIntoConstraints = false
     }
     

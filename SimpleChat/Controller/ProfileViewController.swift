@@ -9,7 +9,7 @@ import UIKit
 
 final class ProfileViewController: UIViewController {
     let signUpTitleLabel = TitleLabel(frame: .zero, text: "プロフィール")
-    let iconImageView = IconImageView(frame: .zero, cornerRadius: 75)
+    let iconImageView = CustomImageView(frame: .zero, cornerRadius: 75)
     let idLabel = CustomLabel(frame: .zero, fontSize: 20.0, text: "ID：", paddingSize: 0)
     let idText = CustomLabel(frame: .zero, fontSize: 20.0, text: "", paddingSize: 0)
     let nameLabel = CustomLabel(frame: .zero, fontSize: 20.0, text: "名前：", paddingSize: 0)
@@ -70,5 +70,4 @@ final class ProfileViewController: UIViewController {
     @objc internal func userBack(sender: UIButton){
         self.navigationController?.popViewController(animated: false)
     }
-    
 }

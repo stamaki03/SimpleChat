@@ -8,7 +8,7 @@
 import UIKit
 
 struct MainTableViewConstraints {
-    static func makeConstraints(contentView: UIView, userIcon: IconImageView, userName: CustomLabel, userLastMessage: CustomLabel, userLastMessageTime: CustomLabel){
+    static func makeConstraints(contentView: UIView, userIcon: CustomImageView, userName: CustomLabel, userLastMessage: CustomLabel, userLastMessageTime: CustomLabel){
         contentView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width).isActive = true
         
         userIcon.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10).isActive = true

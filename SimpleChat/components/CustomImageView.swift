@@ -1,5 +1,5 @@
 //
-//  IconImageView.swift
+//  CustomImageView.swift
 //  SimpleChat
 //
 //  Created by Sho Tamaki on 2023/09/19.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class IconImageView: UIImageView {
+final class CustomImageView: UIImageView {
     init(frame: CGRect, cornerRadius: CGFloat) {
         super.init(frame: frame)
         self.image = UIImage(systemName: "person.circle")

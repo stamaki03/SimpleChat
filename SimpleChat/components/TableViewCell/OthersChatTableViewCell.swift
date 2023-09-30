@@ -8,8 +8,9 @@
 import UIKit
 
 final class OthersChatTableViewCell: UITableViewCell {
-    var userIcon = IconImageView(frame: .zero, cornerRadius: 25)
+    var userIcon = CustomImageView(frame: .zero, cornerRadius: 25)
     var userMessage = CustomLabel(frame: .zero, fontSize: 20.0, text: "", paddingSize: 10)
+    var sendTime = CustomLabel(frame: .zero, fontSize: 15.0, text: "aaa", paddingSize: 0)
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -21,10 +22,12 @@ final class OthersChatTableViewCell: UITableViewCell {
         userMessage.layer.borderWidth = 1
         userMessage.layer.cornerRadius = 5
         userMessage.textColor = .black
+        sendTime.textAlignment = NSTextAlignment.left
         contentView.addSubview(userIcon)
         contentView.addSubview(userMessage)
+        contentView.addSubview(sendTime)
         // 制約設定
-        OthersChatTableViewConstraints.makeConstraints(contentView: contentView, userIcon: userIcon, userMessage: userMessage)
+        OthersChatTableViewConstraints.makeConstraints(contentView: contentView, userIcon: userIcon, userMessage: userMessage, sendTime: sendTime)
     }
     
     required init?(coder: NSCoder) {

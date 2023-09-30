@@ -31,7 +31,7 @@
 		BFAE27682AB9240C0004A47C /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAE27672AB9240C0004A47C /* UserModel.swift */; };
 		BFAE276A2AB9286C0004A47C /* ChatModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAE27692AB9286C0004A47C /* ChatModel.swift */; };
 		BFAE27702AB92A170004A47C /* ChatBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAE276F2AB92A170004A47C /* ChatBaseView.swift */; };
-		BFAE27722AB92AAA0004A47C /* IconImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAE27712AB92AAA0004A47C /* IconImageView.swift */; };
+		BFAE27722AB92AAA0004A47C /* CustomImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAE27712AB92AAA0004A47C /* CustomImageView.swift */; };
 		BFAE27742AB92B030004A47C /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAE27732AB92B030004A47C /* SearchViewController.swift */; };
 		BFAE27762AB92B310004A47C /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAE27752AB92B310004A47C /* SettingViewController.swift */; };
 		BFAE27782AB92B630004A47C /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAE27772AB92B630004A47C /* ChatViewController.swift */; };
@@ -122,7 +122,7 @@
 		BFAE27672AB9240C0004A47C /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		BFAE27692AB9286C0004A47C /* ChatModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatModel.swift; sourceTree = "<group>"; };
 		BFAE276F2AB92A170004A47C /* ChatBaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBaseView.swift; sourceTree = "<group>"; };
-		BFAE27712AB92AAA0004A47C /* IconImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconImageView.swift; sourceTree = "<group>"; };
+		BFAE27712AB92AAA0004A47C /* CustomImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImageView.swift; sourceTree = "<group>"; };
 		BFAE27732AB92B030004A47C /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		BFAE27752AB92B310004A47C /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		BFAE27772AB92B630004A47C /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
@@ -273,9 +273,9 @@
 			children = (
 				BFAE276F2AB92A170004A47C /* ChatBaseView.swift */,
 				BFAE27612AB82DBA0004A47C /* CustomButton.swift */,
+				BFAE27712AB92AAA0004A47C /* CustomImageView.swift */,
 				BFAE27542AB7E9680004A47C /* CustomLabel.swift */,
 				BFAE27562AB7E9730004A47C /* CustomTextField.swift */,
-				BFAE27712AB92AAA0004A47C /* IconImageView.swift */,
 				BFAE27582AB7E9880004A47C /* SelectButton.swift */,
 				BFAE27522AB7E9510004A47C /* TitleLabel.swift */,
 				BFAE27792AB92C070004A47C /* TableViewCell */,
@@ -485,7 +485,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BFAE27722AB92AAA0004A47C /* IconImageView.swift in Sources */,
+				BFAE27722AB92AAA0004A47C /* CustomImageView.swift in Sources */,
 				BFAE27C12ABF0E8D0004A47C /* ChatroomManager.swift in Sources */,
 				BFAE27782AB92B630004A47C /* ChatViewController.swift in Sources */,
 				BFAE27BD2ABED2160004A47C /* StorageManager.swift in Sources */,

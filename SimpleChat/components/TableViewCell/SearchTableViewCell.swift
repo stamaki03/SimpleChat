@@ -8,7 +8,7 @@
 import UIKit
 
 final class SearchTableViewCell: UITableViewCell {
-    var userIcon = IconImageView(frame: .zero, cornerRadius: 25)
+    var userIcon = CustomImageView(frame: .zero, cornerRadius: 25)
     var userName = CustomLabel(frame: .zero, fontSize: 15.0, text: "", paddingSize: 0)
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

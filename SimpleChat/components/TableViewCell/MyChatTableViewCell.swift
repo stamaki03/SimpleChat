@@ -8,8 +8,8 @@
 import UIKit
 
 final class MyChatTableViewCell: UITableViewCell {
-    let chatBaseView = ChatBaseView()
     var userMessage = CustomLabel(frame: .zero, fontSize: 20.0, text: "", paddingSize: 10)
+    var sendTime = CustomLabel(frame: .zero, fontSize: 15.0, text: "aaa", paddingSize: 0)
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -22,9 +22,11 @@ final class MyChatTableViewCell: UITableViewCell {
         userMessage.layer.borderWidth = 1
         userMessage.layer.cornerRadius = 5
         userMessage.textColor = .white
+        sendTime.textAlignment = NSTextAlignment.right
+        contentView.addSubview(sendTime)
         contentView.addSubview(userMessage)
         // 制約設定
-        MyChatTableViewConstraints.makeConstraints(contentView: contentView, userMessage: userMessage)
+        MyChatTableViewConstraints.makeConstraints(contentView: contentView, sendTime: sendTime, userMessage: userMessage)
     }
     
     required init?(coder: NSCoder) {

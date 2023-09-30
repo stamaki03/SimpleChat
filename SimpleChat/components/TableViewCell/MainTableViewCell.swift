@@ -8,7 +8,7 @@
 import UIKit
 
 final class MainTableViewCell: UITableViewCell {
-    var userIcon = IconImageView(frame: .zero, cornerRadius: 25)
+    var userIcon = CustomImageView(frame: .zero, cornerRadius: 25)
     var userName = CustomLabel(frame: .zero, fontSize: 15.0, text: "", paddingSize: 0)
     var userLastMessage = CustomLabel(frame: .zero, fontSize: 15.0, text: "", paddingSize: 0)
     var userLastMessageTime = CustomLabel(frame: .zero, fontSize: 15.0, text: "", paddingSize: 0)
@@ -19,6 +19,7 @@ final class MainTableViewCell: UITableViewCell {
         contentView.backgroundColor = .white
         contentView.translatesAutoresizingMaskIntoConstraints = false
         // サブビュー設定
+        userLastMessage.adjustsFontSizeToFitWidth = false
         contentView.addSubview(userIcon)
         contentView.addSubview(userName)
         contentView.addSubview(userLastMessage)

@@ -125,12 +125,27 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
         if chatViewCellItems[indexPath.row].userId == Auth.auth().currentUser?.uid {
             let cell = tableView.dequeueReusableCell(withIdentifier: "MyChatCell", for: indexPath) as! MyChatTableViewCell
             cell.userMessage.text = chatViewCellItems[indexPath.row].userMessage
+            let date = self.chatViewCellItems[indexPath.row].updateDate
+            let df = makeDateFormatter()
+            cell.sendTime.text = df.string(from: date)
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "OthersChatCell", for: indexPath) as! OthersChatTableViewCell
-            cell.userMessage.text = chatViewCellItems[indexPath.row].userMessage
             cell.userIcon.image = otherMemberImage
+            cell.userMessage.text = chatViewCellItems[indexPath.row].userMessage
+            let date = self.chatViewCellItems[indexPath.row].updateDate
+            let df = makeDateFormatter()
+            cell.sendTime.text = df.string(from: date)
             return cell
         }
+    }
+    
+    private func makeDateFormatter() -> DateFormatter {
+        let df = DateFormatter()
+        df.calendar = Calendar(identifier: .gregorian)
+        df.locale = Locale(identifier: "ja_JP")
+        df.timeZone = TimeZone(identifier: "Asia/Tokyo")
+        df.dateFormat = "yy/MM/dd HH:mm"
+        return df
     }
 }
