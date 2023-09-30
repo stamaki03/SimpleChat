@@ -13,6 +13,7 @@ final class IconImageView: UIImageView {
         self.image = UIImage(systemName: "person.circle")
         self.clipsToBounds = true
         self.contentMode = .scaleToFill
+        self.tintColor = UIColor(named: "bg") ?? .blue
         self.layer.cornerRadius = cornerRadius
         self.layer.masksToBounds = true
         self.translatesAutoresizingMaskIntoConstraints = false

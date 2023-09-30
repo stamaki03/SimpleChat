@@ -18,7 +18,7 @@ final class SignUpViewController: UIViewController {
     let passwordTextField = CustomTextField(frame: .zero, placeholder: "パスワード", paddingSize: 0)
     let repasswordLabel = CustomLabel(frame: .zero, fontSize: 20.0, text: "パスワード(確認)", paddingSize: 0)
     let repasswordTextField = CustomTextField(frame: .zero, placeholder: "パスワード(確認)", paddingSize: 0)
-    let signUpButton = SelectButton(frame: .zero, title: "登録")
+    let signUpButton = SelectButton(frame: .zero, title: "登録", backgroundcolor: .lightGray, borderColor: UIColor.clear.cgColor, borderWidth: 0, foregroundcolor: .white)
     
     let imagePicker = UIImagePickerController()
     

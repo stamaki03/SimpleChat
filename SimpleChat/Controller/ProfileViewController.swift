@@ -10,11 +10,11 @@ import UIKit
 final class ProfileViewController: UIViewController {
     let signUpTitleLabel = TitleLabel(frame: .zero, text: "プロフィール")
     let iconImageView = IconImageView(frame: .zero, cornerRadius: 75)
-    let idLabel = CustomLabel(frame: .zero, fontSize: 20.0, text: "ID", paddingSize: 0)
+    let idLabel = CustomLabel(frame: .zero, fontSize: 20.0, text: "ID：", paddingSize: 0)
     let idText = CustomLabel(frame: .zero, fontSize: 20.0, text: "", paddingSize: 0)
-    let nameLabel = CustomLabel(frame: .zero, fontSize: 20.0, text: "名前", paddingSize: 0)
+    let nameLabel = CustomLabel(frame: .zero, fontSize: 20.0, text: "名前：", paddingSize: 0)
     let nameText = CustomLabel(frame: .zero, fontSize: 20.0, text: "", paddingSize: 0)
-    let modifyButton = SelectButton(frame: .zero, title: "戻る")
+    let backButton = SelectButton(frame: .zero, title: "戻る", backgroundcolor: UIColor(named: "bg") ?? .white, borderColor: UIColor.clear.cgColor, borderWidth: 0, foregroundcolor: .white)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,10 +35,9 @@ final class ProfileViewController: UIViewController {
         view.addSubview(idText)
         view.addSubview(nameLabel)
         view.addSubview(nameText)
-        view.addSubview(modifyButton)
-        modifyButton.backgroundColor = UIColor(named: "bg")
+        view.addSubview(backButton)
         // 制約設定
-        ProfileViewConstraints.makeConstraints(view: view, iconImageView: iconImageView, signUpTitleLabel: signUpTitleLabel, idLabel: idLabel, idText: idText, nameLabel: nameLabel, nameText: nameText, modifyButton: modifyButton)
+        ProfileViewConstraints.makeConstraints(view: view, iconImageView: iconImageView, signUpTitleLabel: signUpTitleLabel, idLabel: idLabel, idText: idText, nameLabel: nameLabel, nameText: nameText, backButton: backButton)
     }
     
     private func displayProfile() async throws {
@@ -61,14 +60,14 @@ final class ProfileViewController: UIViewController {
     }
     
     private func setButtonAction() {
-        modifyButton.addTarget(self, action: #selector(userModify(sender:)), for:.touchUpInside)
+        backButton.addTarget(self, action: #selector(userBack(sender:)), for:.touchUpInside)
     }
     
     private func setBarItem() {
         navigationItem.hidesBackButton = true
     }
     
-    @objc internal func userModify(sender: UIButton){
+    @objc internal func userBack(sender: UIButton){
         self.navigationController?.popViewController(animated: false)
     }
     

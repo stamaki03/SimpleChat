@@ -14,9 +14,9 @@ final class LoginViewController: UIViewController {
     let idTextField = CustomTextField(frame: .zero, placeholder: "example@co.jp", paddingSize: 0)
     let passwordLabel = CustomLabel(frame: .zero, fontSize: 20.0, text: "パスワード", paddingSize: 0)
     let passwordTextField = CustomTextField(frame: .zero, placeholder: "パスワード", paddingSize: 0)
-    let loginSelectButton = SelectButton(frame: .zero, title: "ログイン")
-    let signUpButton = ExplanationButton(frame: .zero, title: "新規登録はこちら")
-    let resetPasswordButton = ExplanationButton(frame: .zero, title: "パスワードリセット")
+    let loginSelectButton = SelectButton(frame: .zero, title: "ログイン", backgroundcolor: .lightGray, borderColor: UIColor.clear.cgColor, borderWidth: 0, foregroundcolor: .white)
+    let signUpButton = SelectButton(frame: .zero, title: "新規登録", backgroundcolor: .clear, borderColor: (UIColor(named: "bg") ?? .white).cgColor, borderWidth: 1, foregroundcolor: UIColor(named: "bg") ?? .white)
+    let resetPasswordButton = SelectButton(frame: .zero, title: "パスワードリセット", backgroundcolor: UIColor.clear, borderColor: UIColor.clear.cgColor, borderWidth: 0, foregroundcolor: UIColor(named: "bg") ?? .white)
     
     override func viewDidLoad() {
         super.viewDidLoad()
