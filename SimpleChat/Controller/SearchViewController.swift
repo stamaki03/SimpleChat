@@ -44,6 +44,7 @@ final class SearchViewController: UIViewController {
     
     private func setView() {
         view.backgroundColor = .white
+        tableView.backgroundColor = .white
         tableView.frame = self.view.frame
         tableView.rowHeight = 70
         tableView.delegate = self

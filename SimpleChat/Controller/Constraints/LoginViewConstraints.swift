@@ -9,12 +9,12 @@ import UIKit
 
 struct LoginViewConstraints {
     static func makeConstraints(view: UIView, appTitleLabel: TitleLabel, idLabel: CustomLabel, idTextField: CustomTextField, passwordLabel: CustomLabel, passwordTextField: CustomTextField, loginSelectButton: SelectButton, signUpButton: SelectButton, resetPasswordButton: SelectButton){
-        appTitleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50).isActive = true
+        appTitleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
         appTitleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
         appTitleLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true
         appTitleLabel.widthAnchor.constraint(equalToConstant: 300).isActive = true
         
-        idLabel.topAnchor.constraint(equalTo: appTitleLabel.bottomAnchor, constant: 50).isActive = true
+        idLabel.topAnchor.constraint(equalTo: appTitleLabel.bottomAnchor, constant: 30).isActive = true
         idLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
         idLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
         idLabel.widthAnchor.constraint(equalToConstant: 300).isActive = true

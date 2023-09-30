@@ -9,7 +9,7 @@ import UIKit
 
 struct SignUpViewConstraints {
     static func makeConstraints(view: UIView, iconImageView: CustomButton, signUpTitleLabel: TitleLabel, idLabel: CustomLabel, idTextField: CustomTextField, nameLabel: CustomLabel, nameTextField: CustomTextField, passwordLabel: CustomLabel, passwordTextField: CustomTextField, repasswordLabel: CustomLabel, repasswordTextField: CustomTextField, signUpButton: SelectButton){
-        signUpTitleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50).isActive = true
+        signUpTitleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
         signUpTitleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
         signUpTitleLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true
         signUpTitleLabel.widthAnchor.constraint(equalToConstant: 300).isActive = true

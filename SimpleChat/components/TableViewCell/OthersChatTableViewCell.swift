@@ -9,17 +9,18 @@ import UIKit
 
 final class OthersChatTableViewCell: UITableViewCell {
     var userIcon = IconImageView(frame: .zero, cornerRadius: 25)
-    var userMessage = CustomLabel(frame: .zero, fontSize: 15.0, text: "", paddingSize: 5)
+    var userMessage = CustomLabel(frame: .zero, fontSize: 20.0, text: "", paddingSize: 10)
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         // コンテントビュー設定
+        contentView.backgroundColor = .white
         contentView.translatesAutoresizingMaskIntoConstraints = false
         // サブビュー設定
-        userMessage.layer.borderColor = UIColor.blue.cgColor
+        userMessage.layer.borderColor = (UIColor(named: "bg") ?? .white).cgColor
         userMessage.layer.borderWidth = 1
         userMessage.layer.cornerRadius = 5
-        
+        userMessage.textColor = .black
         contentView.addSubview(userIcon)
         contentView.addSubview(userMessage)
         // 制約設定
