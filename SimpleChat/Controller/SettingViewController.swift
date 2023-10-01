@@ -44,6 +44,10 @@ final class SettingViewController: UIViewController {
         passwordTextField.delegate = self
         repasswordTextField.delegate = self
         modifyButton.isEnabled = false
+        idTextField.tag = 0
+        nameTextField.tag = 1
+        passwordTextField.tag = 2
+        repasswordTextField.tag = 3
         view.addSubview(signUpTitleLabel)
         view.addSubview(iconImageView)
         view.addSubview(idLabel)
@@ -226,6 +230,10 @@ extension SettingViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
+        let nextTag = textField.tag + 1
+        if let nextTextField = self.view.viewWithTag(nextTag) {
+            nextTextField.becomeFirstResponder()
+        }
         return true
     }
 }

@@ -32,6 +32,8 @@ final class LoginViewController: UIViewController {
         idTextField.delegate = self
         passwordTextField.delegate = self
         loginSelectButton.isEnabled = false
+        idTextField.tag = 0
+        passwordTextField.tag = 1
         view.addSubview(appTitleLabel)
         view.addSubview(idLabel)
         view.addSubview(idTextField)
@@ -127,6 +129,10 @@ extension LoginViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
+        let nextTag = textField.tag + 1
+        if let nextTextField = self.view.viewWithTag(nextTag) {
+            nextTextField.becomeFirstResponder()
+        }
         return true
     }
 }

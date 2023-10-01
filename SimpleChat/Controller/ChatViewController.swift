@@ -79,6 +79,7 @@ final class ChatViewController: UIViewController, UITextFieldDelegate {
     
     private func setButtonAction() {
         chatSendButton.addTarget(self, action: #selector(sendMessage(sender:)), for:.touchUpInside)
+        chatTextField.addTarget(self, action: #selector(sendMessage(sender:)), for:.editingDidEndOnExit)
     }
     
     private func loadMessages() {
@@ -111,9 +112,9 @@ final class ChatViewController: UIViewController, UITextFieldDelegate {
             do {
                 let currentUser = try AuthenticationManager.shared.getAuthenticatedUser()
                 guard let chatText = chatTextField.text else {return}
+                self.chatTextField.text = ""
                 UserManager.shared.updatelatesteMessageInfo(userId1: currentUser.uid, userId2: otherMemberId, chatroomId: self.chatroomId, chatText: chatText)
                 try await ChatroomManager.shared.addDocument(chatroomId: self.chatroomId, userId: currentUser.uid, chatText: chatText)
-                self.chatTextField.text = ""
             } catch {
                 print(error)
             }
