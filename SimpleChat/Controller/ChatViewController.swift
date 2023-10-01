@@ -55,7 +55,6 @@ final class ChatViewController: UIViewController, UITextFieldDelegate {
     }
     
     private func setView() {
-        view.backgroundColor = .white
         tableView.backgroundColor = .white
         tableView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height - 120)
         tableView.separatorStyle = .none

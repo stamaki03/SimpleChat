@@ -16,7 +16,6 @@ final class MainTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         // コンテントビュー設定
-        contentView.backgroundColor = .white
         contentView.translatesAutoresizingMaskIntoConstraints = false
         // サブビュー設定
         userLastMessage.adjustsFontSizeToFitWidth = false
