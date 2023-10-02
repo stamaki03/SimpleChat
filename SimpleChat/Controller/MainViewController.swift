@@ -11,16 +11,16 @@ import FirebaseFirestore
 
 final class MainViewController: UIViewController {
     // MARK: - Properties
-    private let tableView: UITableView = {
-        let view = UITableView(frame: .zero, style: UITableView.Style.plain)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.register(MainTableViewCell.self, forCellReuseIdentifier: "Cell")
-        return view
+    private let mainTableView: UITableView = {
+        let tableView = UITableView(frame: .zero, style: UITableView.Style.plain)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.register(MainTableViewCell.self, forCellReuseIdentifier: "Cell")
+        return tableView
     }()
     
     private var mainViewCellItems: [UserModel?] = [] {
         didSet {
-            tableView.reloadData()
+            mainTableView.reloadData()
         }
     }
     
@@ -57,13 +57,13 @@ final class MainViewController: UIViewController {
     }
     
     private func setView() {
-        tableView.backgroundColor = .white
-        tableView.frame = self.view.frame
-        tableView.rowHeight = 70
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.isMultipleTouchEnabled = false
-        view.addSubview(tableView)
+        mainTableView.backgroundColor = .white
+        mainTableView.frame = self.view.frame
+        mainTableView.rowHeight = 70
+        mainTableView.delegate = self
+        mainTableView.dataSource = self
+        mainTableView.isMultipleTouchEnabled = false
+        view.addSubview(mainTableView)
     }
     
     private func setBarItem() {

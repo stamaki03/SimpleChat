@@ -9,11 +9,11 @@ import UIKit
 
 final class SearchViewController: UIViewController {
     // MARK: - Properties
-    private let tableView: UITableView = {
-        let view = UITableView(frame: .zero, style: UITableView.Style.plain)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.register(SearchTableViewCell.self, forCellReuseIdentifier: "Cell")
-        return view
+    private let searchTableView: UITableView = {
+        let tableView = UITableView(frame: .zero, style: UITableView.Style.plain)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.register(SearchTableViewCell.self, forCellReuseIdentifier: "Cell")
+        return tableView
     }()
     
     private let userIdArray: [String?]
@@ -42,18 +42,18 @@ final class SearchViewController: UIViewController {
         Task {
             self.currentUser = try AuthenticationManager.shared.getAuthenticatedUser()
             try await fetchAllUserData(currentUser: currentUser)
-            self.tableView.reloadData()
+            self.searchTableView.reloadData()
         }
     }
     
     private func setView() {
-        tableView.backgroundColor = .white
-        tableView.frame = self.view.frame
-        tableView.rowHeight = 70
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.isMultipleTouchEnabled = false
-        view.addSubview(tableView)
+        searchTableView.backgroundColor = .white
+        searchTableView.frame = self.view.frame
+        searchTableView.rowHeight = 70
+        searchTableView.delegate = self
+        searchTableView.dataSource = self
+        searchTableView.isMultipleTouchEnabled = false
+        view.addSubview(searchTableView)
     }
     
     private func setBarItem() {
@@ -83,7 +83,7 @@ final class SearchViewController: UIViewController {
         guard let otherMember = otherMember else { return }
         Task {
             do {
-                self.tableView.isUserInteractionEnabled = false
+                self.searchTableView.isUserInteractionEnabled = false
                 let chatroomId = UUID().uuidString
                 guard let member1 = currentUser?.uid else {return}
                 let member2 = otherMember

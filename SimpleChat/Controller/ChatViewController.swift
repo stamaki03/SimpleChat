@@ -11,17 +11,24 @@ import FirebaseFirestore
 
 final class ChatViewController: UIViewController, UITextFieldDelegate {
     // MARK: - Properties
-    private let chatBaseView = ChatBaseView()
-    private let chatSendButton = CustomButton(frame: .zero, cornerRadius: 10, systemName: "paperplane")
-    private let chatTextField = CustomTextField(frame: .zero, placeholder: "メッセージを入力", paddingSize: 10)
-    private let tableView: UITableView = {
-        let view = UITableView(frame: .zero, style: UITableView.Style.plain)
-        view.allowsSelection = false
+    private let chatTableView: UITableView = {
+        let tableView = UITableView(frame: .zero, style: UITableView.Style.plain)
+        tableView.allowsSelection = false
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.register(MyChatTableViewCell.self, forCellReuseIdentifier: "MyChatCell")
+        tableView.register(OthersChatTableViewCell.self, forCellReuseIdentifier: "OthersChatCell")
+        return tableView
+    }()
+    private let chatBaseView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(named: "bg")
+        view.layer.borderColor = UIColor.black.cgColor
+        view.layer.borderWidth = 1
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.register(MyChatTableViewCell.self, forCellReuseIdentifier: "MyChatCell")
-        view.register(OthersChatTableViewCell.self, forCellReuseIdentifier: "OthersChatCell")
         return view
     }()
+    private let chatSendButton = CustomButton(frame: .zero, cornerRadius: 10, systemName: "paperplane")
+    private let chatTextField = CustomTextField(frame: .zero, placeholder: "メッセージを入力", paddingSize: 10)
     
     private let chatroomId: String
     private let otherMemberId: String
@@ -55,12 +62,12 @@ final class ChatViewController: UIViewController, UITextFieldDelegate {
     }
     
     private func setView() {
-        tableView.backgroundColor = .white
-        tableView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height - 120)
-        tableView.separatorStyle = .none
-        tableView.delegate = self
-        tableView.dataSource = self
-        view.addSubview(tableView)
+        chatTableView.backgroundColor = .white
+        chatTableView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height - 120)
+        chatTableView.separatorStyle = .none
+        chatTableView.delegate = self
+        chatTableView.dataSource = self
+        view.addSubview(chatTableView)
         chatTextField.delegate = self
         view.addSubview(chatBaseView)
         chatBaseView.addSubview(chatSendButton)
@@ -94,9 +101,9 @@ final class ChatViewController: UIViewController, UITextFieldDelegate {
                             let newMessage = ChatModel(userId: userId, userMessage: chatText, updateDate: updateDate.dateValue())
                             self?.chatViewCellItems.append(newMessage)
                             Task.detached { @MainActor in
-                                self?.tableView.reloadData()
+                                self?.chatTableView.reloadData()
                                 let indexPath = IndexPath(row: (self?.chatViewCellItems.count ?? 1) - 1, section: 0)
-                                self?.tableView.scrollToRow(at: indexPath, at: .top, animated: false)
+                                self?.chatTableView.scrollToRow(at: indexPath, at: .top, animated: false)
                             }
                         }
                     }

@@ -8,7 +8,7 @@
 import UIKit
 
 struct ChatViewConstraints {
-    static func makeConstraints(view: UIView, chatBaseView: UIView, chatTextField: UITextField, chatSendButton: UIButton) {
+    static func makeConstraints(view: UIView, chatBaseView: UIView, chatTextField: CustomTextField, chatSendButton: CustomButton) {
         chatBaseView.heightAnchor.constraint(equalToConstant: 120).isActive = true
         chatBaseView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
         chatBaseView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0).isActive = true
