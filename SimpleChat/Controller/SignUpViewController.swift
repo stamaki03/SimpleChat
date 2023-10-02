@@ -83,7 +83,7 @@ final class SignUpViewController: UIViewController {
     @objc internal func signUpUser(sender: UIButton){
         Task {
             do {
-                buttonInvalidate()
+                signUpButton.buttonInvalidate()
                 var downloadUrl: String?
                 guard let email = idTextField.text, let name = nameTextField.text, let password = passwordTextField.text, let repassword = repasswordTextField.text else { return }
                 if password != repassword {
@@ -109,17 +109,6 @@ final class SignUpViewController: UIViewController {
             }
         }
     }
-    
-    // MARK: - Helpers
-    private func buttonValidate() {
-        signUpButton.isEnabled = true
-        signUpButton.backgroundColor = UIColor(named: "bg")
-    }
-    
-    private func buttonInvalidate() {
-        signUpButton.isEnabled = false
-        signUpButton.backgroundColor = .lightGray
-    }
 }
 
 // MARK: - Extensions
@@ -131,9 +120,9 @@ extension SignUpViewController: UITextFieldDelegate {
         let repasswordIsEmpty = repasswordTextField.text?.isEmpty ?? true
         
         if idIsEmpty || nameIsEmpty || passwordIsEmpty || repasswordIsEmpty {
-            buttonInvalidate()
+            signUpButton.buttonInvalidate()
         } else {
-            buttonValidate()
+            signUpButton.buttonValidate()
         }
     }
     

@@ -87,7 +87,7 @@ final class SettingViewController: UIViewController {
             self.iconImageView.setImage(UIImage(systemName: "person"), for: .normal)
             self.image = nil
             inputValidate(image: true, id: true, name: true, password: true)
-            buttonInvalidate()
+            modifyButton.buttonInvalidate()
         }
     }
     
@@ -178,15 +178,6 @@ final class SettingViewController: UIViewController {
     }
     
     // MARK: - Helpers
-    private func buttonValidate() {
-        modifyButton.isEnabled = true
-        modifyButton.backgroundColor = UIColor(named: "bg")
-    }
-    
-    private func buttonInvalidate() {
-        modifyButton.isEnabled = false
-        modifyButton.backgroundColor = .lightGray
-    }
     
     private func inputValidate(image: Bool, id: Bool, name: Bool, password: Bool) {
         iconImageView.isEnabled = image
@@ -212,19 +203,19 @@ extension SettingViewController: UITextFieldDelegate {
         
         if !idIsEmpty {
             inputValidate(image: false, id: true, name: false, password: false)
-            buttonValidate()
+            modifyButton.buttonValidate()
         } else if !nameIsEmpty {
             inputValidate(image: false, id: false, name: true, password: false)
-            buttonValidate()
+            modifyButton.buttonValidate()
         } else if !passwordIsEmpty {
             inputValidate(image: false, id: false, name: false, password: true)
-            buttonValidate()
+            modifyButton.buttonValidate()
         } else if !repasswordIsEmpty {
             inputValidate(image: false, id: false, name: false, password: true)
-            buttonValidate()
+            modifyButton.buttonValidate()
         } else {
             inputValidate(image: true, id: true, name: true, password: true)
-            buttonInvalidate()
+            modifyButton.buttonInvalidate()
         }
     }
     
@@ -251,7 +242,7 @@ extension SettingViewController: UIImagePickerControllerDelegate, UINavigationCo
         self.localImageURL = info[UIImagePickerController.InfoKey.imageURL] as? URL
         //
         inputValidate(image: true, id: false, name: false, password: false)
-        buttonValidate()
+        modifyButton.buttonValidate()
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {

@@ -58,7 +58,7 @@ final class LoginViewController: UIViewController {
     @objc internal func goToMainViewController(sender: UIButton){
         Task {
             do {
-                buttonInvalidate()
+                loginSelectButton.buttonInvalidate()
                 guard let email = idTextField.text, let password = passwordTextField.text else { return }
                 if password.count < 8 {
                     let alert = AlertMessage.shared.notificationAlert(message: "パスワードは8文字以上入力してください")
@@ -68,9 +68,9 @@ final class LoginViewController: UIViewController {
                 try await AuthenticationManager.shared.signInUser(email: email, password: password)
                 let mainViewController = MainViewController()
                 self.navigationController?.pushViewController(mainViewController, animated: false)
-                buttonValidate()
+                loginSelectButton.buttonValidate()
             } catch {
-                buttonValidate()
+                loginSelectButton.buttonValidate()
                 let errMessage = FAErrorCheck.shared.loginValidationCheck(error: error)
                 let alert = AlertMessage.shared.notificationAlert(message: errMessage)
                 present(alert, animated: true, completion: nil)
@@ -101,17 +101,6 @@ final class LoginViewController: UIViewController {
         }))
         self.present(remindPasswordAlert, animated: true, completion: nil)
     }
-    
-    // MARK: - Helpers
-    private func buttonValidate() {
-        loginSelectButton.isEnabled = true
-        loginSelectButton.backgroundColor = UIColor(named: "bg")
-    }
-    
-    private func buttonInvalidate() {
-        loginSelectButton.isEnabled = false
-        loginSelectButton.backgroundColor = .lightGray
-    }
 }
 
 // MARK: - Extensions
@@ -121,9 +110,9 @@ extension LoginViewController: UITextFieldDelegate {
         let passwordIsEmpty = passwordTextField.text?.isEmpty ?? true
         
         if idIsEmpty || passwordIsEmpty {
-            buttonInvalidate()
+            loginSelectButton.buttonInvalidate()
         } else {
-            buttonValidate()
+            loginSelectButton.buttonValidate()
         }
     }
     
