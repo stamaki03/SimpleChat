@@ -8,8 +8,8 @@
 import UIKit
 
 final class MyChatTableViewCell: UITableViewCell {
-    var userMessage = CustomLabel(frame: .zero, fontSize: 20.0, text: "", paddingSize: 10)
-    var sendTime = CustomLabel(frame: .zero, fontSize: 15.0, text: "aaa", paddingSize: 0)
+    var userMessage = CustomLabel(frame: .zero, fontSize: 20.0, text: "", textAlignment: .left, paddingSize: 10)
+    var sendTime = CustomLabel(frame: .zero, fontSize: 15.0, text: "aaa", textAlignment: .left, paddingSize: 0)
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

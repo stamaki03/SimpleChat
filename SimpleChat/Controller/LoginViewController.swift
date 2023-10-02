@@ -10,10 +10,10 @@ import FirebaseAuth
 
 final class LoginViewController: UIViewController {
     // MARK: - Properties
-    private let appTitleLabel = TitleLabel(frame: .zero, text: "SIMPLE CHAT")
-    private let idLabel = CustomLabel(frame: .zero, fontSize: 20.0, text: "ID", paddingSize: 0)
+    private let appTitleLabel = CustomLabel(frame: .zero, fontSize: 40, text: "SIMPLE CHAT", textAlignment: .center, paddingSize: 0)
+    private let idLabel = CustomLabel(frame: .zero, fontSize: 20.0, text: "ID", textAlignment: .left, paddingSize: 0)
     private let idTextField = CustomTextField(frame: .zero, placeholder: "example@co.jp", paddingSize: 0)
-    private let passwordLabel = CustomLabel(frame: .zero, fontSize: 20.0, text: "パスワード", paddingSize: 0)
+    private let passwordLabel = CustomLabel(frame: .zero, fontSize: 20.0, text: "パスワード", textAlignment: .left, paddingSize: 0)
     private let passwordTextField = CustomTextField(frame: .zero, placeholder: "パスワード", paddingSize: 0)
     private let loginSelectButton = SelectButton(frame: .zero, title: "ログイン", backgroundcolor: .lightGray, borderColor: UIColor.clear.cgColor, borderWidth: 0, foregroundcolor: .white)
     private let signUpButton = SelectButton(frame: .zero, title: "新規登録", backgroundcolor: .clear, borderColor: (UIColor(named: "bg") ?? .white).cgColor, borderWidth: 1, foregroundcolor: UIColor(named: "bg") ?? .black)

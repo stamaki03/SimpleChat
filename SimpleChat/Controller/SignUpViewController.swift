@@ -9,15 +9,15 @@ import UIKit
 
 final class SignUpViewController: UIViewController {
     // MARK: - Properties
-    private let signUpTitleLabel = TitleLabel(frame: .zero, text: "新規登録")
+    private let signUpTitleLabel = CustomLabel(frame: .zero, fontSize: 40, text: "新規登録", textAlignment: .center, paddingSize: 0)
     private let iconImageView = CustomButton(frame: .zero, cornerRadius: 75, systemName: "person")
-    private let idLabel = CustomLabel(frame: .zero, fontSize: 20.0, text: "ID", paddingSize: 0)
+    private let idLabel = CustomLabel(frame: .zero, fontSize: 20.0, text: "ID", textAlignment: .left, paddingSize: 0)
     private let idTextField = CustomTextField(frame: .zero, placeholder: "example@co.jp", paddingSize: 0)
-    private let nameLabel = CustomLabel(frame: .zero, fontSize: 20.0, text: "名前", paddingSize: 0)
+    private let nameLabel = CustomLabel(frame: .zero, fontSize: 20.0, text: "名前", textAlignment: .left, paddingSize: 0)
     private let nameTextField = CustomTextField(frame: .zero, placeholder: "名前", paddingSize: 0)
-    private let passwordLabel = CustomLabel(frame: .zero, fontSize: 20.0, text: "パスワード", paddingSize: 0)
+    private let passwordLabel = CustomLabel(frame: .zero, fontSize: 20.0, text: "パスワード", textAlignment: .left, paddingSize: 0)
     private let passwordTextField = CustomTextField(frame: .zero, placeholder: "パスワード", paddingSize: 0)
-    private let repasswordLabel = CustomLabel(frame: .zero, fontSize: 20.0, text: "パスワード(確認)", paddingSize: 0)
+    private let repasswordLabel = CustomLabel(frame: .zero, fontSize: 20.0, text: "パスワード(確認)", textAlignment: .left, paddingSize: 0)
     private let repasswordTextField = CustomTextField(frame: .zero, placeholder: "パスワード(確認)", paddingSize: 0)
     private let signUpButton = SelectButton(frame: .zero, title: "登録", backgroundcolor: .lightGray, borderColor: UIColor.clear.cgColor, borderWidth: 0, foregroundcolor: .white)
     

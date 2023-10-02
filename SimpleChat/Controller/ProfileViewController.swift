@@ -9,12 +9,12 @@ import UIKit
 
 final class ProfileViewController: UIViewController {
     // MARK: - Properties
-    private let signUpTitleLabel = TitleLabel(frame: .zero, text: "プロフィール")
+    private let signUpTitleLabel = CustomLabel(frame: .zero, fontSize: 40, text: "プロフィール", textAlignment: .center, paddingSize: 0)
     private let iconImageView = CustomImageView(frame: .zero, cornerRadius: 75)
-    private let idLabel = CustomLabel(frame: .zero, fontSize: 20.0, text: "ID：", paddingSize: 0)
-    private let idText = CustomLabel(frame: .zero, fontSize: 20.0, text: "", paddingSize: 0)
-    private let nameLabel = CustomLabel(frame: .zero, fontSize: 20.0, text: "名前：", paddingSize: 0)
-    private let nameText = CustomLabel(frame: .zero, fontSize: 20.0, text: "", paddingSize: 0)
+    private let idLabel = CustomLabel(frame: .zero, fontSize: 20.0, text: "ID：", textAlignment: .left, paddingSize: 0)
+    private let idText = CustomLabel(frame: .zero, fontSize: 20.0, text: "", textAlignment: .left, paddingSize: 0)
+    private let nameLabel = CustomLabel(frame: .zero, fontSize: 20.0, text: "名前：", textAlignment: .left, paddingSize: 0)
+    private let nameText = CustomLabel(frame: .zero, fontSize: 20.0, text: "", textAlignment: .left, paddingSize: 0)
     private let backButton = SelectButton(frame: .zero, title: "戻る", backgroundcolor: UIColor(named: "bg") ?? .white, borderColor: UIColor.clear.cgColor, borderWidth: 0, foregroundcolor: .white)
     
     // MARK: - SetUp

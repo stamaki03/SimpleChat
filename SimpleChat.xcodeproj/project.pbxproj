@@ -19,7 +19,6 @@
 		BFAE273E2AB7D9D80004A47C /* SimpleChatUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAE273D2AB7D9D80004A47C /* SimpleChatUITests.swift */; };
 		BFAE27402AB7D9D80004A47C /* SimpleChatUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAE273F2AB7D9D80004A47C /* SimpleChatUITestsLaunchTests.swift */; };
 		BFAE27512AB7E8CE0004A47C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAE27502AB7E8CE0004A47C /* LoginViewController.swift */; };
-		BFAE27532AB7E9510004A47C /* TitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAE27522AB7E9510004A47C /* TitleLabel.swift */; };
 		BFAE27552AB7E9680004A47C /* CustomLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAE27542AB7E9680004A47C /* CustomLabel.swift */; };
 		BFAE27572AB7E9730004A47C /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAE27562AB7E9730004A47C /* CustomTextField.swift */; };
 		BFAE27592AB7E9880004A47C /* SelectButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAE27582AB7E9880004A47C /* SelectButton.swift */; };
@@ -110,7 +109,6 @@
 		BFAE273D2AB7D9D80004A47C /* SimpleChatUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleChatUITests.swift; sourceTree = "<group>"; };
 		BFAE273F2AB7D9D80004A47C /* SimpleChatUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleChatUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		BFAE27502AB7E8CE0004A47C /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		BFAE27522AB7E9510004A47C /* TitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleLabel.swift; sourceTree = "<group>"; };
 		BFAE27542AB7E9680004A47C /* CustomLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLabel.swift; sourceTree = "<group>"; };
 		BFAE27562AB7E9730004A47C /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		BFAE27582AB7E9880004A47C /* SelectButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectButton.swift; sourceTree = "<group>"; };
@@ -277,7 +275,6 @@
 				BFAE27542AB7E9680004A47C /* CustomLabel.swift */,
 				BFAE27562AB7E9730004A47C /* CustomTextField.swift */,
 				BFAE27582AB7E9880004A47C /* SelectButton.swift */,
-				BFAE27522AB7E9510004A47C /* TitleLabel.swift */,
 				BFAE27792AB92C070004A47C /* TableViewCell */,
 			);
 			path = components;
@@ -512,7 +509,6 @@
 				BFAE27AB2ABD690E0004A47C /* AuthenticationManager.swift in Sources */,
 				BFAE27742AB92B030004A47C /* SearchViewController.swift in Sources */,
 				BFAE277F2AB92C490004A47C /* MyChatTableViewCell.swift in Sources */,
-				BFAE27532AB7E9510004A47C /* TitleLabel.swift in Sources */,
 				BFAE271D2AB7D9D70004A47C /* AppDelegate.swift in Sources */,
 				BFAE27682AB9240C0004A47C /* UserModel.swift in Sources */,
 				BFAE27622AB82DBA0004A47C /* CustomButton.swift in Sources */,

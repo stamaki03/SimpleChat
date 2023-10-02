@@ -10,13 +10,14 @@ import UIKit
 final class CustomLabel: UILabel {
     private let padding: UIEdgeInsets
     
-    init(frame: CGRect, fontSize: CGFloat, text: String, paddingSize: CGFloat) {
+    init(frame: CGRect, fontSize: CGFloat, text: String, textAlignment: NSTextAlignment, paddingSize: CGFloat) {
         padding = UIEdgeInsets(top: paddingSize, left: paddingSize, bottom: paddingSize, right: paddingSize)
         super.init(frame: frame)
         self.adjustsFontSizeToFitWidth = true
         self.font = UIFont.systemFont(ofSize: fontSize)
         self.numberOfLines = 0
         self.text = text
+        self.textAlignment = textAlignment
         self.textColor = .black
         self.translatesAutoresizingMaskIntoConstraints = false
     }
