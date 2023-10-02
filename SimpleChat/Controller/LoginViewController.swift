@@ -15,9 +15,9 @@ final class LoginViewController: UIViewController {
     private let idTextField = CustomTextField(frame: .zero, placeholder: "example@co.jp", paddingSize: 0)
     private let passwordLabel = CustomLabel(frame: .zero, fontSize: 20.0, text: "パスワード", textAlignment: .left, paddingSize: 0)
     private let passwordTextField = CustomTextField(frame: .zero, placeholder: "パスワード", paddingSize: 0)
-    private let loginSelectButton = SelectButton(frame: .zero, title: "ログイン", backgroundcolor: .lightGray, borderColor: UIColor.clear.cgColor, borderWidth: 0, foregroundcolor: .white)
-    private let signUpButton = SelectButton(frame: .zero, title: "新規登録", backgroundcolor: .clear, borderColor: (UIColor(named: "bg") ?? .white).cgColor, borderWidth: 1, foregroundcolor: UIColor(named: "bg") ?? .black)
-    private let resetPasswordButton = SelectButton(frame: .zero, title: "パスワードリセット", backgroundcolor: UIColor.clear, borderColor: UIColor.clear.cgColor, borderWidth: 0, foregroundcolor: UIColor(named: "bg") ?? .black)
+    private let loginSelectButton = CustomSelectButton(frame: .zero, title: "ログイン", backgroundcolor: .lightGray, borderColor: UIColor.clear.cgColor, borderWidth: 0, foregroundcolor: .white)
+    private let signUpButton = CustomSelectButton(frame: .zero, title: "新規登録", backgroundcolor: .clear, borderColor: (UIColor(named: "bg") ?? .white).cgColor, borderWidth: 1, foregroundcolor: UIColor(named: "bg") ?? .black)
+    private let resetPasswordButton = CustomSelectButton(frame: .zero, title: "パスワードリセット", backgroundcolor: UIColor.clear, borderColor: UIColor.clear.cgColor, borderWidth: 0, foregroundcolor: UIColor(named: "bg") ?? .black)
     
     // MARK: - SetUp
     override func viewDidLoad() {

@@ -8,7 +8,7 @@
 import UIKit
 
 struct ProfileViewConstraints {
-    static func makeConstraints(view: UIView, iconImageView: CustomImageView, signUpTitleLabel: CustomLabel, idLabel: CustomLabel, idText: CustomLabel, nameLabel: CustomLabel, nameText: CustomLabel, backButton: SelectButton){
+    static func makeConstraints(view: UIView, iconImageView: CustomImageView, signUpTitleLabel: CustomLabel, idLabel: CustomLabel, idText: CustomLabel, nameLabel: CustomLabel, nameText: CustomLabel, backButton: CustomSelectButton){
         signUpTitleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
         signUpTitleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
         signUpTitleLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true

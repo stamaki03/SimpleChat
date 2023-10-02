@@ -1,5 +1,5 @@
 //
-//  SelectButton.swift
+//  CustomSelectButton.swift
 //  SimpleChat
 //
 //  Created by Sho Tamaki on 2023/09/18.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class SelectButton: UIButton {
+final class CustomSelectButton: UIButton {
     init(frame: CGRect, title: String, backgroundcolor: UIColor, borderColor: CGColor, borderWidth: CGFloat, foregroundcolor: UIColor) {
         super.init(frame: frame)
         self.backgroundColor = backgroundcolor

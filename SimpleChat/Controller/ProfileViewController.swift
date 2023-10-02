@@ -15,7 +15,7 @@ final class ProfileViewController: UIViewController {
     private let idText = CustomLabel(frame: .zero, fontSize: 20.0, text: "", textAlignment: .left, paddingSize: 0)
     private let nameLabel = CustomLabel(frame: .zero, fontSize: 20.0, text: "名前：", textAlignment: .left, paddingSize: 0)
     private let nameText = CustomLabel(frame: .zero, fontSize: 20.0, text: "", textAlignment: .left, paddingSize: 0)
-    private let backButton = SelectButton(frame: .zero, title: "戻る", backgroundcolor: UIColor(named: "bg") ?? .white, borderColor: UIColor.clear.cgColor, borderWidth: 0, foregroundcolor: .white)
+    private let backButton = CustomSelectButton(frame: .zero, title: "戻る", backgroundcolor: UIColor(named: "bg") ?? .white, borderColor: UIColor.clear.cgColor, borderWidth: 0, foregroundcolor: .white)
     
     // MARK: - SetUp
     override func viewDidLoad() {

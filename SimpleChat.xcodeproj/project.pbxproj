@@ -21,7 +21,7 @@
 		BFAE27512AB7E8CE0004A47C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAE27502AB7E8CE0004A47C /* LoginViewController.swift */; };
 		BFAE27552AB7E9680004A47C /* CustomLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAE27542AB7E9680004A47C /* CustomLabel.swift */; };
 		BFAE27572AB7E9730004A47C /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAE27562AB7E9730004A47C /* CustomTextField.swift */; };
-		BFAE27592AB7E9880004A47C /* SelectButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAE27582AB7E9880004A47C /* SelectButton.swift */; };
+		BFAE27592AB7E9880004A47C /* CustomSelectButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAE27582AB7E9880004A47C /* CustomSelectButton.swift */; };
 		BFAE275E2AB82C080004A47C /* LoginViewConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAE275D2AB82C080004A47C /* LoginViewConstraints.swift */; };
 		BFAE27602AB82C540004A47C /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAE275F2AB82C540004A47C /* SignUpViewController.swift */; };
 		BFAE27622AB82DBA0004A47C /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAE27612AB82DBA0004A47C /* CustomButton.swift */; };
@@ -110,7 +110,7 @@
 		BFAE27502AB7E8CE0004A47C /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		BFAE27542AB7E9680004A47C /* CustomLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLabel.swift; sourceTree = "<group>"; };
 		BFAE27562AB7E9730004A47C /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
-		BFAE27582AB7E9880004A47C /* SelectButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectButton.swift; sourceTree = "<group>"; };
+		BFAE27582AB7E9880004A47C /* CustomSelectButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSelectButton.swift; sourceTree = "<group>"; };
 		BFAE275D2AB82C080004A47C /* LoginViewConstraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewConstraints.swift; sourceTree = "<group>"; };
 		BFAE275F2AB82C540004A47C /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		BFAE27612AB82DBA0004A47C /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
@@ -270,8 +270,8 @@
 				BFAE27612AB82DBA0004A47C /* CustomButton.swift */,
 				BFAE27712AB92AAA0004A47C /* CustomImageView.swift */,
 				BFAE27542AB7E9680004A47C /* CustomLabel.swift */,
+				BFAE27582AB7E9880004A47C /* CustomSelectButton.swift */,
 				BFAE27562AB7E9730004A47C /* CustomTextField.swift */,
-				BFAE27582AB7E9880004A47C /* SelectButton.swift */,
 				BFAE27792AB92C070004A47C /* TableViewCell */,
 			);
 			path = components;
@@ -512,7 +512,7 @@
 				BFAE276A2AB9286C0004A47C /* ChatModel.swift in Sources */,
 				BFAE275E2AB82C080004A47C /* LoginViewConstraints.swift in Sources */,
 				BFAE27842AB92DBA0004A47C /* SearchTableViewConstraints.swift in Sources */,
-				BFAE27592AB7E9880004A47C /* SelectButton.swift in Sources */,
+				BFAE27592AB7E9880004A47C /* CustomSelectButton.swift in Sources */,
 				BFAE277D2AB92C370004A47C /* SearchTableViewCell.swift in Sources */,
 				BFAE271F2AB7D9D70004A47C /* SceneDelegate.swift in Sources */,
 				BFAE278A2AB92E000004A47C /* MainTableViewConstraints.swift in Sources */,
