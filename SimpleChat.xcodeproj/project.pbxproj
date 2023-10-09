@@ -43,7 +43,6 @@
 		BFAE278A2AB92E000004A47C /* MainTableViewConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAE27892AB92E000004A47C /* MainTableViewConstraints.swift */; };
 		BFAE278C2AB92E960004A47C /* OthersChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAE278B2AB92E960004A47C /* OthersChatTableViewCell.swift */; };
 		BFAE278E2AB92EDF0004A47C /* ChatViewConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAE278D2AB92EDF0004A47C /* ChatViewConstraints.swift */; };
-		BFAE27912AB94BA70004A47C /* CombineCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = BFAE27902AB94BA70004A47C /* CombineCocoa */; };
 		BFAE27932ABA57E10004A47C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BFAE27922ABA57E10004A47C /* GoogleService-Info.plist */; };
 		BFAE27942ABA57E10004A47C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BFAE27922ABA57E10004A47C /* GoogleService-Info.plist */; };
 		BFAE27952ABA57E10004A47C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BFAE27922ABA57E10004A47C /* GoogleService-Info.plist */; };
@@ -149,7 +148,6 @@
 				BFAE27A92ABC2F220004A47C /* IQKeyboardManagerSwift in Frameworks */,
 				BFAE279A2ABA5DA50004A47C /* FirebaseAnalyticsSwift in Frameworks */,
 				BFAE27982ABA5DA50004A47C /* FirebaseAnalytics in Frameworks */,
-				BFAE27912AB94BA70004A47C /* CombineCocoa in Frameworks */,
 				BFAE27A02ABA90530004A47C /* FirebaseFirestore in Frameworks */,
 				BFAE27BB2ABECE250004A47C /* FirebaseStorage in Frameworks */,
 				BFAE279D2ABA666D0004A47C /* FirebaseAuth in Frameworks */,
@@ -348,7 +346,6 @@
 			);
 			name = SimpleChat;
 			packageProductDependencies = (
-				BFAE27902AB94BA70004A47C /* CombineCocoa */,
 				BFAE27972ABA5DA50004A47C /* FirebaseAnalytics */,
 				BFAE27992ABA5DA50004A47C /* FirebaseAnalyticsSwift */,
 				BFAE279C2ABA666D0004A47C /* FirebaseAuth */,
@@ -430,7 +427,6 @@
 			);
 			mainGroup = BFAE27102AB7D9D70004A47C;
 			packageReferences = (
-				BFAE278F2AB94BA70004A47C /* XCRemoteSwiftPackageReference "CombineCocoa" */,
 				BFAE27962ABA5DA50004A47C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				BFAE27A72ABC2F220004A47C /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 			);
@@ -865,14 +861,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		BFAE278F2AB94BA70004A47C /* XCRemoteSwiftPackageReference "CombineCocoa" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/CombineCommunity/CombineCocoa";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.4.1;
-			};
-		};
 		BFAE27962ABA5DA50004A47C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -892,11 +880,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		BFAE27902AB94BA70004A47C /* CombineCocoa */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = BFAE278F2AB94BA70004A47C /* XCRemoteSwiftPackageReference "CombineCocoa" */;
-			productName = CombineCocoa;
-		};
 		BFAE27972ABA5DA50004A47C /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = BFAE27962ABA5DA50004A47C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
